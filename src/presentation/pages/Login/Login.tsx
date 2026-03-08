@@ -22,7 +22,7 @@ export default function Login() {
     setError("");
     const success = login(username, password);
     if (success) {
-      navigate("/");
+      navigate("/home");
     } else {
       setError("Usuário ou senha inválidos. Tente novamente.");
     }
