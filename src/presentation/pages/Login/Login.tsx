@@ -3,20 +3,29 @@ import { useNavigate, Link } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
+import { Message } from "primereact/message";
 import { ThemeToggle } from "../../components/ThemeToggle";
 import { GamerVerseLogo } from "../../components/GamerVerseLogo";
+import { useAuthStore } from "@/shared/store/useAuthStore";
 import { loginBackgroundIcons } from "./loginBackgroundIcons";
 import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const login = useAuthStore((s) => s.login);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: integrar com API de login
-    navigate("/");
+    setError("");
+    const success = login(username, password);
+    if (success) {
+      navigate("/");
+    } else {
+      setError("Usuário ou senha inválidos. Tente novamente.");
+    }
   };
 
   return (
@@ -44,6 +53,9 @@ export default function Login() {
           <GamerVerseLogo className="login-logo-wrap" showTagline />
 
           <form onSubmit={handleSubmit} className="login-form">
+            {error && (
+              <Message severity="error" text={error} className="login-error" />
+            )}
             <div className="login-field">
               <InputText
                 id="username"
