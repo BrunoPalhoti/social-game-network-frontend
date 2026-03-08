@@ -1,6 +1,5 @@
+import Login from "@/presentation/pages/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../presentation/pages/Home";
-import Login from "../presentation/pages/Login";
 
 export default function App() {
   return (
