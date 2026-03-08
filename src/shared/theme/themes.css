@@ -6,6 +6,8 @@
 
 :root,
 [data-theme="light"] {
+  --sgn-font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+  --sgn-font-display: "Outfit", system-ui, -apple-system, sans-serif;
   --sgn-bg: #ffffff;
   --sgn-bg-secondary: #f8f7fc;
   --sgn-surface: #ffffff;
@@ -18,9 +20,12 @@
   --sgn-border: #e5e7eb;
   --sgn-border-focus: #8b5cf6;
   --sgn-card-shadow: 0 1px 3px rgba(109, 40, 217, 0.08);
+  --sgn-btn-glow: rgba(139, 92, 246, 0.35);
 }
 
 [data-theme="dark"] {
+  --sgn-font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+  --sgn-font-display: "Outfit", system-ui, -apple-system, sans-serif;
   --sgn-bg: #0d0d0d;
   --sgn-bg-secondary: #121212;
   --sgn-surface: #1a1a1a;
@@ -33,6 +38,7 @@
   --sgn-border: #2d2d2d;
   --sgn-border-focus: #a78bfa;
   --sgn-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --sgn-btn-glow: rgba(139, 92, 246, 0.4);
 
   --surface-a: #1a1a1a;
   --surface-b: #121212;
@@ -68,6 +74,7 @@
 }
 
 body {
+  font-family: var(--sgn-font-sans);
   background-color: var(--sgn-bg);
   color: var(--sgn-text);
   transition: background-color 0.25s ease, color 0.25s ease;
