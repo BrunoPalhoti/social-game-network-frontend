@@ -1,0 +1,180 @@
+.gv-sidebar {
+  width: 280px;
+  min-width: 260px;
+  background: linear-gradient(180deg, #0b0217 0%, #130826 45%, #05020b 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 1.5rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #f9fafb;
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.6);
+}
+
+.gv-sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.gv-sidebar-logo {
+  align-items: flex-start;
+}
+
+.gv-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gv-sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  color: rgba(249, 250, 251, 0.7);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+}
+
+.gv-sidebar-nav-item:hover {
+  background-color: rgba(139, 92, 246, 0.16);
+  color: #f9fafb;
+  transform: translateX(2px);
+  box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.45);
+}
+
+.gv-sidebar-nav-item--active {
+  background: radial-gradient(circle at 0% 0%, #8b5cf6 0%, #4c1d95 45%, #1e1b4b 100%);
+  color: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.8),
+    0 16px 32px rgba(76, 29, 149, 0.7);
+}
+
+.gv-sidebar-nav-item--active .gv-sidebar-nav-icon {
+  color: #f9fafb;
+}
+
+.gv-sidebar-nav-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 0.9rem;
+  background: radial-gradient(circle at 30% 0%, #facc15 0%, #f97316 40%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  color: rgba(12, 10, 24, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.8),
+    0 0 18px rgba(248, 250, 252, 0.35);
+}
+
+.gv-sidebar-nav-label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.gv-sidebar-bottom {
+  margin-top: 2rem;
+}
+
+.gv-sidebar-profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.9rem;
+  background-color: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease,
+    box-shadow 0.18s ease;
+}
+
+.gv-sidebar-profile:hover {
+  background-color: rgba(15, 23, 42, 0.95);
+  border-color: rgba(139, 92, 246, 0.85);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.8),
+    0 12px 26px rgba(17, 24, 39, 0.9);
+  transform: translateY(-1px);
+}
+
+.gv-sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 0%, #f97316 0%, #fb7185 30%, #8b5cf6 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #0b0217;
+  box-shadow:
+    0 0 0 2px rgba(15, 23, 42, 0.9),
+    0 0 18px rgba(251, 113, 133, 0.6);
+}
+
+.gv-sidebar-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.gv-sidebar-username {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.gv-sidebar-status {
+  font-size: 0.75rem;
+  color: rgba(203, 213, 225, 0.88);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 960px) {
+  .gv-sidebar {
+    width: 80px;
+    min-width: 72px;
+    padding-inline: 0.8rem;
+  }
+
+  .gv-sidebar-logo .gamer-verse-logo-text,
+  .gv-sidebar-logo .gamer-verse-logo-tagline {
+    display: none;
+  }
+
+  .gv-sidebar-nav-label,
+  .gv-sidebar-user {
+    display: none;
+  }
+
+  .gv-sidebar-nav-item {
+    justify-content: center;
+  }
+
+  .gv-sidebar-profile {
+    justify-content: center;
+  }
+}
+

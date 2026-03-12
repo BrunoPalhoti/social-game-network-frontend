@@ -6,11 +6,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/esqueci-senha" element={<Login />} />
         <Route path="/criar-conta" element={<Login />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
