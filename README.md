@@ -70,7 +70,7 @@ Detalhes em [`src/ARCHITECTURE.md`](src/ARCHITECTURE.md).
 1. Acesse [vercel.com](https://vercel.com) e faça login (conta GitHub).  
 2. **Add New** → **Project** → importe o repositório `social-game-network-frontend`.  
 3. Deixe o **Framework Preset** como **Vite** e clique em **Deploy**.  
-4. Copie a URL do deploy e atualize o link “Tela ao vivo” acima.
+4. Copie a URL do deploy e atualize o link "Tela ao vivo" acima.
 
 **Opção B – Pelo terminal**  
 Na pasta do projeto, rode:

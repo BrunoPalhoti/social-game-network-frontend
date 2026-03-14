@@ -1,0 +1,62 @@
+.gamer-verse-logo {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.gamer-verse-logo:hover {
+  opacity: 0.9;
+}
+
+.gamer-verse-logo-static {
+  cursor: default;
+}
+
+.gamer-verse-logo-icon {
+  width: 80px;
+  height: 64px;
+  color: var(--sgn-text);
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.gamer-verse-logo-eye {
+  filter: drop-shadow(0 0 6px var(--sgn-primary));
+}
+
+[data-theme="dark"] .gamer-verse-logo-eye {
+  filter: drop-shadow(0 0 8px var(--sgn-primary));
+}
+
+.gamer-verse-logo-text {
+  margin: 0;
+  font-family: var(--sgn-font-display, var(--sgn-font-sans));
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+
+.gamer-verse-logo-gamer {
+  color: #fff;
+  -webkit-text-stroke: 2px #1a1a2e;
+  paint-order: stroke fill;
+}
+
+[data-theme="dark"] .gamer-verse-logo-gamer {
+  -webkit-text-stroke: 2px #0d0d0d;
+}
+
+.gamer-verse-logo-verse {
+  color: var(--sgn-primary);
+}
+
+.gamer-verse-logo-tagline {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sgn-text-secondary);
+}
