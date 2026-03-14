@@ -232,7 +232,8 @@
     0 0 32px rgba(138, 43, 226, 0.35);
 }
 
-@media (max-width: 960px) {
+/* Tablet: sidebar colapsada (só ícones) */
+@media (max-width: 1024px) {
   .gv-sidebar {
     width: 80px;
     min-width: 72px;
@@ -260,5 +261,97 @@
 
   .gv-sidebar-profile {
     justify-content: center;
+  }
+}
+
+/* Mobile: sidebar vira drawer (overlay) */
+.gv-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.gv-sidebar-close {
+  display: none;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  color: var(--sgn-text) !important;
+}
+
+@media (max-width: 768px) {
+  .gv-sidebar-overlay {
+    display: block;
+  }
+
+  .gv-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    min-width: 280px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .gv-sidebar--open {
+    transform: translateX(0);
+    box-shadow: 12px 0 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .gv-sidebar--open + .gv-layout-menu-toggle {
+    /* botão fica atrás do drawer quando aberto */
+  }
+
+  .gv-sidebar-overlay.gv-sidebar-overlay--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Mostrar textos e largura normal no drawer */
+  .gv-sidebar-logo .gamer-verse-logo-text,
+  .gv-sidebar-logo .gamer-verse-logo-tagline {
+    display: block;
+  }
+
+  .gv-sidebar-nav-label,
+  .gv-sidebar-user {
+    display: flex;
+  }
+
+  .gv-sidebar-nav-item {
+    justify-content: flex-start;
+  }
+
+  .gv-sidebar-profile {
+    justify-content: flex-start;
+  }
+
+  .gv-sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .gv-sidebar {
+    width: 100%;
+    min-width: 0;
+  }
+  .gv-sidebar-close {
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }

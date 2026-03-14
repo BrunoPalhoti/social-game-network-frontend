@@ -11,13 +11,39 @@ const navItems = [
   { to: "/profile", label: "Profile", icon: "pi pi-user" },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ open = false, onClose }: SidebarProps) {
   const user = useAuthStore((s) => s.user);
   const displayName = user?.name ?? user?.username ?? "Usuário";
   const initials = user ? getInitialsFromName(user.name) : "?";
 
+  const handleNavClick = () => {
+    onClose?.();
+  };
+
   return (
-    <aside className="gv-sidebar">
+    <>
+      <div
+        className={`gv-sidebar-overlay ${open ? "gv-sidebar-overlay--visible" : ""}`}
+        aria-hidden={!open}
+        onClick={onClose}
+      />
+      <aside className={`gv-sidebar ${open ? "gv-sidebar--open" : ""}`}>
+        {onClose && (
+          <Button
+            icon="pi pi-times"
+            rounded
+            text
+            severity="secondary"
+            aria-label="Fechar menu"
+            className="gv-sidebar-close"
+            onClick={onClose}
+          />
+        )}
       <div className="gv-sidebar-top">
         <GamerVerseLogo
           asLink
@@ -25,7 +51,7 @@ export function Sidebar() {
           showTagline={false}
         />
 
-        <nav className="gv-sidebar-nav" aria-label="Navegação principal">
+        <nav className="gv-sidebar-nav" aria-label="Navegação principal" onClick={handleNavClick}>
           {navItems.map((item) => (
             <NavLink
               key={item.to}
@@ -65,5 +91,6 @@ export function Sidebar() {
         </Button>
       </div>
     </aside>
+    </>
   );
 }
