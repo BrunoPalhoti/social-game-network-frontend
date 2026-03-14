@@ -3,6 +3,8 @@ import { Avatar } from "primereact/avatar";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Tag } from "primereact/tag";
 
+const currentYear = new Date().getFullYear();
+
 export default function Profile() {
   const user = useAuthStore((s) => s.user);
 
@@ -33,9 +35,9 @@ export default function Profile() {
         </div>
 
         <TabView className="gv-profile-tabview">
-          <TabPanel header="JORNADA 2026" className="gv-profile-tab-panel">
+          <TabPanel header={`JORNADA ${currentYear}`} className="gv-profile-tab-panel">
             <div className="gv-profile-tab-content">
-              Conteúdo da Jornada 2026 em breve.
+              Conteúdo da Jornada {currentYear} em breve.
             </div>
           </TabPanel>
           <TabPanel header="BIBLIOTECA (143)" className="gv-profile-tab-panel">
