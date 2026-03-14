@@ -5,25 +5,25 @@ const MOCK_USERS: Record<
   string,
   { password: string; name: string; nickname: string }
 > = {
-  "bruno.palhoti": {
+  brunogameplay: {
     password: "123456",
     name: "Bruno Palhoti",
-    nickname: "BrunoPalhoti",
+    nickname: "brunogameplay",
   },
   darthgamer: {
     password: "123456",
     name: "Darth Gamer",
     nickname: "DarthGamer",
   },
-  reginhinhagameplary: {
+  reginhinhagameplay: {
     password: "123456",
     name: "Regina Linda",
-    nickname: "reginhinhagameplary",
+    nickname: "reginhinhagameplay",
   },
-  dadagameplary: {
+  dadagameplay: {
     password: "123456",
     name: "Daphine Linda",
-    nickname: "dadagameplary",
+    nickname: "dadagameplay",
   },
 };
 
