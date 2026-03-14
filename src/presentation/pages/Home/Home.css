@@ -2,13 +2,10 @@
   min-height: 220px;
   min-width: 280px;
   border-radius: 1.25rem;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  background: radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.2), transparent 55%),
-    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.85));
-  box-shadow:
-    0 0 0 1px rgba(15, 23, 42, 0.9),
-    0 18px 40px rgba(15, 23, 42, 0.9);
-  color: rgba(226, 232, 240, 0.9);
+  border: 1px solid var(--sgn-card-border);
+  background: var(--sgn-card-overlay);
+  box-shadow: var(--sgn-card-shadow-strong);
+  color: var(--sgn-card-text);
 }
 
 .gv-home-placeholder-card .p-card-body {
@@ -24,5 +21,3 @@
   font-size: 0.98rem;
   color: inherit;
 }
-
-

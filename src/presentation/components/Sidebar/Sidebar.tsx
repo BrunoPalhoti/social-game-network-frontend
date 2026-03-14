@@ -2,6 +2,7 @@ import { getInitialsFromName, useAuthStore } from "@/shared/store/useAuthStore";
 import { NavLink } from "react-router-dom";
 import { Button } from "primereact/button";
 import { GamerVerseLogo } from "../GamerVerseLogo/GamerVerseLogo";
+import { ThemeToggle } from "../ThemeToggle";
 import "./Sidebar.css";
 
 const navItems = [
@@ -48,6 +49,9 @@ export function Sidebar() {
       </div>
 
       <div className="gv-sidebar-bottom">
+        <div className="gv-sidebar-theme-row">
+          <ThemeToggle />
+        </div>
         <Button
           className="gv-sidebar-profile p-button-text p-button-plain"
           type="button"
