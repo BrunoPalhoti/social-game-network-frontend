@@ -25,4 +25,32 @@
   color: inherit;
 }
 
+/* Tablet e celular: card ocupa melhor a largura */
+@media (max-width: 768px) {
+  .gv-home-placeholder-card.p-card {
+    min-width: 0;
+    width: 100%;
+  }
+  .gv-home-placeholder-card .p-card-body {
+    padding: 1.25rem 1rem;
+    min-height: 160px;
+  }
+  .gv-home-placeholder-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gv-home-placeholder-card.p-card {
+    min-height: 180px;
+  }
+  .gv-home-placeholder-card .p-card-body {
+    padding: 1rem 0.75rem;
+    min-height: 140px;
+  }
+  .gv-home-placeholder-text {
+    font-size: 0.875rem;
+  }
+}
+
 
