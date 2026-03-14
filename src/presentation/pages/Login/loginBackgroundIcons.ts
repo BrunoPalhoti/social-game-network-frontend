@@ -1,7 +1,3 @@
-/**
- * Configuração dos ícones gamer no fundo da tela de login.
- * Cada item é renderizado como um div com as classes indicadas (animação + delay).
- */
 export const loginBackgroundIcons = [
   { iconClass: "login-bg-icon-controller", delayClass: "login-bg-delay-1" },
   { iconClass: "login-bg-icon-controller-2", delayClass: "login-bg-delay-2" },

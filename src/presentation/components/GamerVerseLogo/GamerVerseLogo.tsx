@@ -2,11 +2,8 @@ import { Link } from "react-router-dom";
 import "./GamerVerseLogo.css";
 
 interface GamerVerseLogoProps {
-  /** Se true, renderiza como Link para "/". Caso contrário, renderiza como div. */
   asLink?: boolean;
-  /** Classe CSS adicional no container */
   className?: string;
-  /** Mostrar tagline "Conecte. Jogue. Compartilhe." */
   showTagline?: boolean;
 }
 
