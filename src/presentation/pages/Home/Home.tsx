@@ -1,3 +1,4 @@
+import { Card } from "primereact/card";
 import { Sidebar } from "@/presentation/components/Sidebar/Sidebar";
 import "./Home.css";
 
@@ -15,9 +16,11 @@ export default function Home() {
         </header>
 
         <section className="gv-home-content">
-          <div className="gv-home-placeholder-card">
-            <p>Seu feed aparecerá aqui em breve.</p>
-          </div>
+          <Card className="gv-home-placeholder-card">
+            <p className="gv-home-placeholder-text">
+              Seu feed aparecerá aqui em breve.
+            </p>
+          </Card>
         </section>
       </main>
     </div>
