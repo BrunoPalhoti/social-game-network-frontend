@@ -15,6 +15,16 @@ const MOCK_USERS: Record<
     name: "Darth Gamer",
     nickname: "DarthGamer",
   },
+  reginhinhagameplary: {
+    password: "123456",
+    name: "Regina Linda",
+    nickname: "reginhinhagameplary",
+  },
+  dadagameplary: {
+    password: "123456",
+    name: "Daphine Linda",
+    nickname: "dadagameplary",
+  },
 };
 
 export interface User {
