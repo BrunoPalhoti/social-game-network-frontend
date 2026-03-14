@@ -7,31 +7,57 @@
 
 .gv-layout-main {
   flex: 1;
-  padding: 1.75rem 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.75rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   color: var(--sgn-main-text);
   min-width: 0;
+  box-sizing: border-box;
 }
 
-/* Botão menu mobile (visível apenas em telas pequenas) */
+/* Botão de três traços: abrir/fechar sidebar (sempre visível) */
 .gv-layout-menu-toggle {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 1rem;
   left: 1rem;
-  z-index: 100;
+  z-index: 1001;
   width: 44px;
   height: 44px;
-  color: var(--sgn-text) !important;
-  background: var(--sgn-surface-elevated, #252525) !important;
-  border: 1px solid var(--sgn-border) !important;
-  box-shadow: var(--sgn-card-shadow);
+  color: #00f5ff !important;
+  background: rgba(0, 245, 255, 0.08) !important;
+  border: 1px solid rgba(0, 245, 255, 0.35) !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .gv-layout-menu-toggle:hover {
-  background: rgba(139, 92, 246, 0.15) !important;
+  background: rgba(0, 245, 255, 0.18) !important;
+  border-color: rgba(0, 245, 255, 0.55) !important;
+  color: #fff !important;
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.15);
+}
+
+/* Modo claro: botão menu com roxo/primary */
+[data-theme="light"] .gv-layout-menu-toggle {
   color: var(--sgn-primary) !important;
+  background: var(--sgn-primary-muted) !important;
+  border: 1px solid rgba(109, 40, 217, 0.35) !important;
+  box-shadow: 0 0 12px rgba(109, 40, 217, 0.15), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .gv-layout-menu-toggle:hover {
+  background: var(--sgn-nav-hover-bg) !important;
+  border-color: var(--sgn-nav-hover-border) !important;
+  color: var(--sgn-primary-hover) !important;
+  box-shadow: 0 0 18px rgba(109, 40, 217, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .gv-page-header {
@@ -61,19 +87,14 @@
 /* Tablet: 769px – 1024px */
 @media (max-width: 1024px) {
   .gv-layout-main {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 2rem;
   }
 }
 
 /* Tablet pequeno / celular grande: até 768px */
 @media (max-width: 768px) {
-  .gv-layout-menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .gv-layout-main {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 1.5rem;
   }
   .gv-page-title {
     font-size: 1.45rem;
@@ -86,7 +107,7 @@
 /* Celular: até 480px */
 @media (max-width: 480px) {
   .gv-layout-main {
-    padding: 1rem 0.75rem;
+    padding: 1rem 1rem;
   }
   .gv-layout-menu-toggle {
     top: 0.75rem;
@@ -268,21 +289,56 @@
   }
 }
 
+/* ----- Profile: tema neon ----- */
 .gv-profile-hero {
+  --neon-cyan: #00f5ff;
+  --neon-magenta: #ff00ff;
+  --neon-purple: #bf00ff;
+  --neon-green: #39ff14;
+  --neon-glow-cyan: 0 0 20px rgba(0, 245, 255, 0.45), 0 0 40px rgba(0, 245, 255, 0.2);
+  --neon-glow-magenta: 0 0 20px rgba(255, 0, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.15);
+  --neon-glow-purple: 0 0 24px rgba(191, 0, 255, 0.5), 0 0 48px rgba(191, 0, 255, 0.2);
+  --neon-border: 1px solid rgba(0, 245, 255, 0.4);
   border-radius: 1rem;
-  overflow: hidden;
-  background: var(--sgn-surface-elevated);
-  border: 1px solid var(--sgn-border);
-  box-shadow: var(--sgn-card-shadow);
+  overflow: visible;
+  background: linear-gradient(180deg, rgba(15, 5, 25, 0.95) 0%, rgba(20, 10, 35, 0.98) 100%);
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  box-shadow: var(--neon-glow-cyan), 0 12px 40px rgba(0, 0, 0, 0.4);
   margin-bottom: 1.5rem;
+}
+
+.gv-profile-hero .gv-profile-banner {
+  border-radius: 1rem 1rem 0 0;
+  overflow: hidden;
 }
 
 .gv-profile-banner {
   position: relative;
   height: 180px;
-  background: var(--sgn-profile-banner);
+  background: linear-gradient(
+    135deg,
+    rgba(15, 5, 30, 0.98) 0%,
+    rgba(191, 0, 255, 0.15) 25%,
+    rgba(0, 245, 255, 0.12) 50%,
+    rgba(255, 0, 255, 0.12) 75%,
+    rgba(15, 5, 30, 0.98) 100%
+  );
   background-size: cover;
   background-position: center;
+  box-shadow: inset 0 0 80px rgba(0, 245, 255, 0.06);
+}
+
+.gv-profile-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 245, 255, 0.03) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 .gv-profile-banner-img {
@@ -310,66 +366,99 @@
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  border: 4px solid var(--sgn-surface-elevated);
+  border: 3px solid rgba(0, 245, 255, 0.6);
   box-shadow:
-    0 0 0 2px var(--sgn-primary),
-    0 12px 28px var(--sgn-card-shadow);
-  background: var(--sgn-nav-icon-bg);
-  color: var(--sgn-avatar-text);
+    0 0 0 1px rgba(191, 0, 255, 0.4),
+    0 0 24px rgba(0, 245, 255, 0.5),
+    0 0 48px rgba(191, 0, 255, 0.25),
+    0 12px 28px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(145deg, rgba(30, 15, 50, 0.95), rgba(15, 5, 30, 0.98));
+  color: var(--neon-cyan);
 }
 
 .gv-profile-badge.p-tag {
   position: absolute;
   bottom: 4px;
   right: 4px;
-  background: var(--sgn-primary) !important;
-  color: var(--sgn-text) !important;
+  background: linear-gradient(135deg, var(--neon-magenta), var(--neon-purple)) !important;
+  color: #fff !important;
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   padding: 0.2rem 0.45rem;
   border-radius: 0.35rem;
-  box-shadow: 0 2px 6px var(--sgn-btn-glow);
+  box-shadow: 0 0 16px rgba(255, 0, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .gv-profile-info {
-  padding: 0.5rem 1.5rem 0;
+  padding: 0.5rem 2rem 0;
   text-align: center;
 }
 
 .gv-profile-status {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--sgn-text);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 0.25rem;
 }
 
 .gv-profile-name {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--sgn-text-secondary);
+  color: rgba(0, 245, 255, 0.85);
   margin: 0 0 0.2rem;
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
 }
 
 .gv-profile-username {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--sgn-text);
+  color: #fff;
   margin: 0 0 1rem;
+  text-shadow: 0 0 24px rgba(255, 0, 255, 0.4), 0 0 48px rgba(191, 0, 255, 0.2);
 }
 
 .gv-profile-info-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  padding: 0 1.5rem 1rem;
+  gap: 1.25rem;
+  padding: 0 2rem 1.25rem;
+}
+
+/* Info cards com tema neon (dentro do profile) */
+.gv-profile-hero .gv-profile-info-cards .gv-info-card {
+  background: rgba(0, 245, 255, 0.04);
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.08), inset 0 0 20px rgba(0, 245, 255, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gv-profile-hero .gv-profile-info-cards .gv-info-card:hover {
+  border-color: rgba(0, 245, 255, 0.55);
+  box-shadow: 0 0 28px rgba(0, 245, 255, 0.15), 0 0 40px rgba(191, 0, 255, 0.08);
+}
+
+.gv-profile-hero .gv-profile-info-cards .gv-info-card-icon {
+  background: rgba(0, 245, 255, 0.12);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.2);
+}
+
+.gv-profile-hero .gv-profile-info-cards .gv-info-card-label {
+  color: rgba(0, 245, 255, 0.8);
+}
+
+.gv-profile-hero .gv-profile-info-cards .gv-info-card-value {
+  color: #fff;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
 }
 
 .gv-profile-hero .p-divider {
-  margin: 0 1.5rem 1rem;
-  border-color: var(--sgn-border);
+  margin: 0 2rem 1.25rem;
+  border-color: rgba(0, 245, 255, 0.2);
 }
 
 .gv-profile-tabview.p-tabview {
@@ -385,55 +474,167 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.35rem;
-  padding: 0 1rem 1rem;
+  gap: 0.5rem;
+  padding: 0 2rem 1.25rem;
   border: none;
-  border-bottom: 1px solid var(--sgn-border);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.25);
   background: transparent;
+  box-shadow: 0 1px 0 0 rgba(191, 0, 255, 0.1);
 }
 
 .gv-profile-tabview .p-tabview-nav-link {
   padding: 0.5rem 1rem;
   border-radius: 0.6rem;
   background: transparent;
-  color: var(--sgn-text-secondary);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  border: none;
+  border: 1px solid transparent;
   transition:
     background-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .gv-profile-tabview .p-tabview-nav-link:hover {
-  color: var(--sgn-text);
-  background-color: var(--sgn-header-btn-hover);
+  color: var(--neon-cyan);
+  background: rgba(0, 245, 255, 0.08);
+  border-color: rgba(0, 245, 255, 0.3);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.2);
 }
 
 .gv-profile-tabview .p-tabview-nav-link.p-highlight {
-  background: var(--sgn-primary);
-  color: var(--sgn-text);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
+  color: #fff;
+  border-color: rgba(0, 245, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.35), inset 0 0 20px rgba(0, 245, 255, 0.05);
 }
 
 .gv-profile-tabview .p-tabview-nav-link.p-highlight:hover {
-  background: var(--sgn-primary-hover);
-  color: var(--sgn-text);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.28), rgba(191, 0, 255, 0.28));
+  color: #fff;
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.45), inset 0 0 24px rgba(0, 245, 255, 0.08);
 }
 
 .gv-profile-tabview .p-tabview-panels {
   background: transparent;
   border: none;
-  padding: 1rem 0 0;
+  padding: 1.25rem 2rem 0;
 }
 
 .gv-profile-tab-panel .p-tabview-panel {
   padding: 0;
 }
 
+/* Garante que o painel ativo da Jornada (e demais abas) seja visível */
+/* Modo claro: seção de perfil com fundo e bordas em roxo suave */
+[data-theme="light"] .gv-profile-hero {
+  background: var(--sgn-card-overlay);
+  border: 1px solid var(--sgn-card-border);
+  box-shadow: var(--sgn-card-shadow-strong);
+}
+
+[data-theme="light"] .gv-profile-banner {
+  background: var(--sgn-profile-banner);
+  box-shadow: none;
+}
+
+[data-theme="light"] .gv-profile-banner::after {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+}
+
+[data-theme="light"] .gv-profile-avatar.p-avatar {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.3), 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(145deg, #7c3aed, #5b21b6);
+  color: #fff;
+}
+
+[data-theme="light"] .gv-profile-status,
+[data-theme="light"] .gv-profile-name {
+  color: var(--sgn-text-secondary);
+}
+
+[data-theme="light"] .gv-profile-username {
+  color: var(--sgn-text);
+  text-shadow: none;
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card {
+  background: var(--sgn-info-card-bg);
+  border: 1px solid var(--sgn-card-border);
+  box-shadow: var(--sgn-card-shadow);
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card:hover {
+  border-color: var(--sgn-border-focus);
+  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-icon {
+  background: var(--sgn-info-card-icon-bg);
+  color: var(--sgn-primary);
+  box-shadow: none;
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-label {
+  color: var(--sgn-text-secondary);
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-value {
+  color: var(--sgn-text);
+}
+
+[data-theme="light"] .gv-profile-hero .p-divider {
+  border-color: var(--sgn-border);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav {
+  border-bottom-color: var(--sgn-border);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link {
+  color: var(--sgn-text-secondary);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link:hover {
+  color: var(--sgn-primary);
+  background: var(--sgn-nav-hover-bg);
+  border-color: var(--sgn-nav-hover-border);
+  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.15);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link.p-highlight {
+  background: var(--sgn-nav-active-bg);
+  color: #fff;
+  border-color: rgba(109, 40, 217, 0.5);
+  box-shadow: var(--sgn-nav-active-shadow);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link.p-highlight:hover {
+  background: var(--sgn-nav-active-bg);
+  color: #fff;
+  box-shadow: var(--sgn-nav-active-shadow);
+}
+
+[data-theme="light"] .gv-profile-tab-content {
+  color: var(--sgn-text);
+}
+
+.gv-profile-tabview .p-tabview-panels {
+  min-height: 300px;
+}
+
+.gv-profile-tabview .p-tabview-panel:not(.p-hidden) {
+  display: block !important;
+}
+
 .gv-profile-tab-content {
   font-size: 0.95rem;
-  color: var(--sgn-text-secondary);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .gv-profile-content {
@@ -447,16 +648,19 @@
     margin-bottom: 1rem;
   }
   .gv-profile-info {
-    padding: 0.5rem 1rem 0;
+    padding: 0.5rem 1.5rem 0;
   }
   .gv-profile-info-cards {
-    padding: 0 1rem 1rem;
+    padding: 0 1.5rem 1rem;
   }
   .gv-profile-hero .p-divider {
-    margin: 0 1rem 1rem;
+    margin: 0 1.5rem 1rem;
   }
   .gv-profile-tabview .p-tabview-nav {
-    padding: 0 0.75rem 1rem;
+    padding: 0 1.5rem 1rem;
+  }
+  .gv-profile-tabview .p-tabview-panels {
+    padding: 1rem 1.5rem 0;
   }
 }
 
@@ -497,8 +701,11 @@
   .gv-profile-tabview .p-tabview-nav {
     justify-content: flex-start;
     overflow-x: auto;
-    padding-bottom: 0.75rem;
+    padding: 0 1rem 0.75rem 0.75rem;
     -webkit-overflow-scrolling: touch;
+  }
+  .gv-profile-tabview .p-tabview-panels {
+    padding: 1rem 1rem 0;
   }
 }
 
@@ -515,7 +722,7 @@
     font-size: 1.35rem;
   }
   .gv-profile-info {
-    padding: 0.4rem 0.75rem 0;
+    padding: 0.4rem 1rem 0;
   }
   .gv-profile-status,
   .gv-profile-name {
@@ -525,14 +732,17 @@
     font-size: 1.1rem;
   }
   .gv-profile-info-cards {
-    padding: 0 0.75rem 0.75rem;
+    padding: 0 1rem 0.75rem;
     gap: 0.75rem;
   }
   .gv-profile-hero .p-divider {
-    margin: 0 0.75rem 0.75rem;
+    margin: 0 1rem 0.75rem;
   }
   .gv-profile-tabview .p-tabview-nav {
-    padding: 0 0.5rem 0.75rem;
+    padding: 0 1rem 0.5rem 0.75rem;
+  }
+  .gv-profile-tabview .p-tabview-panels {
+    padding: 1rem 1rem 0;
   }
   .gv-profile-tabview .p-tabview-nav-link {
     padding: 0.4rem 0.75rem;

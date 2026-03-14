@@ -5,7 +5,9 @@ import { Sidebar } from "@/presentation/components/Sidebar/Sidebar";
 import "./Layout.css";
 
 export function Layout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => setSidebarOpen((open) => !open);
 
   return (
     <div className="gv-layout">
@@ -18,9 +20,10 @@ export function Layout() {
         rounded
         text
         severity="secondary"
-        aria-label="Abrir menu"
+        aria-label={sidebarOpen ? "Fechar menu" : "Abrir menu"}
         className="gv-layout-menu-toggle"
-        onClick={() => setSidebarOpen(true)}
+        onClick={toggleSidebar}
+        title={sidebarOpen ? "Fechar menu" : "Abrir menu"}
       />
       <main className="gv-layout-main">
         <Outlet />
