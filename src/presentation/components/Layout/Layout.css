@@ -99,7 +99,9 @@
   color: var(--sgn-text);
   font-size: 0.9rem;
   font-family: var(--sgn-font-sans);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .gv-header-search .p-inputtext::placeholder {
@@ -274,6 +276,19 @@
   margin: 0 0 1rem;
 }
 
+.gv-profile-info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1.5rem 1rem;
+}
+
+.gv-profile-hero .p-divider {
+  margin: 0 1.5rem 1rem;
+  border-color: var(--sgn-border);
+}
+
 .gv-profile-tabview.p-tabview {
   border: none;
   background: transparent;
@@ -303,7 +318,9 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   border: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .gv-profile-tabview .p-tabview-nav-link:hover {
@@ -358,6 +375,20 @@
 
   .gv-profile-username {
     font-size: 1.25rem;
+  }
+
+  .gv-profile-info-cards {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gv-profile-info-cards .gv-info-card {
+    min-width: 0;
+    max-width: none;
+  }
+
+  .gv-profile-hero .p-divider {
+    margin: 0 1rem 1rem;
   }
 
   .gv-profile-tabview .p-tabview-nav {

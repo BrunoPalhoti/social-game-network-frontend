@@ -3,24 +3,51 @@ import { persist } from "zustand/middleware";
 
 const MOCK_USERS: Record<
   string,
-  { password: string; name: string; nickname: string }
+  { password: string; name: string; nickname: string; platform: string, favoriteGame: string }
 > = {
-  "bruno.palhoti": {
+  brunogameplay: {
     password: "123456",
     name: "Bruno Palhoti",
-    nickname: "BrunoPalhoti",
+    nickname: "brunogameplay",
+    platform: "Playstation",
+    favoriteGame: "The Last of Us",
   },
   darthgamer: {
     password: "123456",
     name: "Darth Gamer",
     nickname: "DarthGamer",
+    platform: "Xbox",
+    favoriteGame: "Halo",
+  },
+  reginhinhagameplay: {
+    password: "123456",
+    name: "Regina Linda",
+    nickname: "reginhinhagameplay",
+    platform: "Celular",
+    favoriteGame: "Home Design: Caribbean Life",
+  },
+  dadagameplay: {
+    password: "123456",
+    name: "Daphine Linda",
+    nickname: "dadagameplay",
+    platform: "Nintendo Switch",
+    favoriteGame: "Stardew Valley",
   },
 };
+
+export function getMockUserProfile(username: string | undefined): { platform?: string; favoriteGame?: string } {
+  if (!username) return {};
+  const key = username.trim().toLowerCase();
+  const mock = MOCK_USERS[key];
+  return mock ? { platform: mock.platform, favoriteGame: mock.favoriteGame } : {};
+}
 
 export interface User {
   username: string;
   name: string;
   nickname: string;
+  platform?: string;
+  favoriteGame?: string;
 }
 
 export function getInitialsFromUsername(username: string): string {
@@ -67,6 +94,8 @@ export const useAuthStore = create<AuthState>()(
               username: key,
               name: mock.name,
               nickname: mock.nickname,
+              platform: mock.platform,
+              favoriteGame: mock.favoriteGame,
             },
             isAuthenticated: true,
           });
