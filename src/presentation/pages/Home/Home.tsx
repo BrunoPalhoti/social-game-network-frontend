@@ -1,28 +1,23 @@
 import { Card } from "primereact/card";
-import { Sidebar } from "@/presentation/components/Sidebar/Sidebar";
 import "./Home.css";
 
 export default function Home() {
   return (
-    <div className="gv-home">
-      <Sidebar />
+    <>
+      <header className="gv-page-header">
+        <h2 className="gv-page-title">Feed</h2>
+        <p className="gv-page-subtitle">
+          Veja o que a comunidade GamerVerse está jogando agora.
+        </p>
+      </header>
 
-      <main className="gv-home-main">
-        <header className="gv-home-header">
-          <h2 className="gv-home-title">Feed</h2>
-          <p className="gv-home-subtitle">
-            Veja o que a comunidade GamerVerse está jogando agora.
+      <section className="gv-page-content">
+        <Card className="gv-home-placeholder-card">
+          <p className="gv-home-placeholder-text">
+            Seu feed aparecerá aqui em breve.
           </p>
-        </header>
-
-        <section className="gv-home-content">
-          <Card className="gv-home-placeholder-card">
-            <p className="gv-home-placeholder-text">
-              Seu feed aparecerá aqui em breve.
-            </p>
-          </Card>
-        </section>
-      </main>
-    </div>
+        </Card>
+      </section>
+    </>
   );
 }

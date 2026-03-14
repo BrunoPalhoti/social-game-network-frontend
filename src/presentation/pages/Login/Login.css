@@ -1,4 +1,3 @@
-/* --- Container da página --- */
 .login-page {
   min-height: 100vh;
   display: flex;
@@ -8,7 +7,6 @@
   overflow: hidden;
 }
 
-/* --- Fundo: padrão + partículas + brilho --- */
 .login-bg {
   position: absolute;
   inset: 0;
@@ -16,7 +14,6 @@
   z-index: 0;
 }
 
-/* Padrão de grade (igual nos dois temas) */
 .login-bg-pattern {
   position: absolute;
   inset: 0;
@@ -27,7 +24,6 @@
   opacity: 0.2;
 }
 
-/* Partículas / pontos roxos (igual nos dois temas) */
 .login-bg-particles {
   position: absolute;
   inset: 0;
@@ -46,7 +42,6 @@
   opacity: 0.4;
 }
 
-/* Brilho roxo (igual nos dois temas) */
 .login-bg-glow {
   position: absolute;
   inset: -100px;
@@ -59,7 +54,6 @@
   opacity: 1;
 }
 
-/* --- Fundo: ícones gamer animados --- */
 .login-bg-gaming {
   position: absolute;
   inset: 0;
@@ -80,7 +74,6 @@
   animation: login-bg-float 14s ease-in-out infinite;
 }
 
-/* Variação mais lenta para alguns ícones */
 .login-bg-float-slow {
   animation: login-bg-float 20s ease-in-out infinite;
 }
@@ -153,7 +146,6 @@
   }
 }
 
-/* Controle gamer à esquerda */
 .login-bg-icon-controller {
   bottom: 15%;
   left: 6%;
@@ -162,7 +154,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='0.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.58 16.09l-1.09-7.66A3.996 3.996 0 0 0 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.27 3.16 19 4.5 19c.53 0 1.04-.18 1.46-.5.42-.32.64-.81.64-1.33l.01-.12h10.78l.01.12c0 .52.22 1.01.64 1.33.42.32.93.5 1.46.5 1.34 0 2.3-1.73 1.92-2.91z'/%3E%3Cpath d='M11 14H9v-2H7v2H5v-2h2V10h2v2h2v2zm4 0v-2h-2v2h2zm2-2h-2v-2h2v2z'/%3E%3C/svg%3E");
 }
 
-/* Segundo controle (canto superior esquerdo) */
 .login-bg-icon-controller-2 {
   top: 18%;
   left: 10%;
@@ -173,7 +164,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6' opacity='0.9'%3E%3Cpath d='M21.58 16.09l-1.09-7.66A3.996 3.996 0 0 0 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.27 3.16 19 4.5 19c.53 0 1.04-.18 1.46-.5.42-.32.64-.81.64-1.33l.01-.12h10.78l.01.12c0 .52.22 1.01.64 1.33.42.32.93.5 1.46.5 1.34 0 2.3-1.73 1.92-2.91z'/%3E%3Cpath d='M11 14H9v-2H7v2H5v-2h2V10h2v2h2v2zm4 0v-2h-2v2h2zm2-2h-2v-2h2v2z'/%3E%3C/svg%3E");
 }
 
-/* Teclado gamer */
 .login-bg-icon-keyboard {
   bottom: 22%;
   right: 22%;
@@ -184,7 +174,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M4 5c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H4zm0 6c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1H4zm2 2v2h2v-2H6zm3 0v2h2v-2H9zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z'/%3E%3C/svg%3E");
 }
 
-/* Mouse gamer */
 .login-bg-icon-mouse {
   top: 35%;
   left: 18%;
@@ -211,7 +200,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9v6c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4V9c0-3.87-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5v6c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V9c0-2.76 2.24-5 5-5z'/%3E%3C/svg%3E");
 }
 
-/* Controles extras */
 .login-bg-icon-controller-3 {
   top: 55%;
   right: 35%;
@@ -228,7 +216,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='0.7'%3E%3Cpath d='M21.58 16.09l-1.09-7.66A3.996 3.996 0 0 0 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.27 3.16 19 4.5 19c.53 0 1.04-.18 1.46-.5.42-.32.64-.81.64-1.33l.01-.12h10.78l.01.12c0 .52.22 1.01.64 1.33.42.32.93.5 1.46.5 1.34 0 2.3-1.73 1.92-2.91z'/%3E%3Cpath d='M11 14H9v-2H7v2H5v-2h2V10h2v2h2v2zm4 0v-2h-2v2h2zm2-2h-2v-2h2v2z'/%3E%3C/svg%3E");
 }
 
-/* Teclados extras */
 .login-bg-icon-keyboard-2 {
   top: 12%;
   left: 28%;
@@ -245,7 +232,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M4 5c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h16c.55 0 1-.45 1-1V6c0-.55-.45-1-1-1H4zm0 6c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1H4zm2 2v2h2v-2H6zm3 0v2h2v-2H9zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z'/%3E%3C/svg%3E");
 }
 
-/* Headsets extras */
 .login-bg-icon-headset-2 {
   top: 42%;
   left: 8%;
@@ -262,7 +248,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M12 1c-4.97 0-9 4.03-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-2v8h4c1.1 0 2-.9 2-2v-7c0-4.97-4.03-9-9-9z'/%3E%3C/svg%3E");
 }
 
-/* Joystick */
 .login-bg-icon-joystick {
   top: 28%;
   right: 32%;
@@ -271,7 +256,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E");
 }
 
-/* Troféus */
 .login-bg-icon-trophy {
   top: 8%;
   right: 18%;
@@ -288,7 +272,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v2c0 1.66 1.34 3 3 3h.62c.34 1.84 1.94 3.24 3.84 3.5-.68.44-1.34 1.04-1.84 1.74-.5.7-.78 1.5-.78 2.26v3h12v-3c0-.76-.28-1.56-.78-2.26-.5-.7-1.16-1.3-1.84-1.74 1.9-.26 3.5-1.66 3.84-3.5h.62c1.66 0 3-1.34 3-3V7c0-1.1-.9-2-2-2zM5 9V7h2v3.82c0 1.1-.9 2-2 2V9zm14 0v3.82c-1.1 0-2-.9-2-2V7h2v2zm-6 9.5c-1.93 0-3.5-1.57-3.5-3.5h2v1.5h3v-1.5h2c0 1.93-1.57 3.5-3.5 3.5z'/%3E%3C/svg%3E");
 }
 
-/* Estrelas (conquistas) */
 .login-bg-icon-star {
   top: 22%;
   left: 38%;
@@ -313,7 +296,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
 }
 
-/* Gamepads */
 .login-bg-icon-gamepad {
   top: 48%;
   left: 42%;
@@ -330,7 +312,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M21.58 16.09l-1.09-7.66A3.996 3.996 0 0 0 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.27 3.16 19 4.5 19c.53 0 1.04-.18 1.46-.5.42-.32.64-.81.64-1.33l.01-.12h10.78l.01.12c0 .52.22 1.01.64 1.33.42.32.93.5 1.46.5 1.34 0 2.3-1.73 1.92-2.91zM11 14H9v-2H7v2H5v-2h2V10h2v2h2v2zm4 0v-2h-2v2h2zm2-2h-2v-2h2v2z'/%3E%3C/svg%3E");
 }
 
-/* Monitor */
 .login-bg-icon-monitor {
   top: 62%;
   right: 25%;
@@ -339,7 +320,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2h4v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z'/%3E%3C/svg%3E");
 }
 
-/* Dado (games) */
 .login-bg-icon-dice {
   top: 15%;
   left: 48%;
@@ -348,7 +328,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5zm2 2h10v10H7V5zm2 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm4 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-4 4a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm4 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/%3E%3C/svg%3E");
 }
 
-/* Botão de tema no canto */
 .login-toggle {
   position: absolute;
   top: 1.5rem;
@@ -356,7 +335,6 @@
   z-index: 10;
 }
 
-/* --- Card central (branco elevado, cantos arredondados, sombra suave) --- */
 .login-card-wrapper {
   position: relative;
   z-index: 1;
@@ -400,7 +378,6 @@
   margin-bottom: 2rem;
 }
 
-/* --- Formulário --- */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -416,7 +393,6 @@
   width: 100%;
 }
 
-/* Wrapper do Password (PrimeReact) com a mesma largura do campo de texto */
 .login-field .p-password {
   width: 100%;
   display: block;
@@ -449,7 +425,6 @@
   border-color: var(--sgn-primary-muted) !important;
 }
 
-/* Password (PrimeReact) */
 .login-password.w-full {
   width: 100%;
 }
