@@ -56,6 +56,21 @@
   border-color: rgba(0, 245, 255, 0.45);
 }
 
+.gv-journey-mission-card .p-card-body,
+.gv-journey-mission-card-body {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gv-journey-mission-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
 .gv-journey-mission-icon {
   font-size: 2rem;
   line-height: 1;
@@ -83,45 +98,119 @@
   text-transform: uppercase;
 }
 
-/* Jogos zerados na vida (horas, plataformas) */
-.gv-journey-vida-card {
-  margin-top: 1.25rem;
-  padding: 1rem 1.25rem;
+.gv-journey-mission-value--small {
+  font-size: 0.9rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+/* ----- Timeline: card com tabs ----- */
+.gv-journey-timeline-wrap {
+  margin-bottom: 2rem;
+}
+
+.gv-journey-timeline-card {
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  border-left: 4px solid var(--journey-accent);
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.04);
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-.gv-journey-vida-title {
-  font-size: 0.8rem;
+.gv-journey-timeline-tabs.p-tabview {
+  background: transparent;
+  border: none;
+  border-radius: 0.75rem 0.75rem 0 0;
+  overflow: hidden;
+}
+
+/* Estilo referência: linha turquesa contínua abaixo das tabs; inativas = cinza, ativa = turquesa fundindo com a linha */
+.gv-journey-timeline-tabs .p-tabview-nav-container {
+  margin-bottom: 0;
+  background: transparent;
+  border-bottom: 3px solid var(--journey-accent);
+  border-radius: 0;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.gv-journey-timeline-tabs .p-tabview-nav {
+  background: transparent;
+  border: none;
+  gap: 0.35rem;
+  padding: 0;
+}
+
+/* Inativas: texto e ícone em cor apagada */
+.gv-journey-timeline-tabs .p-tabview-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--journey-text-muted);
   text-transform: uppercase;
-  margin: 0 0 0.75rem;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin-bottom: -3px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.15);
+  transition: color 0.25s ease, background 0.25s ease;
 }
 
-.gv-journey-vida-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 1.5rem;
+.gv-journey-timeline-tabs .p-tabview-nav-link span,
+.gv-journey-timeline-tabs .p-tabview-nav-link .gv-journey-tab-icon {
+  color: inherit;
 }
 
-.gv-journey-vida-stat {
-  font-size: 0.9rem;
-  color: var(--journey-text);
+.gv-journey-timeline-tabs .p-tabview-nav-link:hover {
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.gv-journey-vida-stat strong {
-  color: var(--journey-text);
-  font-weight: 700;
+.gv-journey-timeline-tabs .p-tabview-nav-link:hover span,
+.gv-journey-timeline-tabs .p-tabview-nav-link:hover .gv-journey-tab-icon {
+  color: inherit;
 }
 
-/* ----- Timeline: divisão Zerados vs Jogando agora ----- */
-.gv-journey-timeline-wrap {
-  margin-bottom: 2rem;
+/* Selecionada: a classe p-highlight fica no <li> (header), não no <a> — estilizar o link e o li quando ativo */
+.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link {
+  color: var(--journey-accent) !important;
+  background: transparent !important;
+  box-shadow: none;
+  border-bottom: 3px solid var(--journey-accent);
+  margin-bottom: -3px;
+  padding-bottom: 0.7rem;
+}
+
+.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link span,
+.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link .gv-journey-tab-icon {
+  color: var(--journey-accent) !important;
+}
+
+.gv-journey-timeline-tabs .p-tabview-nav-link .gv-journey-tab-icon {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.gv-journey-timeline-tabs .p-tabview-panels {
+  background: transparent;
+  border: none;
+  border-top: 3px solid var(--journey-accent);
+  border-radius: 0;
+  padding: 1.5rem 1.75rem;
+  box-shadow: none;
+}
+
+.gv-journey-timeline-tabs .p-tabview-panel {
+  padding: 0;
+}
+
+.gv-journey-timeline-tab-panel .p-tabview-panel-content {
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 
 .gv-journey-timeline-block {
@@ -137,9 +226,10 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   color: var(--journey-accent);
-  margin: 0 0 0.75rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 2px solid var(--journey-border);
+  margin: 0 0 1rem;
+  padding: 0 0 0.5rem 0.75rem;
+  border-left: 3px solid var(--journey-accent);
+  border-bottom: 1px solid var(--journey-border);
 }
 
 .gv-journey-timeline-block-title--playing {
@@ -176,9 +266,9 @@
 
 .gv-journey-timeline-track {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   min-width: min-content;
-  padding: 0.25rem 0.25rem 0.5rem;
+  padding: 0.35rem 0.25rem 0.75rem;
 }
 
 .gv-journey-timeline-game-slot {
@@ -192,12 +282,13 @@
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
   box-shadow: 0 0 16px rgba(0, 245, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .gv-journey-timeline-game-slot:hover {
-  border-color: rgba(0, 245, 255, 0.4);
-  box-shadow: 0 0 24px rgba(0, 245, 255, 0.12), 0 0 32px rgba(255, 0, 255, 0.06);
+  transform: translateY(-4px);
+  border-color: rgba(0, 245, 255, 0.45);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 28px var(--journey-glow), 0 0 40px rgba(255, 0, 255, 0.08);
 }
 
 .gv-journey-timeline-cover-wrap {
@@ -267,17 +358,68 @@
   box-shadow: 0 0 0 2px var(--journey-accent), 0 0 20px rgba(0, 245, 255, 0.25);
 }
 
-.gv-journey-timeline-empty {
+.gv-journey-timeline-empty,
+.gv-journey-timeline-empty.p-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   font-size: 0.9rem;
   color: var(--journey-text-muted);
   margin: 0;
-  padding: 1rem 1.25rem;
+  padding: 1.5rem 1.5rem;
   font-style: italic;
+  text-align: center;
+  background: rgba(0, 245, 255, 0.03);
+  border: 1px dashed var(--journey-border);
+  border-radius: 0.75rem;
+  line-height: 1.5;
+  width: 100%;
 }
 
-/* ----- Mapa de calor gêneros ----- */
+.gv-journey-timeline-empty .p-message-icon,
+.gv-journey-timeline-empty .gv-journey-empty-icon {
+  font-size: 1.75rem;
+  opacity: 0.5;
+}
+
+/* ----- Mapa de calor gêneros (Card PrimeReact) ----- */
 .gv-journey-genre-heatmap {
   margin-bottom: 2rem;
+}
+
+.gv-journey-genre-heatmap.p-card {
+  background: var(--journey-surface);
+  border: 1px solid var(--journey-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.gv-journey-genre-card-header.p-card-header,
+.gv-journey-genre-heatmap .p-card-header {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--journey-border);
+  padding: 1rem 1.25rem 0.75rem;
+}
+
+.gv-journey-genre-card-title.p-card-title,
+.gv-journey-genre-heatmap .p-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--journey-text-muted);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--journey-accent);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+  margin: 0;
+}
+
+.gv-journey-genre-card-body.p-card-body,
+.gv-journey-genre-heatmap .p-card-body {
+  padding: 1rem 1.25rem 1.25rem;
 }
 
 .gv-journey-genre-subtitle {
@@ -331,15 +473,78 @@
   text-align: right;
 }
 
-/* ----- Cards de jogo (grid + hover Análise 1 min) ----- */
+/* Tema escuro: mapa de calor de gêneros (Card) */
+[data-theme="dark"] .gv-journey-genre-heatmap .p-card-title {
+  color: rgba(0, 245, 255, 0.9) !important;
+}
+
+[data-theme="dark"] .gv-journey-genre-heatmap .gv-journey-genre-subtitle,
+[data-theme="dark"] .gv-journey-genre-heatmap .p-card-body {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="dark"] .gv-journey-genre-heatmap .gv-journey-genre-name {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] .gv-journey-genre-heatmap .gv-journey-genre-percent {
+  color: rgba(0, 245, 255, 0.85);
+}
+
+/* ----- Cards de jogo (grid + hover Análise 1 min) — Card PrimeReact ----- */
 .gv-journey-games-section {
   margin-bottom: 2rem;
+}
+
+.gv-journey-games-section.p-card {
+  background: var(--journey-surface);
+  border: 1px solid var(--journey-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.gv-journey-games-card-header.p-card-header,
+.gv-journey-games-section .p-card-header {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--journey-border);
+  padding: 1rem 1.25rem 0.75rem;
+}
+
+.gv-journey-games-card-title.p-card-title,
+.gv-journey-games-section .p-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--journey-text-muted);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--journey-accent);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+  margin: 0;
+}
+
+.gv-journey-games-card-body.p-card-body,
+.gv-journey-games-section .p-card-body {
+  padding: 1rem 1.25rem 1.25rem;
+  background: transparent;
+  color: inherit;
 }
 
 .gv-journey-games-intro {
   font-size: 0.9rem;
   color: var(--journey-text-muted);
   margin: -0.5rem 0 1.25rem;
+}
+
+/* Tema escuro: forçar título e texto legíveis no card de jogos */
+[data-theme="dark"] .gv-journey-games-section .p-card-title {
+  color: rgba(0, 245, 255, 0.9) !important;
+}
+
+[data-theme="dark"] .gv-journey-games-section .gv-journey-games-intro,
+[data-theme="dark"] .gv-journey-games-section .p-card-body {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .gv-journey-games-grid {
@@ -455,7 +660,17 @@
   opacity: 0.85;
 }
 
-.gv-journey-card-badge {
+.gv-journey-card-header-wrap {
+  padding: 0;
+  overflow: visible;
+}
+
+.gv-journey-card-footer-wrap {
+  padding: 0 1rem 1rem;
+}
+
+.gv-journey-card-badge,
+.gv-journey-card-badge--100.p-tag {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -467,11 +682,22 @@
   border-radius: 0.3rem;
   letter-spacing: 0.05em;
   box-shadow: 0 0 12px var(--journey-glow);
+  border: none;
 }
 
-.gv-journey-card-badge--platina {
+.gv-journey-card-badge--platina.p-tag {
+  top: 0.5rem;
+  left: 0.5rem;
+  right: auto;
   background: linear-gradient(135deg, #fbbf24, #f59e0b);
   color: #0f172a;
+}
+
+.gv-journey-card-badge--100.p-tag + .gv-journey-card-badge--platina.p-tag,
+.gv-journey-card-badge--platina.p-tag + .gv-journey-card-badge--100.p-tag {
+  left: auto;
+  right: 0.5rem;
+  top: 2rem;
 }
 
 .gv-journey-card-body {
@@ -510,7 +736,8 @@
 }
 
 /* ----- Gamificação (tema desbloqueável) ----- */
-.gv-journey-gamification {
+.gv-journey-gamification,
+.gv-journey-gamification.p-message {
   padding: 1.25rem 1.5rem;
   background: linear-gradient(
     135deg,
@@ -522,6 +749,7 @@
   box-shadow: 0 0 24px rgba(0, 245, 255, 0.04);
 }
 
+.gv-journey-gamification .p-message-text,
 .gv-journey-gamification-text {
   font-size: 0.9rem;
   color: var(--journey-text-muted);
@@ -592,6 +820,26 @@
 
 [data-theme="light"] .gv-journey-timeline-game-slot--playing .gv-journey-timeline-cover-wrap {
   box-shadow: 0 0 0 2px var(--sgn-primary), 0 4px 16px rgba(109, 40, 217, 0.2);
+}
+
+[data-theme="light"] .gv-journey-genre-heatmap.p-card {
+  background: var(--sgn-surface-elevated);
+  border-color: var(--sgn-card-border);
+  box-shadow: var(--sgn-card-shadow);
+}
+
+[data-theme="light"] .gv-journey-genre-heatmap .p-card-header {
+  border-bottom-color: var(--sgn-border);
+}
+
+[data-theme="light"] .gv-journey-games-section.p-card {
+  background: var(--sgn-surface-elevated);
+  border-color: var(--sgn-card-border);
+  box-shadow: var(--sgn-card-shadow);
+}
+
+[data-theme="light"] .gv-journey-games-section .p-card-header {
+  border-bottom-color: var(--sgn-border);
 }
 
 [data-theme="light"] .gv-journey-genre-bar-wrap {

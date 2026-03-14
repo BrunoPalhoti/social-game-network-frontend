@@ -1,6 +1,9 @@
+import { useState } from "react";
 import type { JourneyMonth } from "./types";
 import type { JourneyGame } from "./types";
-import { JourneyGameCard } from "./JourneyGameCard";
+import { TabView, TabPanel } from "primereact/tabview";
+import { Message } from "primereact/message";
+import { JourneyGameCard } from "@/presentation/pages/Profile/components/Journey/JourneyGameCard";
 import "./Journey.css";
 
 const ZERADOS_STATUS: JourneyGame["status"][] = ["COMPLETED", "PLATINUM"];
@@ -51,6 +54,7 @@ function TimelineGameSlot({
 }
 
 export function JourneyTimeline({ months }: JourneyTimelineProps) {
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const jogosZerados: JourneyGame[] = [];
   const jogandoAgora: JourneyGame[] = [];
 
@@ -63,46 +67,95 @@ export function JourneyTimeline({ months }: JourneyTimelineProps) {
 
   return (
     <section className="gv-journey-timeline-wrap" aria-label="Linha do tempo">
-      <h2 className="gv-journey-section-title">Linha do Tempo</h2>
-
-      {/* 1. Jogos que já zerei */}
-      <div className="gv-journey-timeline-block">
-        <h3 className="gv-journey-timeline-block-title">
-          Jogos que já zerei
-        </h3>
-        <div className="gv-journey-timeline-scroll">
-          <div className="gv-journey-timeline-track">
-            {jogosZerados.length > 0 ? (
-              jogosZerados.map((game) => (
-                <TimelineGameSlot key={game.id} game={game} badge="zerado" />
-              ))
-            ) : (
-              <p className="gv-journey-timeline-empty">
-                Nenhum jogo zerado neste ano ainda.
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Jogos que estou jogando no momento */}
-      <div className="gv-journey-timeline-block">
-        <h3 className="gv-journey-timeline-block-title gv-journey-timeline-block-title--playing">
-          Jogos que estou jogando no momento
-        </h3>
-        <div className="gv-journey-timeline-scroll">
-          <div className="gv-journey-timeline-track">
-            {jogandoAgora.length > 0 ? (
-              jogandoAgora.map((game) => (
-                <TimelineGameSlot key={game.id} game={game} badge="playing" />
-              ))
-            ) : (
-              <p className="gv-journey-timeline-empty">
-                Nenhum jogo em andamento.
-              </p>
-            )}
-          </div>
-        </div>
+      <div className="gv-journey-timeline-card">
+        <TabView
+          className="gv-journey-timeline-tabs"
+          activeIndex={activeTabIndex}
+          onTabChange={(e) => setActiveTabIndex(e.index)}
+        >
+          <TabPanel
+            header={
+              <>
+                <i className="pi pi-calendar gv-journey-tab-icon" />
+                <span>Linha do Tempo</span>
+              </>
+            }
+            className="gv-journey-timeline-tab-panel"
+          >
+            <div className="gv-journey-timeline-block">
+              <div className="gv-journey-timeline-scroll">
+                <div className="gv-journey-timeline-track">
+                  {jogosZerados.length > 0 ? (
+                    jogosZerados.map((game) => (
+                      <TimelineGameSlot
+                        key={game.id}
+                        game={game}
+                        badge="zerado"
+                      />
+                    ))
+                  ) : (
+                    <Message
+                      severity="info"
+                      className="gv-journey-timeline-empty"
+                      text="Nenhum jogo zerado neste ano ainda."
+                      icon="pi pi-inbox"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel
+            header={
+              <>
+                <i className="pi pi-play gv-journey-tab-icon" />
+                <span>Jogando agora</span>
+              </>
+            }
+            className="gv-journey-timeline-tab-panel"
+          >
+            <div className="gv-journey-timeline-block">
+              <div className="gv-journey-timeline-scroll">
+                <div className="gv-journey-timeline-track">
+                  {jogandoAgora.length > 0 ? (
+                    jogandoAgora.map((game) => (
+                      <TimelineGameSlot
+                        key={game.id}
+                        game={game}
+                        badge="playing"
+                      />
+                    ))
+                  ) : (
+                    <Message
+                      severity="info"
+                      className="gv-journey-timeline-empty"
+                      text="Nenhum jogo em andamento."
+                      icon="pi pi-play-circle"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </TabPanel>
+          <TabPanel
+            header={
+              <>
+                <i className="pi pi-trash gv-journey-tab-icon" />
+                <span>Jogos Trocados</span>
+              </>
+            }
+            className="gv-journey-timeline-tab-panel"
+          >
+            <div className="gv-journey-timeline-block">
+              <Message
+                severity="info"
+                className="gv-journey-timeline-empty"
+                text="Nenhum jogo trocado ainda. Troque jogos com amigos pela rede!"
+                icon="pi pi-exchange"
+              />
+            </div>
+          </TabPanel>
+        </TabView>
       </div>
     </section>
   );

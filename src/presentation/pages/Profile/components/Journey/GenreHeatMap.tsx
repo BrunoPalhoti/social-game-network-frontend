@@ -1,3 +1,4 @@
+import { Card } from "primereact/card";
 import type { GenreShare } from "./types";
 import "./Journey.css";
 
@@ -9,8 +10,16 @@ export function GenreHeatMap({ data }: GenreHeatMapProps) {
   const maxPercent = Math.max(...data.map((d) => d.percent), 1);
 
   return (
-    <section className="gv-journey-genre-heatmap" aria-label="Mapa de calor de gêneros">
-      <h2 className="gv-journey-section-title">Onde você mais morou este ano</h2>
+    <Card
+      title="Onde você mais morou este ano"
+      className="gv-journey-genre-heatmap"
+      aria-label="Mapa de calor de gêneros"
+      pt={{
+        header: { className: "gv-journey-genre-card-header" },
+        body: { className: "gv-journey-genre-card-body" },
+        title: { className: "gv-journey-genre-card-title" },
+      }}
+    >
       <p className="gv-journey-genre-subtitle">
         Distribuição por gênero (horas investidas)
       </p>
@@ -29,6 +38,6 @@ export function GenreHeatMap({ data }: GenreHeatMapProps) {
           </div>
         ))}
       </div>
-    </section>
+    </Card>
   );
 }

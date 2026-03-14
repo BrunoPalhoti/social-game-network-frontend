@@ -27,10 +27,9 @@ export interface MissionStats {
   /** Quantidade de jogos zerados no ano (COMPLETED + PLATINUM) */
   jogosZeradosNoAno: number;
   totalHoursInvested: number;
-  bossesDefeated: number;
 }
 
-/** Para uso futuro: totais da vida toda (horas, plataformas, etc.) */
+/** Totais da vida toda (jogos zerados, horas, plataformas) — exibidos no Status da Missão */
 export interface JogosZeradosNaVida {
   totalJogos: number;
   totalHoras: number;
@@ -46,7 +45,7 @@ export interface GenreShare {
 export interface JourneyYearData {
   year: number;
   missionStats: MissionStats;
-  /** Resumo de jogos zerados na vida (horas, plataformas) — uso futuro */
+  /** Resumo de jogos zerados na vida (horas, plataformas) — mesclado no Status da Missão */
   jogosZeradosNaVida?: JogosZeradosNaVida;
   months: JourneyMonth[];
   genreHeatMap: GenreShare[];

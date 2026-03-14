@@ -1,4 +1,6 @@
 import { useMemo } from "react";
+import { Card } from "primereact/card";
+import { Message } from "primereact/message";
 import { getMockJourneyData } from "./journeyData";
 import { MissionStatus } from "./MissionStatus";
 import { JourneyTimeline } from "./JourneyTimeline";
@@ -22,8 +24,16 @@ export function JourneyContent({ year }: JourneyContentProps) {
       <JourneyTimeline months={data.months} />
       <GenreHeatMap data={data.genreHeatMap} />
 
-      <section className="gv-journey-games-section" aria-label="Todos os jogos da jornada">
-        <h2 className="gv-journey-section-title">Sua odisseia em jogos</h2>
+      <Card
+        title="Sua odisseia em jogos"
+        className="gv-journey-games-section"
+        aria-label="Todos os jogos da jornada"
+        pt={{
+          header: { className: "gv-journey-games-card-header" },
+          body: { className: "gv-journey-games-card-body" },
+          title: { className: "gv-journey-games-card-title" },
+        }}
+      >
         <p className="gv-journey-games-intro">
           Passe o mouse sobre um card para ver a <strong>Análise de 1 minuto</strong>.
         </p>
@@ -32,15 +42,20 @@ export function JourneyContent({ year }: JourneyContentProps) {
             <JourneyGameCard key={game.id} game={game} />
           ))}
         </div>
-      </section>
+      </Card>
 
-      <aside className="gv-journey-gamification" aria-label="Tema desbloqueável">
-        <p className="gv-journey-gamification-text">
-          🎨 <strong>Gamificação:</strong> Zerou 10+ jogos no ano? Seu perfil pode ganhar um
-          detalhe <span className="gv-journey-theme-gold">Dourado</span>. Jogou muito terror?
-          O tema pode ficar <span className="gv-journey-theme-blood">Vermelho Sangue</span>.
-        </p>
-      </aside>
+      <Message
+        severity="info"
+        className="gv-journey-gamification"
+        text={
+          <>
+            🎨 <strong>Gamificação:</strong> Zerou 10+ jogos no ano? Seu perfil pode ganhar um
+            detalhe <span className="gv-journey-theme-gold">Dourado</span>. Jogou muito terror?
+            O tema pode ficar <span className="gv-journey-theme-blood">Vermelho Sangue</span>.
+          </>
+        }
+        aria-label="Tema desbloqueável"
+      />
     </div>
   );
 }

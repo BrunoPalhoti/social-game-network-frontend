@@ -1,11 +1,12 @@
 import type { JourneyYearData } from "./types";
 
+// Capas oficiais Steam CDN (App IDs) para garantir correspondência correta com o jogo
 const COVER_ELDEN =
-  "https://images.igdb.com/igdb/image/upload/t_cover_big/co4j1y.jpg";
+  "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg";
 const COVER_HADES =
-  "https://images.igdb.com/igdb/image/upload/t_cover_big/co7cpi.jpg";
+  "https://cdn.cloudflare.steamstatic.com/steam/apps/1145350/header.jpg";
 const COVER_STARFIELD =
-  "https://images.igdb.com/igdb/image/upload/t_cover_big/co6b2w.jpg";
+  "https://cdn.cloudflare.steamstatic.com/steam/apps/1716740/header.jpg";
 const COVER_INDIE =
   "https://images.igdb.com/igdb/image/upload/t_cover_big/co2lbd.jpg";
 const COVER_PLACEHOLDER =
@@ -17,7 +18,6 @@ export function getMockJourneyData(year: number): JourneyYearData {
     missionStats: {
       jogosZeradosNoAno: 2,
       totalHoursInvested: 342,
-      bossesDefeated: 85,
     },
     jogosZeradosNaVida: {
       totalJogos: 47,
