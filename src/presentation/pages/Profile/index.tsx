@@ -1,4 +1,5 @@
 import { getInitialsFromName, useAuthStore } from "@/shared/store/useAuthStore";
+import { Header } from "@/presentation/pages/Profile/components/Header";
 import { Avatar } from "primereact/avatar";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Tag } from "primereact/tag";
@@ -10,6 +11,7 @@ export default function Profile() {
 
   return (
     <>
+      <Header />
       <section className="gv-profile-hero">
         <div className="gv-profile-banner" />
 

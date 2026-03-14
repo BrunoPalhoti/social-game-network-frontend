@@ -3,27 +3,31 @@ import { persist } from "zustand/middleware";
 
 const MOCK_USERS: Record<
   string,
-  { password: string; name: string; nickname: string }
+  { password: string; name: string; nickname: string; platform: string }
 > = {
   brunogameplay: {
     password: "123456",
     name: "Bruno Palhoti",
     nickname: "brunogameplay",
+    platform: "Playstation",
   },
   darthgamer: {
     password: "123456",
     name: "Darth Gamer",
     nickname: "DarthGamer",
+    platform: "Xbox",
   },
   reginhinhagameplay: {
     password: "123456",
     name: "Regina Linda",
     nickname: "reginhinhagameplay",
+    platform: "Celular",
   },
   dadagameplay: {
     password: "123456",
     name: "Daphine Linda",
     nickname: "dadagameplay",
+    platform: "Celular",
   },
 };
 

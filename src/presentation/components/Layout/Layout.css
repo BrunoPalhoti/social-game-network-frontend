@@ -99,7 +99,9 @@
   color: var(--sgn-text);
   font-size: 0.9rem;
   font-family: var(--sgn-font-sans);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .gv-header-search .p-inputtext::placeholder {
@@ -303,7 +305,9 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   border: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .gv-profile-tabview .p-tabview-nav-link:hover {
