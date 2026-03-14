@@ -343,6 +343,48 @@
   padding: 1.5rem;
 }
 
+/* Tablet */
+@media (max-width: 768px) {
+  .login-card-wrapper {
+    padding: 1.25rem;
+  }
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Celular */
+@media (max-width: 480px) {
+  .login-page {
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  .login-toggle {
+    top: 1rem;
+    right: 1rem;
+  }
+  .login-card-wrapper {
+    max-width: none;
+    padding: 1rem 0.75rem;
+  }
+  .login-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 16px;
+  }
+  .login-logo-wrap {
+    margin-bottom: 1.5rem;
+  }
+  .login-form {
+    gap: 0.875rem;
+  }
+  .login-input {
+    min-height: 44px !important;
+  }
+  .login-btn-entrar {
+    padding: 0.75rem 1.25rem !important;
+  }
+}
+
 .login-card {
   background: var(--sgn-surface);
   border: 1px solid var(--sgn-border);
