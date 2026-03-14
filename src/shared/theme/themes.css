@@ -23,6 +23,38 @@
   --sgn-border-focus: #8b5cf6;
   --sgn-card-shadow: 0 1px 3px rgba(109, 40, 217, 0.08);
   --sgn-btn-glow: rgba(139, 92, 246, 0.35);
+
+  /* Layout & sidebar (light) */
+  --sgn-layout-bg: linear-gradient(180deg, #f0eef5 0%, #e8e4f0 45%, #f8f7fc 100%);
+  --sgn-sidebar-bg: linear-gradient(180deg, #faf9fc 0%, #f0eef5 45%, #f8f7fc 100%);
+  --sgn-sidebar-border: rgba(0, 0, 0, 0.06);
+  --sgn-sidebar-shadow: 8px 0 24px rgba(0, 0, 0, 0.06);
+  --sgn-sidebar-text: #1a1a2e;
+  --sgn-sidebar-text-muted: rgba(26, 26, 46, 0.7);
+  --sgn-nav-hover-bg: rgba(109, 40, 217, 0.12);
+  --sgn-nav-hover-border: rgba(109, 40, 217, 0.35);
+  --sgn-nav-active-bg: linear-gradient(135deg, #6d28d9 0%, #5b21b6 45%, #4c1d95 100%);
+  --sgn-nav-active-shadow: 0 0 0 1px rgba(109, 40, 217, 0.5), 0 16px 32px rgba(109, 40, 217, 0.2);
+  --sgn-nav-icon-bg: linear-gradient(180deg, #facc15 0%, #f97316 40%, #6d28d9 100%);
+  --sgn-nav-icon-text: rgba(12, 10, 24, 0.95);
+  --sgn-nav-icon-border: rgba(15, 23, 42, 0.15);
+  --sgn-profile-block-bg: rgba(248, 247, 252, 0.9);
+  --sgn-profile-block-border: rgba(148, 163, 184, 0.3);
+  --sgn-profile-block-hover-bg: rgba(237, 233, 254, 0.95);
+  --sgn-avatar-text: #0b0217;
+  --sgn-avatar-border: rgba(15, 23, 42, 0.2);
+  --sgn-avatar-glow: rgba(139, 92, 246, 0.35);
+  --sgn-status-text: rgba(26, 26, 46, 0.75);
+  --sgn-page-subtitle: rgba(26, 26, 46, 0.7);
+  --sgn-main-text: #1a1a2e;
+  --sgn-card-overlay: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 247, 252, 0.95));
+  --sgn-card-border: rgba(148, 163, 184, 0.25);
+  --sgn-card-shadow-strong: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 18px 40px rgba(0, 0, 0, 0.06);
+  --sgn-card-text: rgba(26, 26, 46, 0.9);
+  --sgn-profile-banner: linear-gradient(135deg, #5b21b6 0%, #6d28d9 30%, #7c3aed 60%, #4c1d95 100%);
+  --sgn-header-btn-hover: rgba(109, 40, 217, 0.12);
+  --sgn-info-card-bg: rgba(109, 40, 217, 0.06);
+  --sgn-info-card-icon-bg: rgba(109, 40, 217, 0.15);
 }
 
 [data-theme="dark"] {
@@ -41,6 +73,38 @@
   --sgn-border-focus: #a78bfa;
   --sgn-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   --sgn-btn-glow: rgba(139, 92, 246, 0.4);
+
+  /* Layout & sidebar (dark) */
+  --sgn-layout-bg: radial-gradient(circle at top left, #0f172a 0%, #020617 45%, #020617 100%);
+  --sgn-sidebar-bg: linear-gradient(180deg, #0b0217 0%, #130826 45%, #05020b 100%);
+  --sgn-sidebar-border: rgba(255, 255, 255, 0.04);
+  --sgn-sidebar-shadow: 8px 0 24px rgba(0, 0, 0, 0.6);
+  --sgn-sidebar-text: #f9fafb;
+  --sgn-sidebar-text-muted: rgba(235, 238, 245, 0.92);
+  --sgn-nav-hover-bg: rgba(139, 92, 246, 0.16);
+  --sgn-nav-hover-border: rgba(139, 92, 246, 0.45);
+  --sgn-nav-active-bg: radial-gradient(circle at 0% 0%, #8b5cf6 0%, #4c1d95 45%, #1e1b4b 100%);
+  --sgn-nav-active-shadow: 0 0 0 1px rgba(139, 92, 246, 0.8), 0 16px 32px rgba(76, 29, 149, 0.7);
+  --sgn-nav-icon-bg: radial-gradient(circle at 30% 0%, #facc15 0%, #f97316 40%, #8b5cf6 100%);
+  --sgn-nav-icon-text: rgba(12, 10, 24, 0.95);
+  --sgn-nav-icon-border: rgba(15, 23, 42, 0.8);
+  --sgn-profile-block-bg: rgba(15, 23, 42, 0.75);
+  --sgn-profile-block-border: rgba(148, 163, 184, 0.35);
+  --sgn-profile-block-hover-bg: rgba(15, 23, 42, 0.95);
+  --sgn-avatar-text: #0b0217;
+  --sgn-avatar-border: rgba(15, 23, 42, 0.9);
+  --sgn-avatar-glow: rgba(139, 92, 246, 0.4);
+  --sgn-status-text: rgba(203, 213, 225, 0.88);
+  --sgn-page-subtitle: rgba(209, 213, 219, 0.85);
+  --sgn-main-text: #e5e7eb;
+  --sgn-card-overlay: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.85));
+  --sgn-card-border: rgba(148, 163, 184, 0.35);
+  --sgn-card-shadow-strong: 0 0 0 1px rgba(15, 23, 42, 0.9), 0 18px 40px rgba(15, 23, 42, 0.9);
+  --sgn-card-text: rgba(226, 232, 240, 0.9);
+  --sgn-profile-banner: linear-gradient(135deg, #1e1b4b 0%, #312e81 30%, #4c1d95 60%, #0f172a 100%);
+  --sgn-header-btn-hover: rgba(139, 92, 246, 0.15);
+  --sgn-info-card-bg: rgba(139, 92, 246, 0.06);
+  --sgn-info-card-icon-bg: rgba(139, 92, 246, 0.2);
 
   --surface-a: #1a1a1a;
   --surface-b: #121212;
@@ -79,5 +143,7 @@ body {
   font-family: var(--sgn-font-sans);
   background-color: var(--sgn-bg);
   color: var(--sgn-text);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
