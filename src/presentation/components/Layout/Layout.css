@@ -45,6 +45,21 @@
   box-shadow: 0 0 24px rgba(0, 245, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.15);
 }
 
+/* Modo claro: botão menu com roxo/primary */
+[data-theme="light"] .gv-layout-menu-toggle {
+  color: var(--sgn-primary) !important;
+  background: var(--sgn-primary-muted) !important;
+  border: 1px solid rgba(109, 40, 217, 0.35) !important;
+  box-shadow: 0 0 12px rgba(109, 40, 217, 0.15), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .gv-layout-menu-toggle:hover {
+  background: var(--sgn-nav-hover-bg) !important;
+  border-color: var(--sgn-nav-hover-border) !important;
+  color: var(--sgn-primary-hover) !important;
+  box-shadow: 0 0 18px rgba(109, 40, 217, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
 .gv-page-header {
   display: flex;
   flex-direction: column;
@@ -514,6 +529,101 @@
 }
 
 /* Garante que o painel ativo da Jornada (e demais abas) seja visível */
+/* Modo claro: seção de perfil com fundo e bordas em roxo suave */
+[data-theme="light"] .gv-profile-hero {
+  background: var(--sgn-card-overlay);
+  border: 1px solid var(--sgn-card-border);
+  box-shadow: var(--sgn-card-shadow-strong);
+}
+
+[data-theme="light"] .gv-profile-banner {
+  background: var(--sgn-profile-banner);
+  box-shadow: none;
+}
+
+[data-theme="light"] .gv-profile-banner::after {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+}
+
+[data-theme="light"] .gv-profile-avatar.p-avatar {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.3), 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(145deg, #7c3aed, #5b21b6);
+  color: #fff;
+}
+
+[data-theme="light"] .gv-profile-status,
+[data-theme="light"] .gv-profile-name {
+  color: var(--sgn-text-secondary);
+}
+
+[data-theme="light"] .gv-profile-username {
+  color: var(--sgn-text);
+  text-shadow: none;
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card {
+  background: var(--sgn-info-card-bg);
+  border: 1px solid var(--sgn-card-border);
+  box-shadow: var(--sgn-card-shadow);
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card:hover {
+  border-color: var(--sgn-border-focus);
+  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-icon {
+  background: var(--sgn-info-card-icon-bg);
+  color: var(--sgn-primary);
+  box-shadow: none;
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-label {
+  color: var(--sgn-text-secondary);
+}
+
+[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-value {
+  color: var(--sgn-text);
+}
+
+[data-theme="light"] .gv-profile-hero .p-divider {
+  border-color: var(--sgn-border);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav {
+  border-bottom-color: var(--sgn-border);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link {
+  color: var(--sgn-text-secondary);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link:hover {
+  color: var(--sgn-primary);
+  background: var(--sgn-nav-hover-bg);
+  border-color: var(--sgn-nav-hover-border);
+  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.15);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link.p-highlight {
+  background: var(--sgn-nav-active-bg);
+  color: #fff;
+  border-color: rgba(109, 40, 217, 0.5);
+  box-shadow: var(--sgn-nav-active-shadow);
+}
+
+[data-theme="light"] .gv-profile-tabview .p-tabview-nav-link.p-highlight:hover {
+  background: var(--sgn-nav-active-bg);
+  color: #fff;
+  box-shadow: var(--sgn-nav-active-shadow);
+}
+
+[data-theme="light"] .gv-profile-tab-content {
+  color: var(--sgn-text);
+}
+
 .gv-profile-tabview .p-tabview-panels {
   min-height: 300px;
 }

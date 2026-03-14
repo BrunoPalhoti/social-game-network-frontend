@@ -55,6 +55,7 @@
   --sgn-header-btn-hover: rgba(109, 40, 217, 0.12);
   --sgn-info-card-bg: rgba(109, 40, 217, 0.06);
   --sgn-info-card-icon-bg: rgba(109, 40, 217, 0.15);
+  color-scheme: light;
 }
 
 [data-theme="dark"] {
