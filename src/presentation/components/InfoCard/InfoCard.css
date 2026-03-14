@@ -8,7 +8,7 @@
   padding: 1rem;
   border-radius: 0.75rem;
   border: 1px solid var(--sgn-primary);
-  background: rgba(139, 92, 246, 0.06);
+  background: var(--sgn-info-card-bg);
   color: var(--sgn-text);
 }
 
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
-  background: rgba(139, 92, 246, 0.2);
+  background: var(--sgn-info-card-icon-bg);
   color: var(--sgn-primary);
 }
 
