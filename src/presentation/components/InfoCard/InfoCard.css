@@ -1,0 +1,49 @@
+.gv-info-card {
+  flex: 1;
+  min-width: 180px;
+  max-width: 280px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--sgn-primary);
+  background: rgba(139, 92, 246, 0.06);
+  color: var(--sgn-text);
+}
+
+.gv-info-card-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--sgn-primary);
+}
+
+.gv-info-card-icon i {
+  font-size: 1.25rem;
+}
+
+.gv-info-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.gv-info-card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--sgn-text-secondary);
+}
+
+.gv-info-card-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--sgn-text);
+}

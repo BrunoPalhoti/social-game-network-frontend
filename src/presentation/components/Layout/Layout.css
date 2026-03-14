@@ -276,6 +276,19 @@
   margin: 0 0 1rem;
 }
 
+.gv-profile-info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1.5rem 1rem;
+}
+
+.gv-profile-hero .p-divider {
+  margin: 0 1.5rem 1rem;
+  border-color: var(--sgn-border);
+}
+
 .gv-profile-tabview.p-tabview {
   border: none;
   background: transparent;
@@ -362,6 +375,20 @@
 
   .gv-profile-username {
     font-size: 1.25rem;
+  }
+
+  .gv-profile-info-cards {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gv-profile-info-cards .gv-info-card {
+    min-width: 0;
+    max-width: none;
+  }
+
+  .gv-profile-hero .p-divider {
+    margin: 0 1rem 1rem;
   }
 
   .gv-profile-tabview .p-tabview-nav {
