@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GamerVerse – Especificação de UX, Dados e API</title>
+  <style>
+    body { font-family: 'Segoe UI', Calibri, sans-serif; margin: 2cm; line-height: 1.4; color: #222; }
+    h1 { font-size: 18pt; border-bottom: 2px solid #7c3aed; padding-bottom: 4px; }
+    h2 { font-size: 14pt; margin-top: 18pt; color: #5b21b6; }
+    h3 { font-size: 12pt; margin-top: 12pt; }
+    table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+    th { background: #ede9fe; font-weight: bold; }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0; }
+    .meta { color: #666; font-size: 10pt; margin-bottom: 16px; }
+    .section { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<h1>GamerVerse – Especificação de UX, Dados e API</h1>
+<p class="meta"><strong>Projeto:</strong> Rede social para gamers – listas, avaliações e comunidade &nbsp;|&nbsp; <strong>Versão:</strong> 1.0 &nbsp;|&nbsp; <strong>Data:</strong> Março 2026</p>
+
+<div class="section">
+<h2>1. Visão geral do produto</h2>
+<p>O GamerVerse é uma plataforma para gamers organizarem listas de jogos, darem notas, acompanharem a jornada anual (zerados, desejados, dropados) e interagirem em um feed e com amigos. O documento descreve a UX do protótipo, as entradas de dados e os endpoints de API necessários para o backend.</p>
+</div>
+
+<div class="section">
+<h2>2. O que um Feed Gamer pode ter</h2>
+<p>Com base nos mockups e na ideia de comunidade, o feed pode incluir:</p>
+<table>
+  <tr><th>Elemento</th><th>Descrição</th></tr>
+  <tr><td><strong>Postagens de análise</strong></td><td>Texto + capas de jogos + nota (ex.: ★ 9.2) + status (Zerado / Quero jogar / Dropado).</td></tr>
+  <tr><td><strong>Status do jogo na postagem</strong></td><td>Selos: ✔ 100% Zerado, [Zerei], [Quero Jogar], [Dropei] com motivo (ex.: "Repetitivo após 10h").</td></tr>
+  <tr><td><strong>Botão RATE</strong></td><td>Permitir que outros usuários deem sua própria nota ao jogo.</td></tr>
+  <tr><td><strong>Interações</strong></td><td>Curtir, comentar, compartilhar (com contadores).</td></tr>
+  <tr><td><strong>Atividades</strong></td><td>Ex.: "@DarthGamer acabou de platinar 'Hades II'!" com ação [DAR PARABÉNS].</td></tr>
+  <tr><td><strong>Destaques/Stories</strong></td><td>Linha de avatares (amigos ou perfis em destaque) no topo do feed.</td></tr>
+  <tr><td><strong>Chat lateral</strong></td><td>Conversas recentemente ativas e busca de usuário para iniciar chat.</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>3. Modelo de nota para o jogo</h2>
+<ul>
+  <li><strong>Formato:</strong> Nota numérica (ex.: 9.2) e/ou estrelas (1–5 ★).</li>
+  <li><strong>Onde aparece:</strong> Na postagem (análise), no card do jogo no perfil (Jornada/Biblioteca) e na comparação entre amigos.</li>
+  <li><strong>Regras sugeridas:</strong> Escala 1–10 ou 1–5 estrelas; uma nota por usuário por jogo (atualizável).</li>
+  <li><strong>Comparação entre amigos:</strong> Bloco "Diferença de notas" (ex.: Starfield @Bruno ★9.5 vs @Darth ★7.0).</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>4. Kanban / Painel de Jornada (por ano)</h2>
+<p>Conceito: “painel de jornada” por ano (ex.: 2026) com abas que funcionam como listas/kanban:</p>
+<table>
+  <tr><th>Aba / Campo</th><th>Descrição</th><th>Entradas de dados</th></tr>
+  <tr><td><strong>Zerados (N)</strong></td><td>Jogos completados naquele ano.</td><td>Jogo, data de conclusão, horas jogadas, nota, opcional “100% / platina”.</td></tr>
+  <tr><td><strong>Desejados (N)</strong></td><td>Lista de desejos (wishlist).</td><td>Jogo, data de adição. Opcional: prioridade.</td></tr>
+  <tr><td><strong>Dropados (N)</strong></td><td>Jogos abandonados + motivo.</td><td>Jogo, motivo (texto livre ou tags), horas jogadas antes de dropar, nota opcional.</td></tr>
+  <tr><td><strong>Ranking (Top 5)</strong></td><td>Ranking de atividade entre amigos.</td><td>Pontuação (ex.: “Profilbos”) calculada por zerados, horas, interações, etc.</td></tr>
+</table>
+<p>No perfil, a <strong>Súmula de Jogos</strong> do ano mostra cada jogo com: capa, status (✔ Zerado / 🗑 Dropado), horas, nota (★), campo “Notes” e “Ver Detalhes”.</p>
+</div>
+
+<div class="section">
+<h2>5. Fluxos de UX principais (para o protótipo)</h2>
+<ol>
+  <li><strong>Login / Criar conta</strong> → Home (Feed).</li>
+  <li><strong>Feed:</strong> ver postagens, criar análise (jogo + nota + status), curtir/comentar, RATE.</li>
+  <li><strong>Perfil:</strong> abas Jornada 2026, Biblioteca, Conquistas, Amigos; editar lista (zerados/desejados/dropados) e motivo de drop.</li>
+  <li><strong>Amigos:</strong> lista de amigos, jogos em comum, diferença de notas, ranking de atividade.</li>
+  <li><strong>Discover:</strong> descobrir jogos (busca, filtros).</li>
+  <li><strong>Chat:</strong> conversas ativas, buscar usuário, enviar mensagem.</li>
+</ol>
+</div>
+
+<div class="section">
+<h2>6. Mapeamento de entradas de dados</h2>
+
+<h3>6.1 Autenticação</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>username</td><td>string</td><td>Sim</td><td>Nome de usuário (login).</td></tr>
+  <tr><td>password</td><td>string</td><td>Sim</td><td>Senha (hash no backend).</td></tr>
+  <tr><td>email</td><td>string</td><td>Sim (registro)</td><td>Para criar conta e recuperação de senha.</td></tr>
+</table>
+
+<h3>6.2 Usuário / Perfil</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>username</td><td>string</td><td>Sim</td><td>Único.</td></tr>
+  <tr><td>displayName</td><td>string</td><td>Não</td><td>Nome exibido.</td></tr>
+  <tr><td>avatarUrl</td><td>string (URL)</td><td>Não</td><td>Foto de perfil.</td></tr>
+  <tr><td>bio</td><td>string</td><td>Não</td><td>Biografia.</td></tr>
+  <tr><td>tag</td><td>string</td><td>Não</td><td>Ex.: "Augtx Gamer".</td></tr>
+</table>
+
+<h3>6.3 Jogo (catálogo)</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>id</td><td>string (UUID)</td><td>Sim</td><td>ID do jogo na plataforma.</td></tr>
+  <tr><td>name</td><td>string</td><td>Sim</td><td>Nome do jogo.</td></tr>
+  <tr><td>coverImageUrl</td><td>string (URL)</td><td>Não</td><td>Capa.</td></tr>
+  <tr><td>releaseYear</td><td>number</td><td>Não</td><td>Ano de lançamento.</td></tr>
+  <tr><td>genres</td><td>string[]</td><td>Não</td><td>Gêneros.</td></tr>
+  <tr><td>platform</td><td>string[]</td><td>Não</td><td>Plataformas.</td></tr>
+</table>
+
+<h3>6.4 Relação usuário–jogo (status na lista / jornada)</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>userId</td><td>string</td><td>Sim</td><td>ID do usuário.</td></tr>
+  <tr><td>gameId</td><td>string</td><td>Sim</td><td>ID do jogo.</td></tr>
+  <tr><td>status</td><td>enum</td><td>Sim</td><td>WISHLIST | PLAYING | COMPLETED | DROPPED | PLATINUM.</td></tr>
+  <tr><td>year</td><td>number</td><td>Condicional</td><td>Ano da jornada (ex.: 2026).</td></tr>
+  <tr><td>completedAt</td><td>datetime</td><td>Se COMPLETED</td><td>Data de conclusão.</td></tr>
+  <tr><td>hoursPlayed</td><td>number</td><td>Não</td><td>Horas jogadas.</td></tr>
+  <tr><td>rating</td><td>number</td><td>Não</td><td>Nota (ex.: 1–10 ou 1–5).</td></tr>
+  <tr><td>droppedReason</td><td>string</td><td>Se DROPPED</td><td>Motivo do drop (texto livre).</td></tr>
+  <tr><td>notes</td><td>string</td><td>Não</td><td>Notas pessoais do usuário.</td></tr>
+</table>
+
+<h3>6.5 Postagem (feed)</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>authorId</td><td>string</td><td>Sim</td><td>ID do usuário.</td></tr>
+  <tr><td>content</td><td>string</td><td>Sim</td><td>Texto da postagem/análise.</td></tr>
+  <tr><td>gameIds</td><td>string[]</td><td>Não</td><td>Jogos citados (capas exibidas).</td></tr>
+  <tr><td>primaryGameId</td><td>string</td><td>Não</td><td>Jogo principal da análise.</td></tr>
+  <tr><td>rating</td><td>number</td><td>Não</td><td>Nota dada ao jogo na análise.</td></tr>
+  <tr><td>status</td><td>enum</td><td>Não</td><td>Zerado / Quero jogar / Dropado.</td></tr>
+  <tr><td>droppedReason</td><td>string</td><td>Não</td><td>Se status = Dropado.</td></tr>
+  <tr><td>createdAt</td><td>datetime</td><td>Sim</td><td>Data/hora da postagem.</td></tr>
+</table>
+
+<h3>6.6 Interações na postagem</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>postId</td><td>string</td><td>Sim</td><td>ID da postagem.</td></tr>
+  <tr><td>userId</td><td>string</td><td>Sim</td><td>Quem interagiu.</td></tr>
+  <tr><td>type</td><td>enum</td><td>Sim</td><td>LIKE | COMMENT.</td></tr>
+  <tr><td>commentText</td><td>string</td><td>Se COMMENT</td><td>Texto do comentário.</td></tr>
+  <tr><td>createdAt</td><td>datetime</td><td>Sim</td><td>Data/hora.</td></tr>
+</table>
+
+<h3>6.7 Avaliação RATE</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>userId</td><td>string</td><td>Sim</td><td>Quem deu a nota.</td></tr>
+  <tr><td>gameId</td><td>string</td><td>Sim</td><td>Jogo avaliado.</td></tr>
+  <tr><td>rating</td><td>number</td><td>Sim</td><td>Nota (ex.: 1–10).</td></tr>
+  <tr><td>postId</td><td>string</td><td>Não</td><td>Se a nota foi dada a partir de uma postagem.</td></tr>
+  <tr><td>createdAt</td><td>datetime</td><td>Sim</td><td>Data/hora.</td></tr>
+</table>
+
+<h3>6.8 Amizade</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>userId</td><td>string</td><td>Sim</td><td>Um usuário.</td></tr>
+  <tr><td>friendId</td><td>string</td><td>Sim</td><td>Outro usuário.</td></tr>
+  <tr><td>status</td><td>enum</td><td>Sim</td><td>PENDING | ACCEPTED | BLOCKED.</td></tr>
+  <tr><td>createdAt</td><td>datetime</td><td>Sim</td><td>Data/hora.</td></tr>
+</table>
+
+<h3>6.9 Mensagem (chat)</h3>
+<table>
+  <tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Observação</th></tr>
+  <tr><td>senderId</td><td>string</td><td>Sim</td><td>Remetente.</td></tr>
+  <tr><td>receiverId</td><td>string</td><td>Sim</td><td>Destinatário.</td></tr>
+  <tr><td>conversationId</td><td>string</td><td>Sim</td><td>Agrupa mensagens da conversa.</td></tr>
+  <tr><td>content</td><td>string</td><td>Sim</td><td>Texto.</td></tr>
+  <tr><td>createdAt</td><td>datetime</td><td>Sim</td><td>Data/hora.</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>7. Endpoints da API sugeridos</h2>
+<p>Base URL sugerida: <code>https://api.gamerverse.example.com/v1</code></p>
+
+<h3>7.1 Autenticação</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body (ex.)</th></tr>
+  <tr><td>POST</td><td>/auth/register</td><td>Criar conta</td><td>{ "username", "email", "password" }</td></tr>
+  <tr><td>POST</td><td>/auth/login</td><td>Login</td><td>{ "username", "password" }</td></tr>
+  <tr><td>POST</td><td>/auth/logout</td><td>Logout</td><td>-</td></tr>
+  <tr><td>POST</td><td>/auth/refresh</td><td>Renovar token</td><td>-</td></tr>
+  <tr><td>POST</td><td>/auth/forgot-password</td><td>Esqueci a senha</td><td>{ "email" }</td></tr>
+</table>
+
+<h3>7.2 Usuário</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body / Query</th></tr>
+  <tr><td>GET</td><td>/users/me</td><td>Perfil do usuário logado</td><td>-</td></tr>
+  <tr><td>PATCH</td><td>/users/me</td><td>Atualizar perfil</td><td>{ "displayName", "avatarUrl", "bio", "tag" }</td></tr>
+  <tr><td>GET</td><td>/users/:username</td><td>Perfil público por username</td><td>-</td></tr>
+  <tr><td>GET</td><td>/users/search</td><td>Buscar usuários</td><td>?q=termo</td></tr>
+</table>
+
+<h3>7.3 Jogos (catálogo)</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body / Query</th></tr>
+  <tr><td>GET</td><td>/games</td><td>Listar/buscar jogos</td><td>?q=elden&genre=action&limit=20&offset=0</td></tr>
+  <tr><td>GET</td><td>/games/:id</td><td>Detalhes de um jogo</td><td>-</td></tr>
+</table>
+
+<h3>7.4 Lista do usuário (jornada / kanban)</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body / Query</th></tr>
+  <tr><td>GET</td><td>/users/me/games</td><td>Minha lista (todos os status)</td><td>?status=COMPLETED&year=2026</td></tr>
+  <tr><td>GET</td><td>/users/me/journey/:year</td><td>Resumo da jornada do ano</td><td>Ex.: /users/me/journey/2026</td></tr>
+  <tr><td>POST</td><td>/users/me/games</td><td>Adicionar jogo à lista</td><td>{ "gameId", "status", "rating?", "hoursPlayed?", "droppedReason?", "notes?" }</td></tr>
+  <tr><td>PATCH</td><td>/users/me/games/:gameId</td><td>Atualizar status/nota/motivo</td><td>{ "status", "rating", "hoursPlayed", "droppedReason", "completedAt", "notes" }</td></tr>
+  <tr><td>DELETE</td><td>/users/me/games/:gameId</td><td>Remover da lista</td><td>-</td></tr>
+  <tr><td>GET</td><td>/users/:userId/games</td><td>Lista de outro usuário (público)</td><td>?status=COMPLETED&year=2026</td></tr>
+</table>
+
+<h3>7.5 Feed</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body / Query</th></tr>
+  <tr><td>GET</td><td>/feed</td><td>Postagens do feed</td><td>?limit=20&offset=0</td></tr>
+  <tr><td>POST</td><td>/feed/posts</td><td>Criar postagem</td><td>{ "content", "gameIds?", "primaryGameId?", "rating?", "status?", "droppedReason?" }</td></tr>
+  <tr><td>GET</td><td>/feed/posts/:id</td><td>Detalhes de uma postagem</td><td>-</td></tr>
+  <tr><td>PATCH</td><td>/feed/posts/:id</td><td>Editar postagem (autor)</td><td>Mesmos campos do POST</td></tr>
+  <tr><td>DELETE</td><td>/feed/posts/:id</td><td>Excluir postagem (autor)</td><td>-</td></tr>
+  <tr><td>POST</td><td>/feed/posts/:id/like</td><td>Curtir</td><td>-</td></tr>
+  <tr><td>DELETE</td><td>/feed/posts/:id/like</td><td>Descurtir</td><td>-</td></tr>
+  <tr><td>GET</td><td>/feed/posts/:id/comments</td><td>Comentários</td><td>?limit=20&offset=0</td></tr>
+  <tr><td>POST</td><td>/feed/posts/:id/comments</td><td>Comentar</td><td>{ "content" }</td></tr>
+  <tr><td>POST</td><td>/feed/posts/:id/rate</td><td>Dar nota ao jogo (RATE)</td><td>{ "gameId", "rating" }</td></tr>
+</table>
+
+<h3>7.6 Amigos e comparação</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body / Query</th></tr>
+  <tr><td>GET</td><td>/users/me/friends</td><td>Lista de amigos</td><td>?status=ACCEPTED</td></tr>
+  <tr><td>POST</td><td>/users/me/friends</td><td>Enviar solicitação</td><td>{ "friendId" } ou { "username" }</td></tr>
+  <tr><td>PATCH</td><td>/users/me/friends/:userId</td><td>Aceitar/rejeitar</td><td>{ "status": "ACCEPTED" | "REJECTED" }</td></tr>
+  <tr><td>DELETE</td><td>/users/me/friends/:userId</td><td>Remover amigo</td><td>-</td></tr>
+  <tr><td>GET</td><td>/users/me/friends/:friendId/common-games</td><td>Jogos em comum</td><td>?year=2026</td></tr>
+  <tr><td>GET</td><td>/users/me/friends/rating-differences</td><td>Diferença de notas entre amigos</td><td>?friendId=...&limit=10</td></tr>
+  <tr><td>GET</td><td>/users/me/friends/activity-ranking</td><td>Ranking de atividade (Top 5)</td><td>?period=2026</td></tr>
+</table>
+
+<h3>7.7 Chat</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th><th>Body / Query</th></tr>
+  <tr><td>GET</td><td>/conversations</td><td>Conversas recentes</td><td>-</td></tr>
+  <tr><td>GET</td><td>/conversations/:id/messages</td><td>Mensagens da conversa</td><td>?limit=50&before=timestamp</td></tr>
+  <tr><td>POST</td><td>/conversations</td><td>Iniciar conversa</td><td>{ "receiverId" }</td></tr>
+  <tr><td>POST</td><td>/conversations/:id/messages</td><td>Enviar mensagem</td><td>{ "content" }</td></tr>
+</table>
+
+<h3>7.8 Conquistas (opcional)</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th></tr>
+  <tr><td>GET</td><td>/users/me/achievements</td><td>Minhas conquistas</td></tr>
+  <tr><td>GET</td><td>/users/:userId/achievements</td><td>Conquistas de outro usuário</td></tr>
+</table>
+
+<h3>7.9 Notificações (opcional)</h3>
+<table>
+  <tr><th>Método</th><th>Endpoint</th><th>Descrição</th></tr>
+  <tr><td>GET</td><td>/notifications</td><td>Listar notificações</td></tr>
+  <tr><td>PATCH</td><td>/notifications/:id/read</td><td>Marcar como lida</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>8. Resumo de entidades e relações</h2>
+<ul>
+  <li><strong>User</strong> → tem muitos <strong>UserGame</strong> (lista/jornada), muitas <strong>Post</strong>, muitas <strong>Friend</strong> (amizades), muitas <strong>Rating</strong> (notas em jogos).</li>
+  <li><strong>Game</strong> → referenciado em UserGame, Post, Rating.</li>
+  <li><strong>Post</strong> → pertence a User; tem muitos Like, Comment; pode referenciar Game e nota.</li>
+  <li><strong>Conversation</strong> → tem muitas Message; liga User (sender/receiver).</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>9. Próximos passos sugeridos</h2>
+<ol>
+  <li>Validar esta especificação com o backend (e ajustar nomes de campos se necessário).</li>
+  <li>Implementar primeiro: auth, usuário, jogos (busca), lista do usuário (CRUD + jornada por ano).</li>
+  <li>Em seguida: feed (postagens + likes + comentários + RATE).</li>
+  <li>Depois: amigos, jogos em comum, diferença de notas, ranking.</li>
+  <li>Por último: chat e conquistas.</li>
+  <li>Manter protótipo de UI alinhado às abas Zerados / Desejados / Dropados e ao modelo de nota (estrelas/número) em todo o app.</li>
+</ol>
+</div>
+
+<p style="margin-top: 24px; color: #666; font-size: 10pt;"><em>Documento gerado para o projeto GamerVerse – uso interno e alinhamento frontend/backend.</em></p>
+
+</body>
+</html>

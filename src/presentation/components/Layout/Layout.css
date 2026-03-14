@@ -1,0 +1,369 @@
+.gv-layout {
+  display: flex;
+  min-height: 100vh;
+  background: radial-gradient(
+    circle at top left,
+    #0f172a 0%,
+    #020617 45%,
+    #020617 100%
+  );
+  color: var(--sgn-text);
+}
+
+.gv-layout-main {
+  flex: 1;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #e5e7eb;
+}
+
+.gv-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.gv-page-title {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.gv-page-subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(209, 213, 219, 0.85);
+}
+
+.gv-page-content {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+@media (max-width: 960px) {
+  .gv-layout-main {
+    padding-inline: 1.25rem;
+  }
+}
+
+.gv-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 0;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
+
+.gv-header-logo {
+  flex-shrink: 0;
+}
+
+.gv-header-logo .gamer-verse-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.gv-header-logo .gamer-verse-logo-icon {
+  width: 36px;
+  height: 29px;
+  margin-bottom: 0;
+}
+
+.gv-header-logo .gamer-verse-logo-text {
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+}
+
+.gv-header-search {
+  flex: 1;
+  max-width: 420px;
+  min-width: 160px;
+}
+
+.gv-header-search .p-icon-field {
+  width: 100%;
+}
+
+.gv-header-search .p-inputtext {
+  width: 100%;
+  padding: 0.6rem 0.9rem 0.6rem 2.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--sgn-surface-elevated, #252525);
+  border: 1px solid var(--sgn-border);
+  color: var(--sgn-text);
+  font-size: 0.9rem;
+  font-family: var(--sgn-font-sans);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gv-header-search .p-inputtext::placeholder {
+  color: var(--sgn-text-secondary);
+}
+
+.gv-header-search .p-inputtext:focus {
+  outline: none;
+  border-color: var(--sgn-primary);
+  box-shadow: 0 0 0 2px var(--sgn-btn-glow);
+}
+
+.gv-header-search .p-icon-field .p-input-icon {
+  color: var(--sgn-text-secondary);
+}
+
+.gv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.gv-header-icon-btn.p-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 0.75rem;
+  color: var(--sgn-text);
+}
+
+.gv-header-icon-btn.p-button:hover {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: var(--sgn-primary);
+}
+
+.gv-header-avatar-btn.p-button {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 999px;
+  overflow: visible;
+}
+
+.gv-header-avatar-btn.p-button:hover {
+  transform: scale(1.05);
+}
+
+.gv-header-avatar.p-avatar {
+  width: 36px;
+  height: 36px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: radial-gradient(
+    circle at 30% 0%,
+    #f97316 0%,
+    #fb7185 30%,
+    var(--sgn-primary) 90%
+  );
+  color: #0b0217;
+  box-shadow:
+    0 0 0 2px rgba(15, 23, 42, 0.9),
+    0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+@media (max-width: 960px) {
+  .gv-header-search {
+    max-width: 180px;
+  }
+}
+
+.gv-profile-hero {
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--sgn-surface-elevated, #252525);
+  border: 1px solid var(--sgn-border);
+  box-shadow: var(--sgn-card-shadow);
+  margin-bottom: 1.5rem;
+}
+
+.gv-profile-banner {
+  position: relative;
+  height: 180px;
+  background: linear-gradient(
+    135deg,
+    #1e1b4b 0%,
+    #312e81 30%,
+    #4c1d95 60%,
+    #0f172a 100%
+  );
+  background-size: cover;
+  background-position: center;
+}
+
+.gv-profile-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gv-profile-avatar-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: -56px;
+  position: relative;
+  z-index: 1;
+}
+
+.gv-profile-avatar-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.gv-profile-avatar.p-avatar {
+  width: 112px;
+  height: 112px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 4px solid var(--sgn-surface-elevated, #252525);
+  box-shadow:
+    0 0 0 2px var(--sgn-primary),
+    0 12px 28px rgba(0, 0, 0, 0.5);
+  background: radial-gradient(
+    circle at 30% 0%,
+    #f97316 0%,
+    #fb7185 30%,
+    var(--sgn-primary) 90%
+  );
+  color: #0b0217;
+}
+
+.gv-profile-badge.p-tag {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  background: var(--sgn-primary) !important;
+  color: #fff !important;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.35rem;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.5);
+}
+
+.gv-profile-info {
+  padding: 0.5rem 1.5rem 0;
+  text-align: center;
+}
+
+.gv-profile-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sgn-text);
+  margin-bottom: 0.25rem;
+}
+
+.gv-profile-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--sgn-text-secondary);
+  margin: 0 0 0.2rem;
+}
+
+.gv-profile-username {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--sgn-text);
+  margin: 0 0 1rem;
+}
+
+.gv-profile-tabview.p-tabview {
+  border: none;
+  background: transparent;
+}
+
+.gv-profile-tabview .p-tabview-nav-container {
+  margin-bottom: 0;
+}
+
+.gv-profile-tabview .p-tabview-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0 1rem 1rem;
+  border: none;
+  border-bottom: 1px solid var(--sgn-border);
+  background: transparent;
+}
+
+.gv-profile-tabview .p-tabview-nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: var(--sgn-text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.gv-profile-tabview .p-tabview-nav-link:hover {
+  color: var(--sgn-text);
+  background-color: rgba(139, 92, 246, 0.12);
+}
+
+.gv-profile-tabview .p-tabview-nav-link.p-highlight {
+  background: var(--sgn-primary);
+  color: #fff;
+}
+
+.gv-profile-tabview .p-tabview-nav-link.p-highlight:hover {
+  background: var(--sgn-primary-hover);
+  color: #fff;
+}
+
+.gv-profile-tabview .p-tabview-panels {
+  background: transparent;
+  border: none;
+  padding: 1rem 0 0;
+}
+
+.gv-profile-tab-panel .p-tabview-panel {
+  padding: 0;
+}
+
+.gv-profile-tab-content {
+  font-size: 0.95rem;
+  color: var(--sgn-text-secondary);
+}
+
+.gv-profile-content {
+  flex: 1;
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .gv-profile-banner {
+    height: 140px;
+  }
+
+  .gv-profile-avatar-wrap {
+    margin-top: -48px;
+  }
+
+  .gv-profile-avatar.p-avatar {
+    width: 96px;
+    height: 96px;
+    font-size: 1.6rem;
+  }
+
+  .gv-profile-username {
+    font-size: 1.25rem;
+  }
+
+  .gv-profile-tabview .p-tabview-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    -webkit-overflow-scrolling: touch;
+  }
+}
