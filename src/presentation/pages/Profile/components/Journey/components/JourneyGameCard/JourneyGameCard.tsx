@@ -1,21 +1,12 @@
 import { Card } from "primereact/card";
 import { Tag } from "primereact/tag";
-import type { JourneyGame } from "./types";
-import "../../styles/Journey.css";
+import type { JourneyGame } from "../../types";
+import { formatJourneyDate } from "../../utils";
+import "../../../../styles/Journey.css";
 
 interface JourneyGameCardProps {
   game: JourneyGame;
   compact?: boolean;
-}
-
-function formatDate(iso?: string) {
-  if (!iso) return null;
-  const d = new Date(iso);
-  return d.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
 }
 
 export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
@@ -25,15 +16,24 @@ export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
         className="gv-journey-card gv-journey-card--compact"
         pt={{
           root: { className: "gv-journey-card gv-journey-card--compact" },
-          body: { className: "gv-journey-card-body", style: { padding: "0.5rem 0" } },
+          body: {
+            className: "gv-journey-card-body",
+            style: { padding: "0.5rem 0" },
+          },
           content: { style: { padding: 0 } },
         }}
       >
         <span className="gv-journey-card-title">{game.name}</span>
         {game.completedAt && (
           <span className="gv-journey-card-date">
-            Concluído: {formatDate(game.completedAt)}
+            Concluído: {formatJourneyDate(game.completedAt)}
           </span>
+        )}
+        {game.platform && (
+          <span className="gv-journey-card-platform">🎮 {game.platform}</span>
+        )}
+        {game.hoursPlayed != null && game.hoursPlayed > 0 && (
+          <span className="gv-journey-card-hours">⏳ {game.hoursPlayed}h</span>
         )}
         {game.rating != null && (
           <span className="gv-journey-card-rating">⭐ {game.rating}/10</span>
@@ -61,10 +61,17 @@ export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
         </div>
       </div>
       {game.is100Percent && (
-        <Tag value="100%" className="gv-journey-card-badge gv-journey-card-badge--100" />
+        <Tag
+          value="100%"
+          className="gv-journey-card-badge gv-journey-card-badge--100"
+        />
       )}
       {game.status === "PLATINUM" && (
-        <Tag value="Platina" severity="warning" className="gv-journey-card-badge gv-journey-card-badge--platina" />
+        <Tag
+          value="Platina"
+          severity="warning"
+          className="gv-journey-card-badge gv-journey-card-badge--platina"
+        />
       )}
     </div>
   );
@@ -94,7 +101,7 @@ export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
       <h3 className="gv-journey-card-title">{game.name}</h3>
       {game.completedAt && (
         <p className="gv-journey-card-meta">
-          Data de conclusão: {formatDate(game.completedAt)}
+          Data de conclusão: {formatJourneyDate(game.completedAt)}
         </p>
       )}
       {game.verdict && (

@@ -5,18 +5,21 @@
  */
 
 import dataFromFile from "@/data/mockUsers.json";
+import type { JourneyGame } from "@/data/types/journey";
 import type { PlatformSelection } from "@/data/types/platformSelection";
 
 const STORAGE_KEY = "mock_users_json";
 const PROFILE_OVERRIDES_KEY = "mock_users_profile_overrides";
 
-/** Atualizações de perfil salvas por username (jogo favorito, plataformas, gênero). */
+/** Atualizações de perfil salvas por username (jogo favorito, plataformas, gênero, jornada). */
 export type ProfileOverrides = {
   favoriteGame?: string;
   favoriteGameCover?: string;
   platforms?: PlatformSelection[];
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+  /** Jogos da jornada por ano (chave = ano em string, ex: "2026"). */
+  journeyByYear?: Record<string, JourneyGame[]>;
 };
 
 /** Gera um id único no formato UUID v4 para novos usuários. */
@@ -38,6 +41,8 @@ export interface UserRecord {
   favoriteGameCover?: string;
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+  /** Jogos da jornada por ano (chave = ano em string). Persistido em mockUsers.json. */
+  journeyByYear?: Record<string, JourneyGame[]>;
   createdAt: string;
 }
 
@@ -116,6 +121,7 @@ function getMergedUsersForFile(): UserRecord[] {
       ...(ov.platforms !== undefined && { platforms: ov.platforms }),
       ...(ov.favoriteGenre !== undefined && { favoriteGenre: ov.favoriteGenre }),
       ...(ov.favoriteGenreCover !== undefined && { favoriteGenreCover: ov.favoriteGenreCover }),
+      ...(ov.journeyByYear !== undefined && { journeyByYear: ov.journeyByYear }),
     };
   });
 }
@@ -160,6 +166,45 @@ export function saveProfileOverride(
 /** Retorna todos os usuários (arquivo + localStorage). */
 export function getUsers(): UserRecord[] {
   return loadFromStorage().users;
+}
+
+/** Retorna os jogos da jornada do usuário para o ano. Mescla override (localStorage) com arquivo (mockUsers.json); dados do arquivo têm prioridade para evitar que o modal mostre valores desatualizados. */
+export function getJourneyGames(username: string, year: number): JourneyGame[] {
+  const key = username.trim().toLowerCase();
+  const yearStr = String(year);
+  const overrides = getProfileOverrides();
+  const ov = overrides[key];
+  const overrideList: JourneyGame[] = Array.isArray(ov?.journeyByYear?.[yearStr])
+    ? ov.journeyByYear[yearStr]
+    : [];
+  const data = loadFromStorage();
+  const user = data.users.find((u) => u.username.trim().toLowerCase() === key);
+  const fileList: JourneyGame[] = Array.isArray(user?.journeyByYear?.[yearStr])
+    ? user.journeyByYear[yearStr]
+    : [];
+  if (fileList.length === 0) return overrideList;
+  if (overrideList.length === 0) return fileList;
+  const byId = new Map<string, JourneyGame>();
+  for (const g of overrideList) byId.set(g.id, { ...g });
+  for (const g of fileList) {
+    const existing = byId.get(g.id);
+    byId.set(g.id, existing ? { ...existing, ...g } : { ...g });
+  }
+  return Array.from(byId.values());
+}
+
+/** Salva os jogos da jornada do usuário para o ano (persiste em overrides e em mockUsers.json). */
+export function saveJourneyGames(
+  username: string,
+  year: number,
+  games: JourneyGame[]
+): void {
+  const key = username.trim().toLowerCase();
+  if (!key) return;
+  const current = getProfileOverrides();
+  const existing = current[key] ?? {};
+  const journeyByYear = { ...existing.journeyByYear, [String(year)]: games };
+  saveProfileOverride(username, { ...existing, journeyByYear });
 }
 
 export type AuthUserSnapshot = {

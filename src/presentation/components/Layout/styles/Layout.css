@@ -1113,6 +1113,17 @@
   color: var(--sgn-text);
 }
 
+[data-theme="light"] .gv-under-construction {
+  background: rgba(109, 40, 217, 0.06);
+  border-color: rgba(109, 40, 217, 0.2);
+}
+[data-theme="light"] .gv-under-construction-title {
+  color: var(--sgn-text);
+}
+[data-theme="light"] .gv-under-construction-text {
+  color: var(--sgn-text-secondary);
+}
+
 .gv-profile-tabview .p-tabview-panels {
   min-height: 300px;
 }
@@ -1124,6 +1135,38 @@
 .gv-profile-tab-content {
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* Bloco "em construção" para abas do perfil */
+.gv-under-construction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.gv-under-construction-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+.gv-under-construction-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.02em;
+}
+.gv-under-construction-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 280px;
 }
 
 .gv-profile-content {

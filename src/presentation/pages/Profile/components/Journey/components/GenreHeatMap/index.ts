@@ -1,0 +1,1 @@
+export { GenreHeatMap } from "./GenreHeatMap";

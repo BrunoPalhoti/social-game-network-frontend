@@ -18,19 +18,22 @@ export function ProfileTabs() {
           <JourneyContent year={currentYear} />
         </div>
       </TabPanel>
-      <TabPanel header="BIBLIOTECA (143)" className="gv-profile-tab-panel">
+      <TabPanel header="DASHBOARD" className="gv-profile-tab-panel">
         <div className="gv-profile-tab-content">
-          Sua biblioteca de jogos aparecerá aqui.
+          <div className="gv-under-construction" aria-label="Página em construção">
+            <span className="gv-under-construction-icon" aria-hidden>🔧</span>
+            <h3 className="gv-under-construction-title">Página em construção</h3>
+            <p className="gv-under-construction-text">Em breve você terá acesso ao dashboard.</p>
+          </div>
         </div>
       </TabPanel>
-      <TabPanel header="CONQUISTAS" className="gv-profile-tab-panel">
+      <TabPanel header="AMIGOS" className="gv-profile-tab-panel">
         <div className="gv-profile-tab-content">
-          Suas conquistas aparecerão aqui.
-        </div>
-      </TabPanel>
-      <TabPanel header="AMIGOS (27)" className="gv-profile-tab-panel">
-        <div className="gv-profile-tab-content">
-          Lista de amigos em breve.
+          <div className="gv-under-construction" aria-label="Página em construção">
+            <span className="gv-under-construction-icon" aria-hidden>🔧</span>
+            <h3 className="gv-under-construction-title">Página em construção</h3>
+            <p className="gv-under-construction-text">Em breve você poderá ver e gerenciar seus amigos aqui.</p>
+          </div>
         </div>
       </TabPanel>
     </TabView>

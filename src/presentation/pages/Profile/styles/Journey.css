@@ -127,6 +127,17 @@
   overflow: hidden;
 }
 
+.gv-journey-timeline-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--journey-border);
+}
+
+.gv-journey-timeline-clear-btn {
+  font-size: 0.85rem;
+}
+
 .gv-journey-timeline-tabs.p-tabview {
   background: transparent;
   border: none;
@@ -391,6 +402,27 @@
     0 0 20px rgba(0, 245, 255, 0.25);
 }
 
+.gv-journey-badge-dropped {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  background: rgba(120, 0, 0, 0.85);
+  color: #ffaaaa;
+  border-radius: 0.35rem;
+  letter-spacing: 0.04em;
+}
+
+.gv-journey-timeline-game-slot--dropped .gv-journey-timeline-cover-wrap {
+  box-shadow:
+    0 0 0 2px rgba(255, 80, 80, 0.6),
+    0 0 20px rgba(255, 80, 80, 0.2);
+}
+
 .gv-journey-timeline-empty,
 .gv-journey-timeline-empty.p-message {
   display: flex;
@@ -415,6 +447,234 @@
 .gv-journey-timeline-empty .gv-journey-empty-icon {
   font-size: 1.75rem;
   opacity: 0.5;
+}
+
+.gv-journey-timeline-game-slot--clickable {
+  cursor: pointer;
+}
+
+.gv-journey-timeline-add-slot {
+  flex: 0 0 auto;
+}
+
+.gv-journey-add-game-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  background: rgba(0, 245, 255, 0.06);
+  border: 2px dashed var(--journey-border);
+  border-radius: 0.75rem;
+  color: var(--journey-text-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.gv-journey-add-game-btn:hover {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: var(--journey-accent);
+  color: var(--journey-accent);
+}
+
+/* ----- Modal formulário jornada (dark mode) ----- */
+.gv-journey-form-dialog.p-dialog,
+.gv-journey-form-dialog .p-dialog {
+  background: #0a0f16;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.2),
+    0 0 40px rgba(0, 245, 255, 0.1),
+    inset 0 0 20px rgba(0, 245, 255, 0.03);
+}
+
+.gv-journey-form-dialog .p-dialog-header,
+.gv-journey-form-dialog .p-dialog-content,
+.gv-journey-form-dialog .p-dialog-footer {
+  background: #0a0f16;
+  border-color: rgba(0, 245, 255, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gv-journey-form-dialog .p-dialog-title {
+  color: #00f5ff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+}
+
+.gv-journey-form-dialog .p-dialog-header-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gv-journey-form-dialog .p-dialog-header-icon:hover {
+  color: #00f5ff;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+}
+
+.gv-journey-form-dialog .p-dialog-content {
+  padding: 1rem;
+}
+
+.gv-journey-form-dialog .p-inputtext,
+.gv-journey-form-dialog input.p-inputtext,
+.gv-journey-form-dialog .p-inputnumber-input,
+.gv-journey-form-dialog input[type="date"] {
+  background: rgba(0, 15, 22, 0.8);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+}
+
+.gv-journey-form-dialog .p-inputtext::placeholder,
+.gv-journey-form-dialog input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.gv-journey-form-dialog .p-inputtext:focus,
+.gv-journey-form-dialog .p-inputnumber-input:focus,
+.gv-journey-form-dialog input[type="date"]:focus {
+  outline: none;
+  border-color: #00f5ff;
+  box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.2);
+}
+
+.gv-journey-form-dialog select.p-inputtext,
+.gv-journey-form-dialog select {
+  background: rgba(0, 15, 22, 0.8);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.gv-journey-form-dialog .p-button.p-button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 245, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gv-journey-form-dialog .p-button.p-button-secondary:hover {
+  background: rgba(0, 245, 255, 0.15);
+  border-color: #00f5ff;
+  color: #00f5ff;
+}
+
+.gv-journey-form-dialog .p-button:not(.p-button-secondary) {
+  background: rgba(0, 245, 255, 0.25);
+  border-color: #00f5ff;
+  color: #0a0f16;
+}
+
+.gv-journey-form-dialog .p-button:not(.p-button-secondary):hover:not(:disabled) {
+  background: #00f5ff;
+  border-color: #00f5ff;
+  color: #0a0f16;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+}
+
+.gv-journey-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gv-journey-form-dialog .gv-journey-form-label {
+  color: rgba(0, 245, 255, 0.85);
+}
+
+.gv-journey-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--journey-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.gv-journey-form-input.w-full,
+.gv-journey-form-fields input[type="date"].w-full {
+  width: 100%;
+}
+
+.gv-journey-form-dialog .gv-journey-form-hint {
+  color: rgba(0, 245, 255, 0.75);
+}
+
+.gv-journey-form-hint {
+  font-size: 0.8rem;
+  color: var(--journey-text-muted);
+  margin: 0;
+}
+
+.gv-journey-form-error {
+  font-size: 0.8rem;
+  color: #f87171;
+  margin: 0.25rem 0 0;
+}
+
+.gv-journey-form-error-block {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(248, 113, 113, 0.12);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.gv-journey-form-games-list {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gv-journey-form-game-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  text-align: left;
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid var(--journey-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.gv-journey-form-game-item:hover {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: var(--journey-accent);
+}
+
+.gv-journey-form-game-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 0.35rem;
+}
+
+.gv-journey-form-game-placeholder {
+  background: var(--journey-border);
+}
+
+.gv-journey-form-dialog .gv-journey-form-game-name {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gv-journey-form-game-name {
+  font-size: 0.9rem;
+  color: var(--journey-text);
+}
+
+.gv-journey-form-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
 /* ----- Mapa de calor gêneros (Card PrimeReact) ----- */

@@ -1,7 +1,7 @@
 import { Card } from "primereact/card";
 import { ProgressBar } from "primereact/progressbar";
-import type { GenreShare } from "./types";
-import "../../styles/Journey.css";
+import type { GenreShare } from "../../types";
+import "../../../../styles/Journey.css";
 
 interface GenreHeatMapProps {
   data: GenreShare[];
