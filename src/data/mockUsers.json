@@ -1,0 +1,112 @@
+{
+  "users": [
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "username": "brunogameplay",
+      "email": "bruno@example.com",
+      "password": "123456",
+      "name": "Bruno Palhoti",
+      "nickname": "brunogameplay",
+      "platform": "Playstation",
+      "favoriteGame": "The Last of Us Part II",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "favoriteGameCover": "https://media.rawg.io/media/games/909/909974d1c7863c2027241e265fe7011f.jpg",
+      "platforms": [
+        {
+          "name": "PlayStation 5",
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "username": "darthgamer",
+      "email": "darth@example.com",
+      "password": "123456",
+      "name": "Darth Gamer",
+      "nickname": "DarthGamer",
+      "platform": "Xbox",
+      "favoriteGame": "Halo",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "username": "reginhinhagameplay",
+      "email": "regina@example.com",
+      "password": "123456",
+      "name": "Regina Linda",
+      "nickname": "reginhinhagameplay",
+      "platform": "Celular",
+      "favoriteGame": "Home Design: Caribbean Life",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "username": "dadagameplay",
+      "email": "daphine@example.com",
+      "password": "123456",
+      "name": "Daphine Linda",
+      "nickname": "dadagameplay",
+      "platform": "Nintendo Switch",
+      "favoriteGame": "Stardew Valley",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "username": "brunolindo",
+      "email": "brunopalhoti@gmail.com",
+      "id": "72cc0bf1-7cb4-45aa-aa74-11375743301c",
+      "createdAt": "2026-03-15T20:06:38.068Z"
+    },
+    {
+      "id": "ff41d133-1bc7-4132-8038-e8be26f0e9ba",
+      "username": "brunolindos",
+      "email": "brunopalhoti@gmail.com.br",
+      "password": "123456",
+      "name": "brunolindos",
+      "nickname": "brunolindos",
+      "createdAt": "2026-03-15T21:12:47.727Z"
+    },
+    {
+      "id": "9d3f73d3-06ee-45b6-b74b-683a5c7d1888",
+      "username": "ava",
+      "email": "ava@ava.com",
+      "password": "123456",
+      "name": "ava",
+      "nickname": "ava",
+      "createdAt": "2026-03-15T21:18:00.237Z",
+      "favoriteGame": "Life is Strange",
+      "favoriteGameCover": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+      "platforms": [
+        {
+          "name": "PlayStation 4",
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "d2b70e87-0b14-4f6c-9080-dad147ef45d3",
+      "username": "brunolindoss",
+      "email": "brunopalhoti@gmail.com.brr",
+      "password": "123456",
+      "name": "brunolindoss",
+      "nickname": "brunolindoss",
+      "createdAt": "2026-03-15T21:21:08.903Z",
+      "favoriteGame": "Call of Duty",
+      "favoriteGameCover": "https://media.rawg.io/media/games/9c5/9c5bc0b6e67102bc96dcf1ba41509e42.jpg",
+      "platforms": [
+        {
+          "name": "PlayStation 5",
+          "imageUrl": null
+        }
+      ],
+      "favoriteGenres": [
+        {
+          "name": "Shooter",
+          "imageUrl": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+        }
+      ],
+      "favoriteGenre": "Shooter",
+      "favoriteGenreCover": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+    }
+  ]
+}

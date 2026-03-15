@@ -1,57 +1,54 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { getUsersForAuth } from "@/shared/api/mockUsersApi";
+import type { PlatformSelection } from "@/data/types/platformSelection";
 
-const MOCK_USERS: Record<
-  string,
-  { password: string; name: string; nickname: string; platform: string, favoriteGame: string }
-> = {
-  brunogameplay: {
-    password: "123456",
-    name: "Bruno Palhoti",
-    nickname: "brunogameplay",
-    platform: "Playstation",
-    favoriteGame: "The Last of Us",
-  },
-  darthgamer: {
-    password: "123456",
-    name: "Darth Gamer",
-    nickname: "DarthGamer",
-    platform: "Xbox",
-    favoriteGame: "Halo",
-  },
-  reginhinhagameplay: {
-    password: "123456",
-    name: "Regina Linda",
-    nickname: "reginhinhagameplay",
-    platform: "Celular",
-    favoriteGame: "Home Design: Caribbean Life",
-  },
-  dadagameplay: {
-    password: "123456",
-    name: "Daphine Linda",
-    nickname: "dadagameplay",
-    platform: "Nintendo Switch",
-    favoriteGame: "Stardew Valley",
-  },
-};
-
-export function getMockUserProfile(username: string | undefined): { platform?: string; favoriteGame?: string } {
+export function getMockUserProfile(
+  username: string | undefined
+): {
+  platforms?: PlatformSelection[];
+  favoriteGame?: string;
+  favoriteGameCover?: string;
+  favoriteGenre?: string;
+  favoriteGenreCover?: string;
+} {
   if (!username) return {};
   const key = username.trim().toLowerCase();
-  const mock = MOCK_USERS[key];
-  return mock ? { platform: mock.platform, favoriteGame: mock.favoriteGame } : {};
+  const users = getUsersForAuth();
+  const mock = users[key];
+  if (!mock) return {};
+  const platforms =
+    (mock.platforms?.length ?? 0) > 0
+      ? mock.platforms
+      : mock.platform
+        ? [{ name: mock.platform, imageUrl: null as string | null }]
+        : undefined;
+  return {
+    platforms,
+    favoriteGame: mock.favoriteGame,
+    favoriteGameCover: mock.favoriteGameCover,
+    favoriteGenre: mock.favoriteGenre,
+    favoriteGenreCover: mock.favoriteGenreCover,
+  };
 }
 
 export interface User {
   username: string;
   name: string;
   nickname: string;
-  platform?: string;
+  /** Plataformas que joga (array com nome + logo). Substitui o antigo "platform" (string). */
+  platforms?: PlatformSelection[];
   favoriteGame?: string;
+  favoriteGameCover?: string;
+  favoriteGenre?: string;
+  favoriteGenreCover?: string;
 }
 
 export function getInitialsFromUsername(username: string): string {
-  const parts = username.replace(/[^a-zA-Z0-9.]/g, "").split(/[.\s]/).filter(Boolean);
+  const parts = username
+    .replace(/[^a-zA-Z0-9.]/g, "")
+    .split(/[.\s]/)
+    .filter(Boolean);
   if (parts.length >= 2) {
     const a = parts[0]?.[0] ?? "";
     const b = parts[1]?.[0] ?? "";
@@ -73,7 +70,9 @@ export function getInitialsFromName(name: string): string {
 interface AuthState {
   user: User | null;
   login: (username: string, password: string) => boolean;
+  loginCreatedUser: (user: User) => void;
   logout: () => void;
+  updateProfile: (updates: Partial<Pick<User, "platforms" | "favoriteGame" | "favoriteGameCover" | "favoriteGenre" | "favoriteGenreCover">>) => void;
   isAuthenticated: boolean;
 }
 
@@ -85,17 +84,26 @@ export const useAuthStore = create<AuthState>()(
 
       login: (username: string, password: string) => {
         const key = username.trim().toLowerCase();
-        const mock = MOCK_USERS[key];
+        const users = getUsersForAuth();
+        const mock = users[key];
         const isValid = mock && password === mock.password;
 
-        if (isValid) {
+        if (isValid && mock) {
           set({
             user: {
               username: key,
               name: mock.name,
               nickname: mock.nickname,
-              platform: mock.platform,
+              platforms:
+                mock.platforms?.length
+                  ? mock.platforms
+                  : mock.platform
+                    ? [{ name: mock.platform, imageUrl: null }]
+                    : undefined,
               favoriteGame: mock.favoriteGame,
+              favoriteGameCover: mock.favoriteGameCover,
+              favoriteGenre: mock.favoriteGenre,
+              favoriteGenreCover: mock.favoriteGenreCover,
             },
             isAuthenticated: true,
           });
@@ -103,6 +111,16 @@ export const useAuthStore = create<AuthState>()(
         }
         return false;
       },
+
+      loginCreatedUser: (user: User) =>
+        set({ user, isAuthenticated: true }),
+
+      updateProfile: (updates) =>
+        set((state) =>
+          state.user
+            ? { user: { ...state.user, ...updates } }
+            : state
+        ),
 
       logout: () => set({ user: null, isAuthenticated: false }),
     }),

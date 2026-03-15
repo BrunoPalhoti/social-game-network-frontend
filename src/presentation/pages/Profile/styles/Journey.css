@@ -46,13 +46,21 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .gv-journey-mission-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 28px var(--journey-glow), 0 0 40px var(--journey-glow-alt), 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 28px var(--journey-glow),
+    0 0 40px var(--journey-glow-alt),
+    0 8px 24px rgba(0, 0, 0, 0.35);
   border-color: rgba(0, 245, 255, 0.45);
 }
 
@@ -113,7 +121,9 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 24px rgba(0, 245, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 24px rgba(0, 245, 255, 0.06),
+    0 4px 24px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
@@ -156,7 +166,9 @@
   margin-bottom: -3px;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.15);
-  transition: color 0.25s ease, background 0.25s ease;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
 }
 
 .gv-journey-timeline-tabs .p-tabview-nav-link span,
@@ -175,7 +187,10 @@
 }
 
 /* Selecionada: a classe p-highlight fica no <li> (header), não no <a> — estilizar o link e o li quando ativo */
-.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link {
+.gv-journey-timeline-tabs
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link {
   color: var(--journey-accent) !important;
   background: transparent !important;
   box-shadow: none;
@@ -184,8 +199,16 @@
   padding-bottom: 0.7rem;
 }
 
-.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link span,
-.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link .gv-journey-tab-icon {
+.gv-journey-timeline-tabs
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link
+  span,
+.gv-journey-timeline-tabs
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link
+  .gv-journey-tab-icon {
   color: var(--journey-accent) !important;
 }
 
@@ -281,14 +304,22 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 16px rgba(0, 245, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow:
+    0 0 16px rgba(0, 245, 255, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .gv-journey-timeline-game-slot:hover {
   transform: translateY(-4px);
   border-color: rgba(0, 245, 255, 0.45);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 28px var(--journey-glow), 0 0 40px rgba(255, 0, 255, 0.08);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    0 0 28px var(--journey-glow),
+    0 0 40px rgba(255, 0, 255, 0.08);
 }
 
 .gv-journey-timeline-cover-wrap {
@@ -355,7 +386,9 @@
 }
 
 .gv-journey-timeline-game-slot--playing .gv-journey-timeline-cover-wrap {
-  box-shadow: 0 0 0 2px var(--journey-accent), 0 0 20px rgba(0, 245, 255, 0.25);
+  box-shadow:
+    0 0 0 2px var(--journey-accent),
+    0 0 20px rgba(0, 245, 255, 0.25);
 }
 
 .gv-journey-timeline-empty,
@@ -393,7 +426,9 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .gv-journey-genre-card-header.p-card-header,
@@ -501,7 +536,9 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .gv-journey-games-card-header.p-card-header,
@@ -559,8 +596,13 @@
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .gv-journey-card:hover {
@@ -594,7 +636,10 @@
 
 .gv-journey-card--full:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 32px var(--journey-glow), 0 0 48px var(--journey-glow-alt), 0 12px 28px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 32px var(--journey-glow),
+    0 0 48px var(--journey-glow-alt),
+    0 12px 28px rgba(0, 0, 0, 0.4);
 }
 
 .gv-journey-card-cover-wrap {
@@ -678,7 +723,11 @@
   font-size: 0.6rem;
   font-weight: 700;
   padding: 0.2rem 0.4rem;
-  background: linear-gradient(135deg, var(--journey-accent), var(--journey-accent-alt));
+  background: linear-gradient(
+    135deg,
+    var(--journey-accent),
+    var(--journey-accent-alt)
+  );
   color: #0a0a14;
   border-radius: 0.3rem;
   letter-spacing: 0.05em;
@@ -793,7 +842,9 @@
 
 [data-theme="light"] .gv-journey-mission-card:hover {
   border-color: var(--sgn-border-focus);
-  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(109, 40, 217, 0.2),
+    0 4px 16px rgba(109, 40, 217, 0.08);
 }
 
 [data-theme="light"] .gv-journey-vida-card {
@@ -816,11 +867,17 @@
 
 [data-theme="light"] .gv-journey-timeline-game-slot:hover {
   border-color: var(--sgn-border-focus);
-  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(109, 40, 217, 0.2),
+    0 4px 16px rgba(109, 40, 217, 0.08);
 }
 
-[data-theme="light"] .gv-journey-timeline-game-slot--playing .gv-journey-timeline-cover-wrap {
-  box-shadow: 0 0 0 2px var(--sgn-primary), 0 4px 16px rgba(109, 40, 217, 0.2);
+[data-theme="light"]
+  .gv-journey-timeline-game-slot--playing
+  .gv-journey-timeline-cover-wrap {
+  box-shadow:
+    0 0 0 2px var(--sgn-primary),
+    0 4px 16px rgba(109, 40, 217, 0.2);
 }
 
 [data-theme="light"] .gv-journey-genre-heatmap.p-card {
