@@ -1,11 +1,22 @@
 .gv-info-card {
   flex: 1;
-  min-width: 180px;
-  max-width: 280px;
+  min-width: 200px;
+  max-width: 320px;
   border-radius: 0.75rem;
   border: 1px solid var(--sgn-primary);
   background: var(--sgn-info-card-bg);
   color: var(--sgn-text);
+}
+
+/* Card com capa (game favorito): um pouco mais largo para a foto maior */
+.gv-info-card--with-image {
+  min-width: 220px;
+}
+
+/* Card com lista (plataformas): mais largo para várias entradas */
+.gv-info-card--with-items {
+  min-width: 220px;
+  max-width: 340px;
 }
 
 .gv-info-card .p-card-body,
@@ -53,4 +64,82 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--sgn-text);
+}
+
+.gv-info-card-edit {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 0.35rem 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--sgn-text-secondary);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.gv-info-card-edit:hover {
+  color: var(--sgn-primary);
+  background: var(--sgn-info-card-icon-bg);
+}
+
+.gv-info-card-edit i {
+  font-size: 0.9rem;
+}
+
+/* Card com capa (ex.: game favorito) – tamanho maior para a foto */
+.gv-info-card-cover {
+  flex-shrink: 0;
+  width: 96px;
+  height: 54px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--sgn-info-card-icon-bg);
+}
+
+.gv-info-card-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card com lista de itens (ex.: plataformas) – máx. 3, em linhas */
+.gv-info-card-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.gv-info-card-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--sgn-text);
+}
+
+.gv-info-card-item-img,
+.gv-info-card-item-placeholder {
+  width: 22px;
+  height: 22px;
+  border-radius: 0.25rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: var(--sgn-info-card-icon-bg);
+}
+
+.gv-info-card-item-placeholder {
+  border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.gv-info-card-item-name {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

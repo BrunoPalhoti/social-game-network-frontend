@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { Button } from "primereact/button";
-import { Message } from "primereact/message";
-import { FloatLabel } from "primereact/floatlabel";
 import { Divider } from "primereact/divider";
 import { useAuthStore } from "@/shared/store/useAuthStore";
+import {
+  FormMessage,
+  FormField,
+  FormSubmitButton,
+} from "@/presentation/components/Form";
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -29,41 +31,49 @@ export function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="login-form">
       {error && (
-        <Message severity="error" text={error} className="login-error" />
+        <FormMessage
+          severity="error"
+          text={error}
+          className="login-error"
+        />
       )}
-      <div className="login-field">
-        <FloatLabel>
-          <InputText
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="login-input w-full"
-            autoComplete="username"
-          />
-          <label htmlFor="username">Nome de Usuário</label>
-        </FloatLabel>
-      </div>
-      <div className="login-field">
-        <FloatLabel>
-          <Password
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="login-password w-full"
-            inputClassName="login-input w-full"
-            toggleMask
-            feedback={false}
-            autoComplete="current-password"
-          />
-          <label htmlFor="password">Senha</label>
-        </FloatLabel>
-      </div>
+      <FormField
+        label="Nome de Usuário"
+        id="username"
+        floatLabel
+        fieldClassName="login-field"
+      >
+        <InputText
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="login-input w-full"
+          autoComplete="username"
+        />
+      </FormField>
+      <FormField
+        label="Senha"
+        id="password"
+        floatLabel
+        fieldClassName="login-field"
+      >
+        <Password
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="login-password w-full"
+          inputClassName="login-input w-full"
+          toggleMask
+          feedback={false}
+          autoComplete="current-password"
+        />
+      </FormField>
       <div className="login-links-row">
         <Link to="/esqueci-senha" className="login-link">
           Esqueceu a senha?
         </Link>
       </div>
-      <Button type="submit" label="ENTRAR" className="login-btn-entrar" />
+      <FormSubmitButton label="ENTRAR" className="login-btn-entrar" />
       <Divider align="center" type="dashed">
         <span className="login-divider-text">ou</span>
       </Divider>
