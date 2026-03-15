@@ -67,6 +67,16 @@
   width: 100%;
 }
 
+/* Espaçamento entre label e input (evita label "Senha" colado no campo) */
+.login-field .p-floatlabel > label {
+  display: block;
+  margin-bottom: 0.375rem;
+}
+
+.login-field .p-floatlabel .p-password {
+  margin-top: 0.25rem;
+}
+
 .login-divider-text {
   font-size: 0.875rem;
   color: var(--sgn-text-secondary);
@@ -107,6 +117,11 @@
 
 .login-field {
   width: 100%;
+}
+
+/* Mais espaço entre o input de nome e o label "Senha" */
+.login-field + .login-field {
+  margin-top: 0.75rem;
 }
 
 .login-field .p-password {
