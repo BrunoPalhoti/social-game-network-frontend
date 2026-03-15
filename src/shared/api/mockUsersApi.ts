@@ -16,6 +16,7 @@ export type ProfileOverrides = {
   favoriteGameCover?: string;
   platforms?: PlatformSelection[];
   favoriteGenre?: string;
+  favoriteGenreCover?: string;
 };
 
 /** Gera um id único no formato UUID v4 para novos usuários. */
@@ -36,6 +37,7 @@ export interface UserRecord {
   favoriteGame?: string;
   favoriteGameCover?: string;
   favoriteGenre?: string;
+  favoriteGenreCover?: string;
   createdAt: string;
 }
 
@@ -113,6 +115,7 @@ function getMergedUsersForFile(): UserRecord[] {
       ...(ov.favoriteGameCover !== undefined && { favoriteGameCover: ov.favoriteGameCover }),
       ...(ov.platforms !== undefined && { platforms: ov.platforms }),
       ...(ov.favoriteGenre !== undefined && { favoriteGenre: ov.favoriteGenre }),
+      ...(ov.favoriteGenreCover !== undefined && { favoriteGenreCover: ov.favoriteGenreCover }),
     };
   });
 }
@@ -168,6 +171,7 @@ export type AuthUserSnapshot = {
   favoriteGame?: string;
   favoriteGameCover?: string;
   favoriteGenre?: string;
+  favoriteGenreCover?: string;
 };
 
 /**
@@ -194,6 +198,7 @@ export function getUsersForAuth(): Record<string, AuthUserSnapshot> {
       favoriteGame: u.favoriteGame,
       favoriteGameCover: u.favoriteGameCover,
       favoriteGenre: u.favoriteGenre,
+      favoriteGenreCover: u.favoriteGenreCover,
     };
     const override = overrides[key];
     map[key] = override

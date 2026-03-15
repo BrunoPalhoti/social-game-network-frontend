@@ -112,3 +112,47 @@ export async function fetchPlatforms(
   }
   return res.json() as Promise<RawgPlatformsResponse>;
 }
+
+// —— Gêneros ———————————————————————————————————————————————————————————————
+
+export interface RawgGenre {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string | null;
+}
+
+export interface RawgGenresResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: RawgGenre[];
+}
+
+export interface FetchGenresParams {
+  page?: number;
+  page_size?: number;
+  ordering?: string;
+}
+
+/**
+ * Lista gêneros de jogos na API RAWG (ex.: Action, RPG, Indie).
+ */
+export async function fetchGenres(
+  params: FetchGenresParams = {}
+): Promise<RawgGenresResponse> {
+  const key = getApiKey();
+  const searchParams = new URLSearchParams();
+  if (key) searchParams.set("key", key);
+  searchParams.set("page", String(params.page ?? 1));
+  searchParams.set("page_size", String(params.page_size ?? 20));
+  if (params.ordering) searchParams.set("ordering", params.ordering);
+
+  const url = `${BASE_URL}/genres?${searchParams.toString()}`;
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`RAWG API error: ${res.status} ${res.statusText}`);
+  }
+  return res.json() as Promise<RawgGenresResponse>;
+}

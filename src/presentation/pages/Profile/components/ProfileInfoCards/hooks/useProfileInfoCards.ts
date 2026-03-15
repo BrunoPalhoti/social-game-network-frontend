@@ -9,8 +9,10 @@ import type { FavoriteGameSelection } from "@/data/types/favoriteGame";
 import type { PlatformSelection } from "@/data/types/platformSelection";
 import {
   fetchGames,
+  fetchGenres,
   fetchPlatforms,
   type RawgGame,
+  type RawgGenre,
   type RawgPlatform,
 } from "@/shared/api/rawgApi";
 
@@ -49,8 +51,18 @@ export function useProfileInfoCards() {
   const [platformsError, setPlatformsError] = useState<string | null>(null);
   const [selectedPlatforms, setSelectedPlatforms] = useState<PlatformSelection[]>([]);
 
+  // —— Estado da lista de gêneros (Gênero Favorito) ———————————————————————
+  const [genresList, setGenresList] = useState<RawgGenre[]>([]);
+  const [genresLoading, setGenresLoading] = useState(false);
+  const [genresError, setGenresError] = useState<string | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<{
+    name: string;
+    cover: string | null;
+  } | null>(null);
+
   const isFavoriteGameEdit = editingCard === "favoriteGame";
   const isPlatformsEdit = editingCard === "platforms";
+  const isFavoriteGenreEdit = editingCard === "favoriteGenre";
 
   /** Valor a exibir no card: user > mock > "Em breve". Para "platforms" retorna "Em breve" se vazio. */
   const getDisplayValue = useCallback(
@@ -75,6 +87,11 @@ export function useProfileInfoCards() {
   const getDisplayCover = useCallback((): string | null | undefined => {
     return user?.favoriteGameCover ?? mockProfile.favoriteGameCover ?? undefined;
   }, [user?.favoriteGameCover, mockProfile.favoriteGameCover]);
+
+  /** URL da imagem do gênero favorito (user ou mock). */
+  const getDisplayGenreCover = useCallback((): string | null | undefined => {
+    return user?.favoriteGenreCover ?? mockProfile.favoriteGenreCover ?? undefined;
+  }, [user?.favoriteGenreCover, mockProfile.favoriteGenreCover]);
 
   /** Abre o modal para editar o campo. */
   const openEdit = useCallback(
@@ -118,8 +135,29 @@ export function useProfileInfoCards() {
           })
           .finally(() => setPlatformsLoading(false));
       }
+
+      if (field === "favoriteGenre") {
+        const genreName = getDisplayValue("favoriteGenre");
+        const genreCover = getDisplayGenreCover();
+        setSelectedGenre(
+          genreName && genreName !== "Em breve"
+            ? { name: genreName, cover: genreCover ?? null }
+            : null
+        );
+        setGenresList([]);
+        setGenresError(null);
+        setGenresLoading(true);
+        fetchGenres({ page_size: 50 })
+          .then((r) => setGenresList(r.results))
+          .catch((e) => {
+            setGenresError(
+              e instanceof Error ? e.message : "Erro ao carregar gêneros"
+            );
+          })
+          .finally(() => setGenresLoading(false));
+      }
     },
-    [getDisplayValue, getDisplayCover, getDisplayPlatforms]
+    [getDisplayValue, getDisplayCover, getDisplayGenreCover, getDisplayPlatforms]
   );
 
   /** Fecha o modal e limpa todo o estado de edição/busca. */
@@ -134,6 +172,10 @@ export function useProfileInfoCards() {
     setPlatformsLoading(false);
     setPlatformsError(null);
     setSelectedPlatforms([]);
+    setGenresList([]);
+    setGenresLoading(false);
+    setGenresError(null);
+    setSelectedGenre(null);
   }, []);
 
   /** Persiste no perfil (store + camada de dados/localStorage para sobreviver a logout). */
@@ -150,6 +192,12 @@ export function useProfileInfoCards() {
       const updates = { platforms: list.length > 0 ? list : undefined };
       updateProfile(updates);
       updateUserProfile(user.username, updates);
+    } else if (editingCard === "favoriteGenre") {
+      const name = (selectedGenre?.name ?? editValue).trim() || undefined;
+      const cover = selectedGenre?.cover ?? undefined;
+      const updates = { favoriteGenre: name, favoriteGenreCover: cover };
+      updateProfile(updates);
+      updateUserProfile(user.username, updates);
     } else {
       const value = editValue.trim() || undefined;
       const updates = { [editingCard]: value } as { favoriteGenre?: string };
@@ -157,7 +205,7 @@ export function useProfileInfoCards() {
       updateUserProfile(user.username, updates);
     }
     closeEdit();
-  }, [editingCard, editValue, selectedGame, selectedPlatforms, user?.username, updateProfile, closeEdit]);
+  }, [editingCard, editValue, selectedGame, selectedPlatforms, selectedGenre, user?.username, updateProfile, closeEdit]);
 
   // —— Busca de jogos na RAWG com debounce ——————————————————————————————————
   useEffect(() => {
@@ -219,9 +267,26 @@ export function useProfileInfoCards() {
     setSelectedPlatforms((prev) => prev.filter((_, i) => i !== index));
   }, []);
 
+  /** Filtra a lista de gêneros pelo texto digitado (client-side). */
+  const filteredGenres = editValue.trim()
+    ? genresList.filter((g) =>
+        g.name.toLowerCase().includes(editValue.trim().toLowerCase())
+      )
+    : genresList;
+
+  /** Seleciona um gênero da lista (nome + imagem de fundo). */
+  const onSelectGenre = useCallback((genre: RawgGenre) => {
+    setSelectedGenre({
+      name: genre.name,
+      cover: genre.image_background ?? null,
+    });
+    setEditValue(genre.name);
+  }, []);
+
   return {
     getDisplayValue,
     getDisplayCover,
+    getDisplayGenreCover,
     getDisplayPlatforms,
     openEdit,
     closeEdit,
@@ -242,5 +307,10 @@ export function useProfileInfoCards() {
     platformsError,
     selectedPlatforms,
     maxPlatforms: MAX_PLATFORMS,
+    isFavoriteGenreEdit,
+    genresList: filteredGenres,
+    genresLoading,
+    genresError,
+    onSelectGenre,
   };
 }

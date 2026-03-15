@@ -10,6 +10,7 @@ export function getMockUserProfile(
   favoriteGame?: string;
   favoriteGameCover?: string;
   favoriteGenre?: string;
+  favoriteGenreCover?: string;
 } {
   if (!username) return {};
   const key = username.trim().toLowerCase();
@@ -27,6 +28,7 @@ export function getMockUserProfile(
     favoriteGame: mock.favoriteGame,
     favoriteGameCover: mock.favoriteGameCover,
     favoriteGenre: mock.favoriteGenre,
+    favoriteGenreCover: mock.favoriteGenreCover,
   };
 }
 
@@ -39,6 +41,7 @@ export interface User {
   favoriteGame?: string;
   favoriteGameCover?: string;
   favoriteGenre?: string;
+  favoriteGenreCover?: string;
 }
 
 export function getInitialsFromUsername(username: string): string {
@@ -69,7 +72,7 @@ interface AuthState {
   login: (username: string, password: string) => boolean;
   loginCreatedUser: (user: User) => void;
   logout: () => void;
-  updateProfile: (updates: Partial<Pick<User, "platforms" | "favoriteGame" | "favoriteGameCover" | "favoriteGenre">>) => void;
+  updateProfile: (updates: Partial<Pick<User, "platforms" | "favoriteGame" | "favoriteGameCover" | "favoriteGenre" | "favoriteGenreCover">>) => void;
   isAuthenticated: boolean;
 }
 
@@ -100,6 +103,7 @@ export const useAuthStore = create<AuthState>()(
               favoriteGame: mock.favoriteGame,
               favoriteGameCover: mock.favoriteGameCover,
               favoriteGenre: mock.favoriteGenre,
+              favoriteGenreCover: mock.favoriteGenreCover,
             },
             isAuthenticated: true,
           });

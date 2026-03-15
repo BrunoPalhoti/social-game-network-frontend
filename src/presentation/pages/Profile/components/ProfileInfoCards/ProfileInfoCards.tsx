@@ -24,6 +24,7 @@ export function ProfileInfoCards() {
   const {
     getDisplayValue,
     getDisplayCover,
+    getDisplayGenreCover,
     getDisplayPlatforms,
     openEdit,
     closeEdit,
@@ -31,11 +32,13 @@ export function ProfileInfoCards() {
     onSelectGame,
     onAddPlatform,
     onRemovePlatform,
+    onSelectGenre,
     editingCard,
     editValue,
     setEditValue,
     isFavoriteGameEdit,
     isPlatformsEdit,
+    isFavoriteGenreEdit,
     games,
     gamesLoading,
     gamesError,
@@ -44,6 +47,9 @@ export function ProfileInfoCards() {
     platformsError,
     selectedPlatforms,
     maxPlatforms,
+    genresList,
+    genresLoading,
+    genresError,
   } = useProfileInfoCards();
 
   const config = CARD_CONFIG.find((c) => c.field === editingCard);
@@ -56,7 +62,13 @@ export function ProfileInfoCards() {
           label={label}
           value={getDisplayValue(field)}
           icon={icon}
-          imageUrl={field === "favoriteGame" ? getDisplayCover() : undefined}
+          imageUrl={
+            field === "favoriteGame"
+              ? getDisplayCover()
+              : field === "favoriteGenre"
+                ? getDisplayGenreCover()
+                : undefined
+          }
           items={
             field === "platforms"
               ? getDisplayPlatforms().length
@@ -242,21 +254,75 @@ export function ProfileInfoCards() {
                 </>
               )}
           </div>
-        ) : (
+        ) : isFavoriteGenreEdit ? (
           <div className="gv-profile-game-favorite-dialog">
+            <label
+              className="gv-profile-game-list-label"
+              htmlFor="genre-search"
+            >
+              Buscar gênero
+            </label>
             <InputText
+              id="genre-search"
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
-              placeholder={
-                config
-                  ? `Digite ${config.label.toLowerCase().replace(":", "")}`
-                  : ""
-              }
+              placeholder="Digite para filtrar (ex.: Action, RPG, Indie...)"
               className="gv-profile-edit-input w-full"
               autoFocus
             />
+            {genresLoading && (
+              <div className="gv-profile-dialog-games-loading">
+                <i className="pi pi-spin pi-spinner" />
+                Carregando gêneros...
+              </div>
+            )}
+            {genresError && (
+              <p className="gv-profile-dialog-games-error">{genresError}</p>
+            )}
+            {!genresLoading &&
+              !genresError &&
+              genresList.length > 0 && (
+                <>
+                  <p className="gv-profile-game-list-label">
+                    Clique em um gênero para selecionar
+                  </p>
+                  <div className="gv-profile-dialog-games-list">
+                    {genresList.map((genre) => (
+                      <button
+                        key={genre.id}
+                        type="button"
+                        className="gv-profile-dialog-game-item"
+                        onClick={() => onSelectGenre(genre)}
+                      >
+                        {genre.image_background ? (
+                          <img
+                            src={genre.image_background}
+                            alt=""
+                            className="gv-profile-game-suggestion-img"
+                          />
+                        ) : (
+                          <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
+                        )}
+                        <span className="gv-profile-game-suggestion-info">
+                          <span className="gv-profile-game-suggestion-name">
+                            {genre.name}
+                          </span>
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            {!genresLoading &&
+              !genresError &&
+              editValue.trim() &&
+              genresList.length === 0 && (
+                <p className="gv-profile-dialog-games-error">
+                  Nenhum gênero encontrado.
+                </p>
+              )}
           </div>
-        )}
+        ) : null}
       </Dialog>
     </div>
   );
