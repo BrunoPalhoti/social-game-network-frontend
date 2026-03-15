@@ -1,7 +1,7 @@
 import { Card } from "primereact/card";
 import { Tag } from "primereact/tag";
 import type { JourneyGame } from "./types";
-import "./Journey.css";
+import "../../styles/Journey.css";
 
 interface JourneyGameCardProps {
   game: JourneyGame;
@@ -21,7 +21,14 @@ function formatDate(iso?: string) {
 export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
   if (compact) {
     return (
-      <div className="gv-journey-card gv-journey-card--compact">
+      <Card
+        className="gv-journey-card gv-journey-card--compact"
+        pt={{
+          root: { className: "gv-journey-card gv-journey-card--compact" },
+          body: { className: "gv-journey-card-body", style: { padding: "0.5rem 0" } },
+          content: { style: { padding: 0 } },
+        }}
+      >
         <span className="gv-journey-card-title">{game.name}</span>
         {game.completedAt && (
           <span className="gv-journey-card-date">
@@ -31,7 +38,7 @@ export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
         {game.rating != null && (
           <span className="gv-journey-card-rating">⭐ {game.rating}/10</span>
         )}
-      </div>
+      </Card>
     );
   }
 
