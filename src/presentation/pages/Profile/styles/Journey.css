@@ -447,7 +447,8 @@
   color: var(--journey-text);
 }
 
-.gv-journey-genre-bar-wrap {
+.gv-journey-genre-bar-wrap,
+.gv-journey-genre-bar-wrap.p-progressbar {
   height: 1.25rem;
   background: var(--journey-border);
   border-radius: 0.35rem;

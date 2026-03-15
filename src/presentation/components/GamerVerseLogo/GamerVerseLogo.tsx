@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./GamerVerseLogo.css";
+import "./styles/GamerVerseLogo.css";
 
 interface GamerVerseLogoProps {
   asLink?: boolean;

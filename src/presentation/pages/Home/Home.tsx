@@ -1,5 +1,5 @@
 import { Card } from "primereact/card";
-import "./Home.css";
+import "./styles/Home.css";
 
 export default function Home() {
   return (

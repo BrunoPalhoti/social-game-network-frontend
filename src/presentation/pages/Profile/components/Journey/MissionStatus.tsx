@@ -1,6 +1,6 @@
 import { Card } from "primereact/card";
 import type { MissionStats, JogosZeradosNaVida } from "./types";
-import "./Journey.css";
+import "../../styles/Journey.css";
 
 interface MissionStatusProps {
   stats: MissionStats;
