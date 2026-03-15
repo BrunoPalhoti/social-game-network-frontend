@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Button } from "primereact/button";
 import { GamerVerseLogo } from "../GamerVerseLogo/GamerVerseLogo";
 import { ThemeToggle } from "../ThemeToggle";
-import "./Sidebar.css";
+import "./styles/Sidebar.css";
 
 const navItems = [
   { to: "/home", label: "Feed", icon: "pi pi-home" },

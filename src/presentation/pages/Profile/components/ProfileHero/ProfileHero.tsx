@@ -21,11 +21,7 @@ export function ProfileHero({ children }: ProfileHeroProps) {
             shape="circle"
             className="gv-profile-avatar"
           />
-          <Tag
-            value="PRO"
-            severity="secondary"
-            className="gv-profile-badge"
-          />
+          <Tag value="PRO" severity="secondary" className="gv-profile-badge" />
         </div>
       </div>
 
@@ -34,7 +30,12 @@ export function ProfileHero({ children }: ProfileHeroProps) {
         <h1 className="gv-profile-username">@{user?.nickname ?? "..."}</h1>
       </div>
 
-      {children}
+      {children && (
+        <>
+          <div className="gv-profile-hero-divider" aria-hidden />
+          {children}
+        </>
+      )}
     </section>
   );
 }

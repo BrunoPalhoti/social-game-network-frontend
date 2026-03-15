@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { JourneyMonth } from "./types";
 import type { JourneyGame } from "./types";
+import { Card } from "primereact/card";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Message } from "primereact/message";
 import { JourneyGameCard } from "@/presentation/pages/Profile/components/Journey/JourneyGameCard";
-import "./Journey.css";
+import "../../styles/Journey.css";
 
 const ZERADOS_STATUS: JourneyGame["status"][] = ["COMPLETED", "PLATINUM"];
 
@@ -67,7 +68,14 @@ export function JourneyTimeline({ months }: JourneyTimelineProps) {
 
   return (
     <section className="gv-journey-timeline-wrap" aria-label="Linha do tempo">
-      <div className="gv-journey-timeline-card">
+      <Card
+        className="gv-journey-timeline-card"
+        pt={{
+          root: { className: "gv-journey-timeline-card" },
+          body: { style: { padding: 0 } },
+          content: { style: { padding: 0 } },
+        }}
+      >
         <TabView
           className="gv-journey-timeline-tabs"
           activeIndex={activeTabIndex}
@@ -156,7 +164,7 @@ export function JourneyTimeline({ months }: JourneyTimelineProps) {
             </div>
           </TabPanel>
         </TabView>
-      </div>
+      </Card>
     </section>
   );
 }

@@ -17,11 +17,7 @@ export function ProfileInfoCards() {
         value={user?.platform ?? mockProfile.platform ?? "Em breve"}
         icon="pi pi-desktop"
       />
-      <InfoCard
-        label="GÊNERO FAVORITO:"
-        value="Em breve"
-        icon="pi pi-star"
-      />
+      <InfoCard label="GÊNERO FAVORITO:" value="Em breve" icon="pi pi-star" />
     </div>
   );
 }

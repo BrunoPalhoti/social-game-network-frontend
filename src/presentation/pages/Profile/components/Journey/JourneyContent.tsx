@@ -6,7 +6,7 @@ import { MissionStatus } from "./MissionStatus";
 import { JourneyTimeline } from "./JourneyTimeline";
 import { GenreHeatMap } from "./GenreHeatMap";
 import { JourneyGameCard } from "./JourneyGameCard";
-import "./Journey.css";
+import "../../styles/Journey.css";
 
 interface JourneyContentProps {
   year: number;
@@ -35,7 +35,8 @@ export function JourneyContent({ year }: JourneyContentProps) {
         }}
       >
         <p className="gv-journey-games-intro">
-          Passe o mouse sobre um card para ver a <strong>Análise de 1 minuto</strong>.
+          Passe o mouse sobre um card para ver a{" "}
+          <strong>Análise de 1 minuto</strong>.
         </p>
         <div className="gv-journey-games-grid">
           {data.games.map((game) => (
@@ -49,9 +50,11 @@ export function JourneyContent({ year }: JourneyContentProps) {
         className="gv-journey-gamification"
         text={
           <>
-            🎨 <strong>Gamificação:</strong> Zerou 10+ jogos no ano? Seu perfil pode ganhar um
-            detalhe <span className="gv-journey-theme-gold">Dourado</span>. Jogou muito terror?
-            O tema pode ficar <span className="gv-journey-theme-blood">Vermelho Sangue</span>.
+            🎨 <strong>Gamificação:</strong> Zerou 10+ jogos no ano? Seu perfil
+            pode ganhar um detalhe{" "}
+            <span className="gv-journey-theme-gold">Dourado</span>. Jogou muito
+            terror? O tema pode ficar{" "}
+            <span className="gv-journey-theme-blood">Vermelho Sangue</span>.
           </>
         }
         aria-label="Tema desbloqueável"

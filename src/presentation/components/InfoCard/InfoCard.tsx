@@ -1,5 +1,5 @@
 import { Card } from "primereact/card";
-import "./InfoCard.css";
+import "./styles/InfoCard.css";
 
 export interface InfoCardProps {
   label: string;
