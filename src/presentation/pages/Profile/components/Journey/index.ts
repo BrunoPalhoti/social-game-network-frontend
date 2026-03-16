@@ -1,7 +1,4 @@
 export { JourneyContent } from "./JourneyContent";
-export { MissionStatus } from "./MissionStatus";
-export { JourneyTimeline } from "./JourneyTimeline";
-export { GenreHeatMap } from "./GenreHeatMap";
-export { JourneyGameCard } from "./JourneyGameCard";
-export { getMockJourneyData } from "./journeyData";
+export { MissionStatus, JourneyTimeline, GenreHeatMap, JourneyGameCard } from "./components";
+export { useJourneyData, useJourneyTimeline } from "./hooks";
 export type { JourneyYearData, JourneyGame, JourneyMonth } from "./types";

@@ -1,11 +1,7 @@
-import { useMemo } from "react";
-import { Card } from "primereact/card";
-import { Message } from "primereact/message";
-import { getMockJourneyData } from "./journeyData";
-import { MissionStatus } from "./MissionStatus";
-import { JourneyTimeline } from "./JourneyTimeline";
-import { GenreHeatMap } from "./GenreHeatMap";
-import { JourneyGameCard } from "./JourneyGameCard";
+import { useAuthStore } from "@/shared/store/useAuthStore";
+import { MissionStatus, JourneyTimeline, GenreHeatMap, JourneyMessage } from "./components";
+import { useJourneyData } from "./hooks";
+import { isZeradoStatus } from "./utils";
 import "../../styles/Journey.css";
 
 interface JourneyContentProps {
@@ -13,7 +9,41 @@ interface JourneyContentProps {
 }
 
 export function JourneyContent({ year }: JourneyContentProps) {
-  const data = useMemo(() => getMockJourneyData(year), [year]);
+  const username = useAuthStore((s) => s.user?.username ?? "");
+  const { data, loading, error, addGame, updateGame, clearAll } = useJourneyData(
+    year,
+    username,
+  );
+
+  if (!username) {
+    return (
+      <JourneyMessage severity="warn" year={year}>
+        Faça login para ver e salvar sua jornada.
+      </JourneyMessage>
+    );
+  }
+  if (loading) {
+    return (
+      <JourneyMessage severity="info" year={year}>
+        Carregando jornada…
+      </JourneyMessage>
+    );
+  }
+  if (error) {
+    return (
+      <JourneyMessage severity="error" year={year} className="gv-journey-error">
+        Não foi possível carregar a jornada. {error.message}
+      </JourneyMessage>
+    );
+  }
+  if (!data) return null;
+
+  const sortedGames = [...data.games].sort((a, b) => {
+    if (!a.completedAt && !b.completedAt) return 0;
+    if (!a.completedAt) return 1;
+    if (!b.completedAt) return -1;
+    return b.completedAt.localeCompare(a.completedAt);
+  });
 
   return (
     <div className="gv-journey" data-journey-year={year}>
@@ -21,44 +51,15 @@ export function JourneyContent({ year }: JourneyContentProps) {
         stats={data.missionStats}
         jogosZeradosNaVida={data.jogosZeradosNaVida}
       />
-      <JourneyTimeline months={data.months} />
-      <GenreHeatMap data={data.genreHeatMap} />
-
-      <Card
-        title="Sua odisseia em jogos"
-        className="gv-journey-games-section"
-        aria-label="Todos os jogos da jornada"
-        pt={{
-          header: { className: "gv-journey-games-card-header" },
-          body: { className: "gv-journey-games-card-body" },
-          title: { className: "gv-journey-games-card-title" },
-        }}
-      >
-        <p className="gv-journey-games-intro">
-          Passe o mouse sobre um card para ver a{" "}
-          <strong>Análise de 1 minuto</strong>.
-        </p>
-        <div className="gv-journey-games-grid">
-          {data.games.map((game) => (
-            <JourneyGameCard key={game.id} game={game} />
-          ))}
-        </div>
-      </Card>
-
-      <Message
-        severity="info"
-        className="gv-journey-gamification"
-        text={
-          <>
-            🎨 <strong>Gamificação:</strong> Zerou 10+ jogos no ano? Seu perfil
-            pode ganhar um detalhe{" "}
-            <span className="gv-journey-theme-gold">Dourado</span>. Jogou muito
-            terror? O tema pode ficar{" "}
-            <span className="gv-journey-theme-blood">Vermelho Sangue</span>.
-          </>
-        }
-        aria-label="Tema desbloqueável"
+      <JourneyTimeline
+        months={data.months}
+        year={data.year}
+        addGame={addGame}
+        updateGame={updateGame}
+        clearAll={clearAll}
+        jogosZeradosAno={sortedGames.filter((game) => isZeradoStatus(game.status))}
       />
+      <GenreHeatMap data={data.genreHeatMap} />
     </div>
   );
 }

@@ -67,9 +67,85 @@
   width: 100%;
 }
 
+/* Espaçamento entre label e input (evita label "Senha" colado no campo) */
+.login-field .p-floatlabel > label {
+  display: block;
+  margin-bottom: 0.375rem;
+}
+
+.login-field .p-floatlabel .p-password {
+  margin-top: 0.25rem;
+}
+
 .login-divider-text {
   font-size: 0.875rem;
   color: var(--sgn-text-secondary);
+}
+
+.login-divider-gamer.p-divider {
+  position: relative;
+  overflow: visible;
+}
+
+.login-divider-gamer.p-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(129, 140, 248, 0) 0%,
+    rgba(129, 140, 248, 0.8) 15%,
+    rgba(236, 72, 153, 0.9) 50%,
+    rgba(129, 140, 248, 0.8) 85%,
+    rgba(129, 140, 248, 0) 100%
+  );
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.55));
+  transform: translateY(-50%);
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.login-divider-gamer.p-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: radial-gradient(circle, #fbbf24 55%, transparent 56%);
+  background-size: 10px 10px;
+  background-repeat: repeat-x;
+  background-position:
+    0 50%;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  animation: login-gamer-dots 3s linear infinite;
+  pointer-events: none;
+}
+
+.login-divider-gamer .p-divider-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 0.75rem !important;
+  background: var(--sgn-surface);
+}
+
+@keyframes login-gamer-dots {
+  0% {
+    background-position: 0 50%;
+  }
+  100% {
+    background-position: 40px 50%;
+  }
 }
 
 .login-card-wrapper:hover .login-card {
@@ -107,6 +183,11 @@
 
 .login-field {
   width: 100%;
+}
+
+/* Mais espaço entre o input de nome e o label "Senha" */
+.login-field + .login-field {
+  margin-top: 0.75rem;
 }
 
 .login-field .p-password {
@@ -209,4 +290,41 @@
 
 .login-criar-conta .login-link {
   font-size: 0.9375rem;
+}
+
+/* Create account form */
+.create-account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.create-account-message {
+  width: 100%;
+}
+
+.create-account-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.create-account-label {
+  display: block;
+  margin-bottom: 0;
+  font-weight: 500;
+  color: var(--p-text-color);
+}
+
+.create-account-field + .create-account-field {
+  margin-top: 0.75rem;
+}
+
+.create-account-input.w-full {
+  width: 100%;
+}
+
+.create-account-btn {
+  margin-top: 0.25rem;
 }

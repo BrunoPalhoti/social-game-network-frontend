@@ -8,7 +8,7 @@
 .gv-layout-main {
   flex: 1;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
   padding: 1.75rem 2.5rem;
@@ -22,7 +22,7 @@
 
 /* Botão de três traços: abrir/fechar sidebar (sempre visível) */
 .gv-layout-menu-toggle {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -35,29 +35,22 @@
   background: rgba(0, 245, 255, 0.08) !important;
   border: 1px solid rgba(0, 245, 255, 0.35) !important;
   border-radius: 0.5rem;
-  box-shadow: 0 0 16px rgba(0, 245, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 0 16px rgba(0, 245, 255, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .gv-layout-menu-toggle:hover {
   background: rgba(0, 245, 255, 0.18) !important;
   border-color: rgba(0, 245, 255, 0.55) !important;
   color: #fff !important;
-  box-shadow: 0 0 24px rgba(0, 245, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.15);
-}
-
-/* Modo claro: botão menu com roxo/primary */
-[data-theme="light"] .gv-layout-menu-toggle {
-  color: var(--sgn-primary) !important;
-  background: var(--sgn-primary-muted) !important;
-  border: 1px solid rgba(109, 40, 217, 0.35) !important;
-  box-shadow: 0 0 12px rgba(109, 40, 217, 0.15), 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .gv-layout-menu-toggle:hover {
-  background: var(--sgn-nav-hover-bg) !important;
-  border-color: var(--sgn-nav-hover-border) !important;
-  color: var(--sgn-primary-hover) !important;
-  box-shadow: 0 0 18px rgba(109, 40, 217, 0.25), 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 0 24px rgba(0, 245, 255, 0.4),
+    0 0 40px rgba(255, 0, 255, 0.15);
 }
 
 .gv-page-header {
@@ -237,6 +230,13 @@
     0 0 12px var(--sgn-avatar-glow);
 }
 
+.gv-header-avatar.p-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 /* Header responsivo: tablet */
 @media (max-width: 1024px) {
   .gv-header-search {
@@ -295,16 +295,25 @@
   --neon-magenta: #ff00ff;
   --neon-purple: #bf00ff;
   --neon-green: #39ff14;
-  --neon-glow-cyan: 0 0 20px rgba(0, 245, 255, 0.45), 0 0 40px rgba(0, 245, 255, 0.2);
-  --neon-glow-magenta: 0 0 20px rgba(255, 0, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.15);
-  --neon-glow-purple: 0 0 24px rgba(191, 0, 255, 0.5), 0 0 48px rgba(191, 0, 255, 0.2);
+  --neon-glow-cyan:
+    0 0 20px rgba(0, 245, 255, 0.45), 0 0 40px rgba(0, 245, 255, 0.2);
+  --neon-glow-magenta:
+    0 0 20px rgba(255, 0, 255, 0.4), 0 0 40px rgba(255, 0, 255, 0.15);
+  --neon-glow-purple:
+    0 0 24px rgba(191, 0, 255, 0.5), 0 0 48px rgba(191, 0, 255, 0.2);
   --neon-border: 1px solid rgba(0, 245, 255, 0.4);
   border-radius: 1rem;
   overflow-x: hidden;
   overflow-y: visible;
-  background: linear-gradient(180deg, rgba(15, 5, 25, 0.95) 0%, rgba(20, 10, 35, 0.98) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 5, 25, 0.95) 0%,
+    rgba(20, 10, 35, 0.98) 100%
+  );
   border: 1px solid rgba(0, 245, 255, 0.25);
-  box-shadow: var(--neon-glow-cyan), 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    var(--neon-glow-cyan),
+    0 12px 40px rgba(0, 0, 0, 0.4);
   margin-bottom: 1.5rem;
 }
 
@@ -315,7 +324,7 @@
 
 .gv-profile-banner {
   position: relative;
-  height: 180px;
+  height: 500px;
   background: linear-gradient(
     135deg,
     rgba(15, 5, 30, 0.98) 0%,
@@ -327,6 +336,44 @@
   background-size: cover;
   background-position: center;
   box-shadow: inset 0 0 80px rgba(0, 245, 255, 0.06);
+}
+
+.gv-profile-banner-edit-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.6);
+  background: rgba(0, 0, 0, 0.6);
+  color: #00f5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow:
+    0 0 12px rgba(0, 245, 255, 0.5),
+    0 4px 10px rgba(0, 0, 0, 0.4);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gv-profile-banner-edit-btn:hover {
+  background: rgba(0, 245, 255, 0.2);
+  border-color: rgba(0, 245, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 18px rgba(0, 245, 255, 0.7),
+    0 8px 18px rgba(0, 0, 0, 0.6);
+}
+
+.gv-profile-banner-edit-btn i {
+  font-size: 0.9rem;
 }
 
 .gv-profile-banner::after {
@@ -361,6 +408,43 @@
   display: inline-flex;
 }
 
+.gv-profile-avatar-edit-btn {
+  position: absolute;
+  top: 0.25rem;
+  right: -0.75rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.6);
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #00f5ff;
+  box-shadow:
+    0 0 10px rgba(0, 245, 255, 0.6),
+    0 4px 10px rgba(0, 0, 0, 0.5);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gv-profile-avatar-edit-btn:hover {
+  background: rgba(0, 245, 255, 0.2);
+  border-color: rgba(0, 245, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 16px rgba(0, 245, 255, 0.8),
+    0 8px 18px rgba(0, 0, 0, 0.6);
+}
+
+.gv-profile-avatar-edit-btn i {
+  font-size: 0.9rem;
+}
+
 .gv-profile-avatar.p-avatar {
   width: 112px;
   height: 112px;
@@ -373,22 +457,39 @@
     0 0 24px rgba(0, 245, 255, 0.5),
     0 0 48px rgba(191, 0, 255, 0.25),
     0 12px 28px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(145deg, rgba(30, 15, 50, 0.95), rgba(15, 5, 30, 0.98));
+  background: linear-gradient(
+    145deg,
+    rgba(30, 15, 50, 0.95),
+    rgba(15, 5, 30, 0.98)
+  );
   color: var(--neon-cyan);
+}
+
+.gv-profile-avatar.p-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .gv-profile-badge.p-tag {
   position: absolute;
   bottom: 4px;
   right: 4px;
-  background: linear-gradient(135deg, var(--neon-magenta), var(--neon-purple)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--neon-magenta),
+    var(--neon-purple)
+  ) !important;
   color: #fff !important;
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   padding: 0.2rem 0.45rem;
   border-radius: 0.35rem;
-  box-shadow: 0 0 16px rgba(255, 0, 255, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 16px rgba(255, 0, 255, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -418,43 +519,234 @@
   letter-spacing: 0.04em;
   color: #fff;
   margin: 0 0 1rem;
-  text-shadow: 0 0 24px rgba(255, 0, 255, 0.4), 0 0 48px rgba(191, 0, 255, 0.2);
+  text-shadow:
+    0 0 24px rgba(255, 0, 255, 0.4),
+    0 0 48px rgba(191, 0, 255, 0.2);
 }
 
+/* Três cards na mesma linha; se um tiver duas linhas de conteúdo, todos alinham pela altura */
 .gv-profile-info-cards {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
+  align-items: stretch;
   gap: 1.25rem;
   padding: 0 2rem 1.25rem;
 }
 
-/* Info cards com tema neon (dentro do profile) */
+/* Card de editar: um único bloco, tudo juntinho (busca + lista + botões) */
+.gv-profile-game-favorite-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 320px;
+}
+.gv-profile-game-list-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(0, 245, 255, 0.8);
+  margin: 0 !important;
+}
+.gv-profile-game-favorite-dialog .gv-profile-edit-input,
+.gv-profile-game-favorite-dialog .p-inputtext {
+  margin-bottom: 0 !important;
+}
+.gv-profile-game-favorite-dialog .gv-profile-dialog-games-list {
+  margin-top: 0.15rem;
+}
+.gv-profile-dialog-games-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+}
+.gv-profile-dialog-games-error {
+  color: #f87171;
+  font-size: 0.875rem;
+  margin: 0;
+}
+.gv-profile-dialog-games-error code {
+  background: rgba(248, 113, 113, 0.15);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+  font-size: 0.8em;
+}
+.gv-profile-dialog-games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.25rem;
+  padding-bottom: 0.5rem;
+}
+
+.gv-profile-banner-position-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gv-profile-banner-pos-slider {
+  width: 100%;
+  cursor: pointer;
+}
+
+.gv-profile-banner-pos-hints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.gv-profile-dialog-game-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.gv-profile-dialog-game-item:hover {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: rgba(0, 245, 255, 0.4);
+}
+.gv-profile-dialog-game-item .gv-profile-game-suggestion-img {
+  width: 48px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+}
+.gv-profile-dialog-game-item .gv-profile-game-suggestion-placeholder {
+  background: rgba(0, 245, 255, 0.15);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+}
+.gv-profile-dialog-game-item .gv-profile-game-suggestion-info {
+  min-width: 0;
+}
+.gv-profile-dialog-game-item .gv-profile-game-suggestion-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gv-profile-dialog-load-more {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* Plataformas/gêneros selecionados (chips com logo e remover) – compacto */
+.gv-profile-dialog-platforms-selected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.gv-profile-dialog-platform-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 245, 255, 0.1);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sgn-text, #fff);
+}
+
+.gv-profile-dialog-platform-chip-img,
+.gv-profile-dialog-platform-chip-placeholder {
+  width: 22px;
+  height: 22px;
+  border-radius: 0.25rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: rgba(0, 245, 255, 0.1);
+}
+
+.gv-profile-dialog-platform-chip-placeholder {
+  display: inline-block;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.gv-profile-dialog-platform-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.15rem;
+  padding: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.gv-profile-dialog-platform-chip-remove:hover {
+  background: rgba(248, 113, 113, 0.3);
+  color: #f87171;
+}
+
+.gv-profile-dialog-platform-chip-remove i {
+  font-size: 0.7rem;
+}
+
+/* Info cards (GAME FAVORITO, etc.) – uma só borda, sem duplicar no body */
 .gv-profile-hero .gv-profile-info-cards .gv-info-card {
-  background: rgba(0, 245, 255, 0.04);
-  border: 1px solid rgba(0, 245, 255, 0.35);
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.08), inset 0 0 20px rgba(0, 245, 255, 0.02);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: rgba(15, 10, 30, 0.6) !important;
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.gv-profile-hero .gv-profile-info-cards .gv-info-card .p-card-body,
+.gv-profile-hero .gv-profile-info-cards .gv-info-card .gv-info-card-body {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0.75rem;
 }
 
 .gv-profile-hero .gv-profile-info-cards .gv-info-card:hover {
-  border-color: rgba(0, 245, 255, 0.55);
-  box-shadow: 0 0 28px rgba(0, 245, 255, 0.15), 0 0 40px rgba(191, 0, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 28px rgba(0, 245, 255, 0.35),
+    0 0 40px rgba(255, 0, 255, 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  border-color: rgba(0, 245, 255, 0.45);
 }
 
 .gv-profile-hero .gv-profile-info-cards .gv-info-card-icon {
   background: rgba(0, 245, 255, 0.12);
-  color: var(--neon-cyan);
+  color: #00f5ff;
   box-shadow: 0 0 12px rgba(0, 245, 255, 0.2);
 }
 
 .gv-profile-hero .gv-profile-info-cards .gv-info-card-label {
-  color: rgba(0, 245, 255, 0.8);
+  color: rgba(0, 245, 255, 0.75);
 }
 
 .gv-profile-hero .gv-profile-info-cards .gv-info-card-value {
-  color: #fff;
-  text-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
 }
 
 /* Linha entre nome e cards: mesma cor neon do container, alinhada às bordas do conteúdo */
@@ -464,6 +756,243 @@
   border: none;
   border-top: 1px solid rgba(0, 245, 255, 0.4);
   box-shadow: 0 0 12px rgba(0, 245, 255, 0.15);
+}
+
+/* Tema dark: mesmo visual dos cards Status da Missão */
+[data-theme="dark"] .gv-profile-hero .gv-profile-info-cards .gv-info-card {
+  background: rgba(15, 10, 30, 0.6) !important;
+  border-color: rgba(0, 245, 255, 0.25);
+}
+[data-theme="dark"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card
+  .p-card-body,
+[data-theme="dark"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card
+  .gv-info-card-body {
+  background: transparent !important;
+  border: none !important;
+}
+[data-theme="dark"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card:hover {
+  border-color: rgba(0, 245, 255, 0.45);
+  box-shadow:
+    0 0 28px rgba(0, 245, 255, 0.35),
+    0 0 40px rgba(255, 0, 255, 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+[data-theme="dark"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-icon {
+  background: rgba(0, 245, 255, 0.12);
+  color: #00f5ff;
+}
+[data-theme="dark"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card-label {
+  color: rgba(0, 245, 255, 0.75);
+}
+[data-theme="dark"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card-value {
+  color: rgba(255, 255, 255, 0.95);
+}
+[data-theme="dark"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-edit {
+  color: rgba(255, 255, 255, 0.6);
+}
+[data-theme="dark"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card-edit:hover {
+  color: #00f5ff;
+  background: rgba(0, 245, 255, 0.15);
+}
+
+/* Diálogo de edição – mesmo visual do card (fundo escuro + borda ciano brilhante) */
+.gv-profile-edit-dialog .gv-profile-edit-input {
+  width: 100%;
+}
+
+.gv-profile-edit-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Autocomplete de jogos (RAWG) no diálogo de edição */
+/* Panel pode ser renderizado em portal (fora do dialog) - estilizar de forma que sempre fique legível */
+.p-autocomplete-panel,
+.gv-profile-edit-dialog .p-autocomplete-panel {
+  background: rgba(10, 15, 22, 0.98) !important;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  min-width: 280px;
+}
+.p-autocomplete-panel .p-autocomplete-list,
+.gv-profile-edit-dialog .p-autocomplete-panel .p-autocomplete-list {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.95);
+}
+.gv-profile-edit-dialog .p-autocomplete-list .p-autocomplete-item,
+.p-autocomplete-list .p-autocomplete-item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}
+.gv-profile-game-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  min-width: 0;
+}
+.gv-profile-game-suggestion-item:hover,
+.gv-profile-edit-dialog .p-autocomplete-item.p-highlight,
+.p-autocomplete-item.p-highlight .gv-profile-game-suggestion-item {
+  background: rgba(0, 245, 255, 0.12);
+}
+.gv-profile-game-suggestion-img {
+  width: 48px;
+  height: 27px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+}
+.gv-profile-game-suggestion-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 120px;
+  overflow: hidden;
+}
+.gv-profile-game-suggestion-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.gv-profile-game-suggestion-rating {
+  font-size: 0.8rem;
+  color: rgba(0, 245, 255, 0.9);
+}
+
+/* Modal = estilo do card: fundo #0a0f16, borda e títulos em ciano (#00FFFF) com glow */
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog {
+  background: #0a0f16;
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.2),
+    0 0 40px rgba(0, 255, 255, 0.1),
+    inset 0 0 20px rgba(0, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog-header,
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog-content,
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog-footer {
+  background: #0a0f16;
+  border-color: rgba(0, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Modal de edição: sem vão entre título, busca e botões – tudo junto (força override do PrimeReact) */
+.gv-profile-edit-dialog .p-dialog-header {
+  padding: 0.5rem 1rem 0.25rem !important;
+}
+.gv-profile-edit-dialog .p-dialog-content {
+  padding: 0.25rem 1rem !important;
+}
+.gv-profile-edit-dialog .p-dialog-footer {
+  padding: 0.25rem 1rem 0.5rem !important;
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog-title {
+  color: #00ffff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog-header-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .p-dialog-header-icon:hover {
+  color: #00ffff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .gv-profile-edit-input.p-inputtext,
+[data-theme="dark"] .gv-profile-edit-dialog .p-inputtext {
+  background: rgba(0, 15, 22, 0.8);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .p-inputtext:focus,
+[data-theme="dark"]
+  .gv-profile-edit-dialog
+  .gv-profile-edit-input.p-inputtext:focus {
+  border-color: #00ffff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
+  outline: none;
+}
+
+[data-theme="dark"]
+  .gv-profile-edit-dialog
+  .gv-profile-edit-input.p-inputtext::placeholder,
+[data-theme="dark"] .gv-profile-edit-dialog .p-inputtext::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Botão Cancelar: escuro com borda ciano suave */
+[data-theme="dark"] .gv-profile-edit-dialog .p-button.p-button-secondary {
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .gv-profile-edit-dialog .p-button.p-button-secondary:hover {
+  background: rgba(0, 255, 255, 0.15);
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+}
+
+/* Botão Salvar: ciano brilhante */
+[data-theme="dark"] .gv-profile-edit-dialog .p-button:not(.p-button-secondary) {
+  background: rgba(0, 255, 255, 0.25);
+  border: 1px solid #00ffff;
+  color: #0a0f16;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
+}
+
+[data-theme="dark"]
+  .gv-profile-edit-dialog
+  .p-button:not(.p-button-secondary):hover {
+  background: rgba(0, 255, 255, 0.4);
+  border-color: #00ffff;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.4);
 }
 
 /* Profile tabs: mesmo estilo das tabs da Jornada (linha contínua, inativas apagadas, ativa turquesa) */
@@ -505,7 +1034,9 @@
   margin-bottom: -3px;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.15);
-  transition: color 0.25s ease, background 0.25s ease;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
 }
 
 .gv-profile-tabview .p-tabview-nav-link:hover {
@@ -514,7 +1045,10 @@
 }
 
 /* Tab ativa: linha turquesa fundindo com a barra (igual Journey) */
-.gv-profile-tabview .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link,
+.gv-profile-tabview
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link,
 .gv-profile-tabview .p-tabview-nav-link.p-highlight {
   color: var(--neon-cyan) !important;
   background: transparent !important;
@@ -524,7 +1058,10 @@
   padding-bottom: 0.7rem;
 }
 
-.gv-profile-tabview .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link:hover,
+.gv-profile-tabview
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link:hover,
 .gv-profile-tabview .p-tabview-nav-link.p-highlight:hover {
   color: var(--neon-cyan) !important;
   background: transparent !important;
@@ -556,12 +1093,19 @@
 }
 
 [data-theme="light"] .gv-profile-banner::after {
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
 }
 
 [data-theme="light"] .gv-profile-avatar.p-avatar {
   border-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.3), 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(109, 40, 217, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.12);
   background: linear-gradient(145deg, #7c3aed, #5b21b6);
   color: #fff;
 }
@@ -582,22 +1126,36 @@
   box-shadow: var(--sgn-card-shadow);
 }
 
-[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card:hover {
+[data-theme="light"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card:hover {
   border-color: var(--sgn-border-focus);
-  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(109, 40, 217, 0.2),
+    0 4px 16px rgba(109, 40, 217, 0.08);
 }
 
-[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-icon {
+[data-theme="light"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card-icon {
   background: var(--sgn-info-card-icon-bg);
   color: var(--sgn-primary);
   box-shadow: none;
 }
 
-[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-label {
+[data-theme="light"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card-label {
   color: var(--sgn-text-secondary);
 }
 
-[data-theme="light"] .gv-profile-hero .gv-profile-info-cards .gv-info-card-value {
+[data-theme="light"]
+  .gv-profile-hero
+  .gv-profile-info-cards
+  .gv-info-card-value {
   color: var(--sgn-text);
 }
 
@@ -620,7 +1178,11 @@
   background: rgba(109, 40, 217, 0.1);
 }
 
-[data-theme="light"] .gv-profile-tabview .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link,
+[data-theme="light"]
+  .gv-profile-tabview
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link,
 [data-theme="light"] .gv-profile-tabview .p-tabview-nav-link.p-highlight {
   color: var(--sgn-primary) !important;
   background: transparent !important;
@@ -630,7 +1192,11 @@
   padding-bottom: 0.7rem;
 }
 
-[data-theme="light"] .gv-profile-tabview .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link:hover,
+[data-theme="light"]
+  .gv-profile-tabview
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link:hover,
 [data-theme="light"] .gv-profile-tabview .p-tabview-nav-link.p-highlight:hover {
   color: var(--sgn-primary) !important;
   background: transparent !important;
@@ -645,6 +1211,17 @@
   color: var(--sgn-text);
 }
 
+[data-theme="light"] .gv-under-construction {
+  background: rgba(109, 40, 217, 0.06);
+  border-color: rgba(109, 40, 217, 0.2);
+}
+[data-theme="light"] .gv-under-construction-title {
+  color: var(--sgn-text);
+}
+[data-theme="light"] .gv-under-construction-text {
+  color: var(--sgn-text-secondary);
+}
+
 .gv-profile-tabview .p-tabview-panels {
   min-height: 300px;
 }
@@ -656,6 +1233,38 @@
 .gv-profile-tab-content {
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* Bloco "em construção" para abas do perfil */
+.gv-under-construction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+}
+.gv-under-construction-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+.gv-under-construction-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.02em;
+}
+.gv-under-construction-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 280px;
 }
 
 .gv-profile-content {
@@ -688,7 +1297,7 @@
 /* Profile hero: celular (640px e 480px) */
 @media (max-width: 640px) {
   .gv-profile-banner {
-    height: 140px;
+    height: 170px;
   }
 
   .gv-profile-avatar-wrap {
@@ -706,6 +1315,7 @@
   }
 
   .gv-profile-info-cards {
+    flex-wrap: wrap;
     flex-direction: column;
     align-items: stretch;
   }
@@ -734,7 +1344,7 @@
 
 @media (max-width: 480px) {
   .gv-profile-banner {
-    height: 120px;
+    height: 150px;
   }
   .gv-profile-avatar-wrap {
     margin-top: -40px;

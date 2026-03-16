@@ -8,7 +8,7 @@ import {
 
 const STORAGE_KEY = "sgn-theme";
 
-type Theme = "light" | "dark";
+type Theme = "dark";
 
 interface ThemeContextValue {
   theme: Theme;
@@ -25,9 +25,7 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return (
-      stored === "dark" || stored === "light" ? stored : "light"
-    ) as Theme;
+    return (stored === "dark" ? "dark" : "dark") as Theme;
   });
 
   useEffect(() => {
@@ -36,13 +34,13 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }, [theme]);
 
   const setTheme = (newTheme: Theme) => {
-    if (newTheme === "dark" || newTheme === "light") {
-      setThemeState(newTheme);
+    if (newTheme === "dark") {
+      setThemeState("dark");
     }
   };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
+    setThemeState("dark");
   };
 
   return (

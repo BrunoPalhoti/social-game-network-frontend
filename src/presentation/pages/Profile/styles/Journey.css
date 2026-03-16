@@ -46,13 +46,21 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .gv-journey-mission-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 28px var(--journey-glow), 0 0 40px var(--journey-glow-alt), 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 0 28px var(--journey-glow),
+    0 0 40px var(--journey-glow-alt),
+    0 8px 24px rgba(0, 0, 0, 0.35);
   border-color: rgba(0, 245, 255, 0.45);
 }
 
@@ -113,8 +121,43 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 24px rgba(0, 245, 255, 0.06), 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 24px rgba(0, 245, 255, 0.06),
+    0 4px 24px rgba(0, 0, 0, 0.3);
   overflow: hidden;
+}
+
+.gv-journey-timeline-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--journey-border);
+  background: rgba(0, 0, 0, 0.35);
+  gap: 0.5rem;
+}
+
+.gv-journey-timeline-clear-btn {
+  font-size: 0.85rem;
+}
+
+.gv-journey-timeline-toolbar .p-button {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: var(--journey-accent);
+  color: var(--journey-text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gv-journey-timeline-toolbar .p-button .p-button-icon {
+  font-size: 0.8rem;
+}
+
+.gv-journey-timeline-toolbar .p-button:hover {
+  background: rgba(0, 245, 255, 0.25);
+  border-color: var(--journey-accent);
+  color: var(--journey-accent);
+  box-shadow: 0 0 12px var(--journey-glow);
 }
 
 .gv-journey-timeline-tabs.p-tabview {
@@ -156,7 +199,9 @@
   margin-bottom: -3px;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.15);
-  transition: color 0.25s ease, background 0.25s ease;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
 }
 
 .gv-journey-timeline-tabs .p-tabview-nav-link span,
@@ -175,7 +220,10 @@
 }
 
 /* Selecionada: a classe p-highlight fica no <li> (header), não no <a> — estilizar o link e o li quando ativo */
-.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link {
+.gv-journey-timeline-tabs
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link {
   color: var(--journey-accent) !important;
   background: transparent !important;
   box-shadow: none;
@@ -184,8 +232,16 @@
   padding-bottom: 0.7rem;
 }
 
-.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link span,
-.gv-journey-timeline-tabs .p-tabview-nav .p-tabview-selected.p-highlight .p-tabview-nav-link .gv-journey-tab-icon {
+.gv-journey-timeline-tabs
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link
+  span,
+.gv-journey-timeline-tabs
+  .p-tabview-nav
+  .p-tabview-selected.p-highlight
+  .p-tabview-nav-link
+  .gv-journey-tab-icon {
   color: var(--journey-accent) !important;
 }
 
@@ -281,14 +337,22 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 16px rgba(0, 245, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow:
+    0 0 16px rgba(0, 245, 255, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .gv-journey-timeline-game-slot:hover {
   transform: translateY(-4px);
   border-color: rgba(0, 245, 255, 0.45);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 28px var(--journey-glow), 0 0 40px rgba(255, 0, 255, 0.08);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.35),
+    0 0 28px var(--journey-glow),
+    0 0 40px rgba(255, 0, 255, 0.08);
 }
 
 .gv-journey-timeline-cover-wrap {
@@ -355,7 +419,30 @@
 }
 
 .gv-journey-timeline-game-slot--playing .gv-journey-timeline-cover-wrap {
-  box-shadow: 0 0 0 2px var(--journey-accent), 0 0 20px rgba(0, 245, 255, 0.25);
+  box-shadow:
+    0 0 0 2px var(--journey-accent),
+    0 0 20px rgba(0, 245, 255, 0.25);
+}
+
+.gv-journey-badge-dropped {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  background: rgba(120, 0, 0, 0.85);
+  color: #ffaaaa;
+  border-radius: 0.35rem;
+  letter-spacing: 0.04em;
+}
+
+.gv-journey-timeline-game-slot--dropped .gv-journey-timeline-cover-wrap {
+  box-shadow:
+    0 0 0 2px rgba(255, 80, 80, 0.6),
+    0 0 20px rgba(255, 80, 80, 0.2);
 }
 
 .gv-journey-timeline-empty,
@@ -384,6 +471,298 @@
   opacity: 0.5;
 }
 
+.gv-journey-timeline-game-slot--clickable {
+  cursor: pointer;
+}
+
+.gv-journey-timeline-add-slot {
+  flex: 0 0 auto;
+}
+
+.gv-journey-add-game-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  background: rgba(0, 245, 255, 0.06);
+  border: 2px dashed var(--journey-border);
+  border-radius: 0.75rem;
+  color: var(--journey-text-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+
+.gv-journey-add-game-btn:hover {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: var(--journey-accent);
+  color: var(--journey-accent);
+}
+
+/* ----- Modal formulário jornada (dark mode) ----- */
+.gv-journey-form-dialog.p-dialog,
+.gv-journey-form-dialog .p-dialog,
+.gv-journey-completed-dialog.p-dialog,
+.gv-journey-completed-dialog .p-dialog {
+  background: #0a0f16;
+  border: 1px solid rgba(0, 245, 255, 0.35);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.2),
+    0 0 40px rgba(0, 245, 255, 0.1),
+    inset 0 0 20px rgba(0, 245, 255, 0.03);
+}
+
+.gv-journey-form-dialog .p-dialog-header,
+.gv-journey-form-dialog .p-dialog-content,
+.gv-journey-form-dialog .p-dialog-footer,
+.gv-journey-completed-dialog .p-dialog-header,
+.gv-journey-completed-dialog .p-dialog-content,
+.gv-journey-completed-dialog .p-dialog-footer {
+  background: #0a0f16;
+  border-color: rgba(0, 245, 255, 0.2);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gv-journey-form-dialog .p-dialog-title,
+.gv-journey-completed-dialog .p-dialog-title {
+  color: #00f5ff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+}
+
+.gv-journey-form-dialog .p-dialog-header-icon,
+.gv-journey-completed-dialog .p-dialog-header-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gv-journey-form-dialog .p-dialog-header-icon:hover,
+.gv-journey-completed-dialog .p-dialog-header-icon:hover {
+  color: #00f5ff;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+}
+
+.gv-journey-form-dialog .p-dialog-content,
+.gv-journey-completed-dialog .p-dialog-content {
+  padding: 1rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.gv-journey-form-dialog .p-inputtext,
+.gv-journey-form-dialog input.p-inputtext,
+.gv-journey-form-dialog .p-inputnumber-input,
+.gv-journey-form-dialog input[type="date"] {
+  background: rgba(0, 15, 22, 0.8);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+}
+
+.gv-journey-form-dialog .p-inputtext::placeholder,
+.gv-journey-form-dialog input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.gv-journey-form-dialog .p-inputtext:focus,
+.gv-journey-form-dialog .p-inputnumber-input:focus,
+.gv-journey-form-dialog input[type="date"]:focus {
+  outline: none;
+  border-color: #00f5ff;
+  box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.2);
+}
+
+.gv-journey-form-dialog select.p-inputtext,
+.gv-journey-form-dialog select {
+  background: rgba(0, 15, 22, 0.8);
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.gv-journey-form-dialog .p-button.p-button-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 245, 255, 0.3);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gv-journey-form-dialog .p-button.p-button-secondary:hover {
+  background: rgba(0, 245, 255, 0.15);
+  border-color: #00f5ff;
+  color: #00f5ff;
+}
+
+.gv-journey-form-dialog .p-button:not(.p-button-secondary) {
+  background: rgba(0, 245, 255, 0.25);
+  border-color: #00f5ff;
+  color: #0a0f16;
+}
+
+.gv-journey-form-dialog
+  .p-button:not(.p-button-secondary):hover:not(:disabled) {
+  background: #00f5ff;
+  border-color: #00f5ff;
+  color: #0a0f16;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+}
+
+.gv-journey-form-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  column-gap: 1.25rem;
+}
+
+.gv-journey-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gv-journey-form-field--full {
+  grid-column: 1 / -1;
+}
+
+.gv-journey-form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+@media (max-width: 600px) {
+  .gv-journey-form-dialog .p-dialog {
+    width: 100vw !important;
+    max-width: 100vw;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .gv-journey-form-dialog .p-dialog-content {
+    padding: 0.75rem;
+    max-height: calc(100vh - 3rem);
+  }
+
+  .gv-journey-form-dialog .p-dialog-header,
+  .gv-journey-form-dialog .p-dialog-footer {
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .gv-journey-form-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gv-journey-form-field .gv-journey-form-label {
+    min-height: 2.2rem;
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.gv-journey-form-dialog .gv-journey-form-label {
+  color: rgba(0, 245, 255, 0.85);
+}
+
+.gv-journey-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--journey-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.gv-journey-form-input.w-full,
+.gv-journey-form-fields input[type="date"].w-full {
+  width: 100%;
+}
+
+.gv-journey-form-dialog .gv-journey-form-hint {
+  color: rgba(0, 245, 255, 0.75);
+}
+
+.gv-journey-form-hint {
+  font-size: 0.8rem;
+  color: var(--journey-text-muted);
+  margin: 0;
+}
+
+.gv-journey-form-error {
+  font-size: 0.8rem;
+  color: #f87171;
+  margin: 0.25rem 0 0;
+}
+
+.gv-journey-form-error-block {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(248, 113, 113, 0.12);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.gv-journey-form-games-list {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gv-journey-form-game-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  text-align: left;
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid var(--journey-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.gv-journey-form-game-item:hover {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: var(--journey-accent);
+}
+
+.gv-journey-form-game-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 0.35rem;
+}
+
+.gv-journey-form-game-placeholder {
+  background: var(--journey-border);
+}
+
+.gv-journey-form-dialog .gv-journey-form-game-name {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.gv-journey-form-game-name {
+  font-size: 0.9rem;
+  color: var(--journey-text);
+}
+
+.gv-journey-form-dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
 /* ----- Mapa de calor gêneros (Card PrimeReact) ----- */
 .gv-journey-genre-heatmap {
   margin-bottom: 2rem;
@@ -393,7 +772,9 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .gv-journey-genre-card-header.p-card-header,
@@ -501,7 +882,9 @@
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
   border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .gv-journey-games-card-header.p-card-header,
@@ -550,17 +933,63 @@
 
 .gv-journey-games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Cards mais largos, próximos de 320px como no layout sugerido */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
+}
+
+.gv-journey-games-grid--dialog {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.gv-journey-games-dialog-item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.gv-journey-games-dialog-item:focus-visible {
+  outline: 2px solid var(--journey-accent);
+  outline-offset: 2px;
+}
+
+.gv-journey-completed-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gv-journey-completed-filter-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--journey-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.gv-journey-completed-dropdown.p-dropdown {
+  width: 100%;
 }
 
 .gv-journey-card {
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
+  /* ~12px para combinar com o design sugerido */
   border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .gv-journey-card:hover {
@@ -594,12 +1023,16 @@
 
 .gv-journey-card--full:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 32px var(--journey-glow), 0 0 48px var(--journey-glow-alt), 0 12px 28px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 32px var(--journey-glow),
+    0 0 48px var(--journey-glow-alt),
+    0 12px 28px rgba(0, 0, 0, 0.4);
 }
 
 .gv-journey-card-cover-wrap {
   position: relative;
-  aspect-ratio: 3/4;
+  /* Banner mais horizontal, semelhante a 320x180 (~16:9) */
+  aspect-ratio: 16/9;
   overflow: hidden;
   background: var(--journey-border);
 }
@@ -678,7 +1111,11 @@
   font-size: 0.6rem;
   font-weight: 700;
   padding: 0.2rem 0.4rem;
-  background: linear-gradient(135deg, var(--journey-accent), var(--journey-accent-alt));
+  background: linear-gradient(
+    135deg,
+    var(--journey-accent),
+    var(--journey-accent-alt)
+  );
   color: #0a0a14;
   border-radius: 0.3rem;
   letter-spacing: 0.05em;
@@ -766,106 +1203,6 @@
 .gv-journey-theme-blood {
   color: #dc2626;
   font-weight: 700;
-}
-
-/* ----- Modo claro: roxo/primary em vez de neon cyan ----- */
-[data-theme="light"] .gv-journey {
-  --journey-accent: #6d28d9;
-  --journey-accent-alt: #7c3aed;
-  --journey-glow: rgba(109, 40, 217, 0.25);
-  --journey-glow-alt: rgba(124, 58, 237, 0.2);
-  --journey-surface: rgba(248, 247, 252, 0.95);
-  --journey-border: rgba(109, 40, 217, 0.2);
-  --journey-text: #1a1a2e;
-  --journey-text-muted: #4a4a6a;
-}
-
-[data-theme="light"] .gv-journey-section-title {
-  color: var(--journey-text-muted);
-  text-shadow: none;
-}
-
-[data-theme="light"] .gv-journey-mission-card {
-  background: var(--sgn-info-card-bg);
-  border-color: var(--sgn-card-border);
-  box-shadow: var(--sgn-card-shadow);
-}
-
-[data-theme="light"] .gv-journey-mission-card:hover {
-  border-color: var(--sgn-border-focus);
-  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
-}
-
-[data-theme="light"] .gv-journey-vida-card {
-  background: var(--sgn-info-card-bg);
-  border-color: var(--sgn-card-border);
-  border-left-color: var(--sgn-primary);
-  box-shadow: var(--sgn-card-shadow);
-}
-
-[data-theme="light"] .gv-journey-timeline-block-title {
-  color: var(--sgn-primary);
-  border-bottom-color: var(--sgn-border);
-}
-
-[data-theme="light"] .gv-journey-timeline-game-slot {
-  background: var(--sgn-surface-elevated);
-  border-color: var(--sgn-card-border);
-  box-shadow: var(--sgn-card-shadow);
-}
-
-[data-theme="light"] .gv-journey-timeline-game-slot:hover {
-  border-color: var(--sgn-border-focus);
-  box-shadow: 0 0 0 1px rgba(109, 40, 217, 0.2), 0 4px 16px rgba(109, 40, 217, 0.08);
-}
-
-[data-theme="light"] .gv-journey-timeline-game-slot--playing .gv-journey-timeline-cover-wrap {
-  box-shadow: 0 0 0 2px var(--sgn-primary), 0 4px 16px rgba(109, 40, 217, 0.2);
-}
-
-[data-theme="light"] .gv-journey-genre-heatmap.p-card {
-  background: var(--sgn-surface-elevated);
-  border-color: var(--sgn-card-border);
-  box-shadow: var(--sgn-card-shadow);
-}
-
-[data-theme="light"] .gv-journey-genre-heatmap .p-card-header {
-  border-bottom-color: var(--sgn-border);
-}
-
-[data-theme="light"] .gv-journey-games-section.p-card {
-  background: var(--sgn-surface-elevated);
-  border-color: var(--sgn-card-border);
-  box-shadow: var(--sgn-card-shadow);
-}
-
-[data-theme="light"] .gv-journey-games-section .p-card-header {
-  border-bottom-color: var(--sgn-border);
-}
-
-[data-theme="light"] .gv-journey-genre-bar-wrap {
-  background: var(--sgn-border);
-}
-
-[data-theme="light"] .gv-journey-genre-bar-fill {
-  background: linear-gradient(90deg, var(--sgn-primary) 0%, #7c3aed 100%);
-  box-shadow: 0 0 8px rgba(109, 40, 217, 0.25);
-}
-
-[data-theme="light"] .gv-journey-card {
-  background: var(--sgn-surface-elevated);
-  border-color: var(--sgn-card-border);
-  box-shadow: var(--sgn-card-shadow);
-}
-
-[data-theme="light"] .gv-journey-card:hover {
-  border-color: var(--sgn-border-focus);
-}
-
-[data-theme="light"] .gv-journey-gamification {
-  background: var(--sgn-primary-muted);
-  border-color: var(--sgn-border);
-  box-shadow: none;
 }
 
 /* ----- Responsivo ----- */

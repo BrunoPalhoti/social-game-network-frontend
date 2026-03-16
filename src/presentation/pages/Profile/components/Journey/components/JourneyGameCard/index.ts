@@ -1,0 +1,1 @@
+export { JourneyGameCard } from "./JourneyGameCard";

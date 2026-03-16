@@ -1,0 +1,243 @@
+{
+  "users": [
+    {
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "username": "brunogameplay",
+      "email": "bruno@example.com",
+      "password": "123456",
+      "name": "Bruno Palhoti",
+      "nickname": "brunogameplay",
+      "platform": "Playstation",
+      "favoriteGame": "Life is Strange",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "favoriteGameCover": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+      "avatarUrl": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+      "bannerUrl": "https://media.rawg.io/media/games/909/909974d1c7863c2027241e265fe7011f.jpg",
+      "platforms": [
+        {
+          "name": "PlayStation 5",
+          "imageUrl": null
+        }
+      ],
+      "journeyByYear": {
+        "2026": [
+          {
+            "id": "4340",
+            "name": "Uncharted: Drake's Fortune",
+            "coverImageUrl": "https://media.rawg.io/media/games/f2e/f2e6dcf9c27d99ba2551f1094ad41756.jpg",
+            "startedAt": "2026-03-13",
+            "completedAt": "2026-03-14",
+            "hoursPlayed": 7,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": ["Shooter", "Action"],
+            "monthKey": "2026-03",
+            "rating": 9,
+            "notes": "Começo perfeito pra saga, vibe sessão da tarde."
+          },
+          {
+            "id": "22513",
+            "name": "Uncharted 2: Among Thieves",
+            "coverImageUrl": "https://media.rawg.io/media/games/74b/74b239f6ef0216a2f66e652d54abb2e6.jpg",
+            "startedAt": "2026-03-14",
+            "completedAt": "2026-03-14",
+            "hoursPlayed": 8,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": ["Shooter", "Action"],
+            "monthKey": "2026-03",
+            "rating": 9.5,
+            "notes": "Topo do ranking de Uncharted, set pieces insanas."
+          },
+          {
+            "id": "5703",
+            "name": "Uncharted 3: Drake's Deception",
+            "coverImageUrl": "https://media.rawg.io/media/games/589/589fc47c5ae34160d65c4682e21fed66.jpg",
+            "startedAt": "2026-03-16",
+            "hoursPlayed": 0,
+            "status": "PLAYING",
+            "platform": "PlayStation 5",
+            "genres": ["Action"],
+            "monthKey": "2026-03",
+            "rating": 0,
+            "notes": "Em progresso: hype pra sequência do Drake."
+          },
+          {
+            "id": "244738",
+            "name": "DmC: Devil May Cry: Definitive Edition",
+            "coverImageUrl": "https://media.rawg.io/media/screenshots/a72/a7263e0ccaf879a00296db0d6d91c854.jpg",
+            "startedAt": "2026-03-07",
+            "completedAt": "2026-03-09",
+            "hoursPlayed": 8,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": ["Adventure", "Action"],
+            "monthKey": "2026-03",
+            "rating": 8.5,
+            "notes": "Combate muito gostoso, história meio exagerada mas divertida."
+          },
+          {
+            "id": "982603",
+            "name": "Still Wakes the Deep",
+            "coverImageUrl": "https://media.rawg.io/media/games/27d/27d2f9f7ee2c49d21c9c21e74cf98749.jpg",
+            "startedAt": "2026-03-03",
+            "completedAt": "2026-03-04",
+            "hoursPlayed": 5,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": ["Adventure", "Action"],
+            "monthKey": "2026-03",
+            "rating": 8,
+            "notes": "Tensão constante, terror curtinho e eficiente."
+          },
+          {
+            "id": "989329",
+            "name": "Ghost of Yotei",
+            "coverImageUrl": "https://media.rawg.io/media/games/30b/30b195c2321d763f807366967ffad793.jpg",
+            "startedAt": "2026-02-16",
+            "completedAt": "2026-02-21",
+            "hoursPlayed": 22,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": ["Action", "RPG"],
+            "monthKey": "2026-02",
+            "rating": 9,
+            "notes": "Exploração deliciosa, clima de lenda japonesa muito forte."
+          },
+          {
+            "id": "29338",
+            "name": "Days Gone",
+            "coverImageUrl": "https://media.rawg.io/media/games/a79/a79d2fc90c4dbf07a8580b19600fd61d.jpg",
+            "startedAt": "2025-12-21",
+            "completedAt": "2025-12-18",
+            "hoursPlayed": 25,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": ["Action"],
+            "monthKey": "2025-12",
+            "rating": 8.5,
+            "notes": "Horda de zumbi é o ponto alto, história demorou mas engatou."
+          }
+        ]
+      },
+      "favoriteGenre": "Shooter",
+      "favoriteGenreCover": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
+      "bannerPosition": 87
+    },
+    {
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "username": "darthgamer",
+      "email": "darth@example.com",
+      "password": "123456",
+      "name": "Darth Gamer",
+      "nickname": "DarthGamer",
+      "platform": "Xbox",
+      "favoriteGame": "Halo",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "username": "reginhinhagameplay",
+      "email": "regina@example.com",
+      "password": "123456",
+      "name": "Regina Linda",
+      "nickname": "reginhinhagameplay",
+      "platform": "Celular",
+      "favoriteGame": "Home Design: Caribbean Life",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "username": "dadagameplay",
+      "email": "daphine@example.com",
+      "password": "123456",
+      "name": "Daphine Linda",
+      "nickname": "dadagameplay",
+      "platform": "Nintendo Switch",
+      "favoriteGame": "Stardew Valley",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "username": "brunolindo",
+      "email": "brunopalhoti@gmail.com",
+      "id": "72cc0bf1-7cb4-45aa-aa74-11375743301c",
+      "createdAt": "2026-03-15T20:06:38.068Z"
+    },
+    {
+      "id": "ff41d133-1bc7-4132-8038-e8be26f0e9ba",
+      "username": "brunolindos",
+      "email": "brunopalhoti@gmail.com.br",
+      "password": "123456",
+      "name": "brunolindos",
+      "nickname": "brunolindos",
+      "createdAt": "2026-03-15T21:12:47.727Z"
+    },
+    {
+      "id": "9d3f73d3-06ee-45b6-b74b-683a5c7d1888",
+      "username": "ava",
+      "email": "ava@ava.com",
+      "password": "123456",
+      "name": "ava",
+      "nickname": "ava",
+      "createdAt": "2026-03-15T21:18:00.237Z",
+      "favoriteGame": "Life is Strange",
+      "favoriteGameCover": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+      "platforms": [
+        {
+          "name": "PlayStation 4",
+          "imageUrl": null
+        }
+      ]
+    },
+    {
+      "id": "d2b70e87-0b14-4f6c-9080-dad147ef45d3",
+      "username": "brunolindoss",
+      "email": "brunopalhoti@gmail.com.brr",
+      "password": "123456",
+      "name": "brunolindoss",
+      "nickname": "brunolindoss",
+      "createdAt": "2026-03-15T21:21:08.903Z",
+      "favoriteGame": "Call of Duty",
+      "favoriteGameCover": "https://media.rawg.io/media/games/9c5/9c5bc0b6e67102bc96dcf1ba41509e42.jpg",
+      "platforms": [
+        {
+          "name": "PlayStation 5",
+          "imageUrl": null
+        }
+      ],
+      "favoriteGenres": [
+        {
+          "name": "Shooter",
+          "imageUrl": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+        }
+      ],
+      "favoriteGenre": "Shooter",
+      "favoriteGenreCover": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
+      "journeyByYear": {
+        "2026": [
+          {
+            "id": "4340",
+            "name": "Uncharted: Drake's Fortune",
+            "coverImageUrl": "https://media.rawg.io/media/games/f2e/f2e6dcf9c27d99ba2551f1094ad41756.jpg",
+            "startedAt": "2026-03-14",
+            "completedAt": "2026-03-14",
+            "status": "COMPLETED",
+            "genres": ["Shooter", "Action"],
+            "monthKey": "2026-03",
+            "hoursPlayed": 7.5
+          },
+          {
+            "id": "22513",
+            "name": "Uncharted 2: Among Thieves",
+            "coverImageUrl": "https://media.rawg.io/media/games/74b/74b239f6ef0216a2f66e652d54abb2e6.jpg",
+            "startedAt": "2026-03-15",
+            "status": "PLAYING",
+            "genres": ["Shooter", "Action"],
+            "monthKey": "2026-03",
+            "platform": "PlayStation 5"
+          }
+        ]
+      }
+    }
+  ]
+}
