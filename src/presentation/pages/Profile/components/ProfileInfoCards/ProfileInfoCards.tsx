@@ -2,26 +2,10 @@ import { InfoCard } from "@/presentation/components/InfoCard";
 import { type User } from "@/shared/store/useAuthStore";
 import { useProfileInfoCards } from "./hooks";
 import { RawgGameSuggestionList } from "../shared/RawgGameSuggestionList";
+import { LoadingRow, ErrorText, EmptyMessage } from "./DialogHelpers";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-
-function LoadingRow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="gv-profile-dialog-games-loading">
-      <i className="pi pi-spin pi-spinner" />
-      {children}
-    </div>
-  );
-}
-
-function ErrorText({ message }: { message: string }) {
-  return <p className="gv-profile-dialog-games-error">{message}</p>;
-}
-
-function EmptyMessage({ children }: { children: React.ReactNode }) {
-  return <p className="gv-profile-dialog-games-error">{children}</p>;
-}
 
 type EditableField = keyof Pick<
   User,
