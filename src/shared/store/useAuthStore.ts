@@ -11,6 +11,9 @@ export function getMockUserProfile(
   favoriteGameCover?: string;
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+  avatarUrl?: string | null;
+  bannerUrl?: string | null;
+  bannerPosition?: "top" | "center" | "bottom";
 } {
   if (!username) return {};
   const key = username.trim().toLowerCase();
@@ -29,6 +32,9 @@ export function getMockUserProfile(
     favoriteGameCover: mock.favoriteGameCover,
     favoriteGenre: mock.favoriteGenre,
     favoriteGenreCover: mock.favoriteGenreCover,
+    avatarUrl: mock.avatarUrl ?? null,
+    bannerUrl: mock.bannerUrl ?? null,
+    bannerPosition: mock.bannerPosition ?? "center",
   };
 }
 
@@ -42,6 +48,12 @@ export interface User {
   favoriteGameCover?: string;
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+   /** URL do avatar personalizado (ex.: personagem do jogo na RAWG). */
+  avatarUrl?: string | null;
+  /** URL da capa/banner do perfil (ex.: capa do game favorito na RAWG). */
+  bannerUrl?: string | null;
+  /** Posição vertical da capa (para centralizar melhor o foco). */
+  bannerPosition?: "top" | "center" | "bottom";
 }
 
 export function getInitialsFromUsername(username: string): string {
@@ -72,7 +84,8 @@ interface AuthState {
   login: (username: string, password: string) => boolean;
   loginCreatedUser: (user: User) => void;
   logout: () => void;
-  updateProfile: (updates: Partial<Pick<User, "platforms" | "favoriteGame" | "favoriteGameCover" | "favoriteGenre" | "favoriteGenreCover">>) => void;
+  updateProfile: (updates: Partial<Pick<User, "platforms" | "favoriteGame" | "favoriteGameCover" | "favoriteGenre" | "favoriteGenreCover" | "avatarUrl" | "bannerUrl">>) => void;
+  updateProfile: (updates: Partial<Pick<User, "platforms" | "favoriteGame" | "favoriteGameCover" | "favoriteGenre" | "favoriteGenreCover" | "avatarUrl" | "bannerUrl" | "bannerPosition">>) => void;
   isAuthenticated: boolean;
 }
 
@@ -104,6 +117,9 @@ export const useAuthStore = create<AuthState>()(
               favoriteGameCover: mock.favoriteGameCover,
               favoriteGenre: mock.favoriteGenre,
               favoriteGenreCover: mock.favoriteGenreCover,
+              avatarUrl: mock.avatarUrl ?? null,
+              bannerUrl: mock.bannerUrl ?? null,
+              bannerPosition: mock.bannerPosition ?? "center",
             },
             isAuthenticated: true,
           });

@@ -18,6 +18,12 @@ export type ProfileOverrides = {
   platforms?: PlatformSelection[];
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+  /** URL do avatar personalizado (ex.: personagem do jogo na RAWG). */
+  avatarUrl?: string | null;
+  /** URL da capa/banner do perfil (ex.: capa do game favorito na RAWG). */
+  bannerUrl?: string | null;
+  /** Posição vertical da capa (top/center/bottom). */
+  bannerPosition?: "top" | "center" | "bottom";
   /** Jogos da jornada por ano (chave = ano em string, ex: "2026"). */
   journeyByYear?: Record<string, JourneyGame[]>;
 };
@@ -41,6 +47,10 @@ export interface UserRecord {
   favoriteGameCover?: string;
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+  /** URL do avatar personalizado (ex.: personagem do jogo na RAWG). */
+  avatarUrl?: string | null;
+  /** URL da capa/banner do perfil (ex.: capa do game favorito na RAWG). */
+  bannerUrl?: string | null;
   /** Jogos da jornada por ano (chave = ano em string). Persistido em mockUsers.json. */
   journeyByYear?: Record<string, JourneyGame[]>;
   createdAt: string;
@@ -121,6 +131,9 @@ function getMergedUsersForFile(): UserRecord[] {
       ...(ov.platforms !== undefined && { platforms: ov.platforms }),
       ...(ov.favoriteGenre !== undefined && { favoriteGenre: ov.favoriteGenre }),
       ...(ov.favoriteGenreCover !== undefined && { favoriteGenreCover: ov.favoriteGenreCover }),
+      ...(ov.avatarUrl !== undefined && { avatarUrl: ov.avatarUrl }),
+      ...(ov.bannerUrl !== undefined && { bannerUrl: ov.bannerUrl }),
+      ...(ov.bannerPosition !== undefined && { bannerPosition: ov.bannerPosition }),
       ...(ov.journeyByYear !== undefined && { journeyByYear: ov.journeyByYear }),
     };
   });
@@ -217,6 +230,9 @@ export type AuthUserSnapshot = {
   favoriteGameCover?: string;
   favoriteGenre?: string;
   favoriteGenreCover?: string;
+  avatarUrl?: string | null;
+  bannerUrl?: string | null;
+  bannerPosition?: "top" | "center" | "bottom";
 };
 
 /**
@@ -244,6 +260,9 @@ export function getUsersForAuth(): Record<string, AuthUserSnapshot> {
       favoriteGameCover: u.favoriteGameCover,
       favoriteGenre: u.favoriteGenre,
       favoriteGenreCover: u.favoriteGenreCover,
+      avatarUrl: u.avatarUrl ?? null,
+      bannerUrl: u.bannerUrl ?? null,
+      bannerPosition: u.bannerPosition ?? "center",
     };
     const override = overrides[key];
     map[key] = override

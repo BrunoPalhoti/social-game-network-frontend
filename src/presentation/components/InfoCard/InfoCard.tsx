@@ -18,7 +18,14 @@ export interface InfoCardProps {
   onEdit?: () => void;
 }
 
-export function InfoCard({ label, value, icon, imageUrl, items, onEdit }: InfoCardProps) {
+export function InfoCard({
+  label,
+  value,
+  icon,
+  imageUrl,
+  items,
+  onEdit,
+}: InfoCardProps) {
   const hasItems = items && items.length > 0;
   return (
     <Card

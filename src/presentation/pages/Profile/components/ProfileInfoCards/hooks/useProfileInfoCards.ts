@@ -184,7 +184,10 @@ export function useProfileInfoCards() {
     if (editingCard === "favoriteGame") {
       const name = (selectedGame?.name ?? editValue).trim() || undefined;
       const cover = selectedGame?.cover ?? undefined;
-      const updates = { favoriteGame: name, favoriteGameCover: cover };
+      const updates = {
+        favoriteGame: name,
+        favoriteGameCover: cover,
+      };
       updateProfile(updates);
       updateUserProfile(user.username, updates);
     } else if (editingCard === "platforms") {

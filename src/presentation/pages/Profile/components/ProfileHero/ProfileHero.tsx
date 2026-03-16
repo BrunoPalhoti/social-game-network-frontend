@@ -1,26 +1,118 @@
+import { useState } from "react";
 import { getInitialsFromName, useAuthStore } from "@/shared/store/useAuthStore";
+import { updateUserProfile } from "@/shared/api/mockUsersApi";
+import { fetchGames, type RawgGame } from "@/shared/api/rawgApi";
 import { Avatar } from "primereact/avatar";
 import { Tag } from "primereact/tag";
+import { Dialog } from "primereact/dialog";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 
 interface ProfileHeroProps {
   children?: React.ReactNode;
 }
 
 export function ProfileHero({ children }: ProfileHeroProps) {
-  const user = useAuthStore((s) => s.user);
+  const { user, updateProfile } = useAuthStore();
+
+  const [editing, setEditing] = useState<"avatar" | "banner" | null>(null);
+  const [search, setSearch] = useState("");
+  const [games, setGames] = useState<RawgGame[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedCover, setSelectedCover] = useState<string | null>(null);
+  const [bannerPositionChoice, setBannerPositionChoice] = useState<
+    "top" | "center" | "bottom"
+  >("center");
+
+  const bannerStyle =
+    user?.bannerUrl ?? user?.favoriteGameCover
+      ? {
+          backgroundImage: `url(${user.bannerUrl ?? user.favoriteGameCover})`,
+          backgroundPosition:
+            user?.bannerPosition === "top"
+              ? "center 0%"
+              : user?.bannerPosition === "bottom"
+                ? "center 100%"
+                : "center 50%",
+        }
+      : undefined;
+
+  async function handleSearchGames(q: string) {
+    const query = q.trim();
+    setSearch(q);
+    if (!query) {
+      setGames([]);
+      setError(null);
+      return;
+    }
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetchGames({ search: query, page_size: 12 });
+      setGames(res.results);
+    } catch (e) {
+      setError(
+        e instanceof Error ? e.message : "Erro ao buscar jogos na RAWG"
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function handleSelectGame(game: RawgGame) {
+    const cover = game.background_image ?? null;
+    if (!editing) return;
+    setSelectedCover(cover);
+  }
+
+  const isEditingAvatar = editing === "avatar";
 
   return (
     <section className="gv-profile-hero">
-      <div className="gv-profile-banner" />
+      <div className="gv-profile-banner" style={bannerStyle}>
+        <button
+          type="button"
+          className="gv-profile-banner-edit-btn"
+          onClick={() => {
+            setEditing("banner");
+            setSelectedCover(null);
+            setBannerPositionChoice(user?.bannerPosition ?? "center");
+          }}
+          aria-label="Alterar capa do perfil"
+        >
+          <i className="pi pi-pencil" />
+        </button>
+      </div>
 
       <div className="gv-profile-avatar-wrap">
         <div className="gv-profile-avatar-container">
-          <Avatar
-            label={user ? getInitialsFromName(user.name) : "?"}
-            size="xlarge"
-            shape="circle"
-            className="gv-profile-avatar"
-          />
+          {user?.avatarUrl ? (
+            <Avatar
+              image={user.avatarUrl}
+              size="xlarge"
+              shape="circle"
+              className="gv-profile-avatar"
+            />
+          ) : (
+            <Avatar
+              label={user ? getInitialsFromName(user.name) : "?"}
+              size="xlarge"
+              shape="circle"
+              className="gv-profile-avatar"
+            />
+          )}
+          <button
+            type="button"
+            className="gv-profile-avatar-edit-btn"
+            onClick={() => {
+              setEditing("avatar");
+              setSelectedCover(null);
+            }}
+            aria-label="Alterar avatar"
+          >
+            <i className="pi pi-pencil" />
+          </button>
           <Tag value="PRO" severity="secondary" className="gv-profile-badge" />
         </div>
       </div>
@@ -36,6 +128,164 @@ export function ProfileHero({ children }: ProfileHeroProps) {
           {children}
         </>
       )}
+
+      <Dialog
+        header={isEditingAvatar ? "Escolher avatar" : "Escolher capa"}
+        visible={editing !== null}
+        onHide={() => {
+          setEditing(null);
+          setSearch("");
+          setGames([]);
+          setError(null);
+          setSelectedCover(null);
+          setBannerPositionChoice("center");
+        }}
+        className="gv-profile-edit-dialog"
+        contentStyle={{ padding: "0.25rem 1rem" }}
+        pt={{
+          header: { style: { padding: "0.5rem 1rem 0.25rem" } },
+          content: { style: { padding: "0.25rem 1rem" } },
+          footer: { style: { padding: "0.25rem 1rem 0.5rem" } },
+        }}
+        footer={
+          <div className="gv-profile-edit-dialog-footer">
+            <Button
+              label="Fechar"
+              severity="secondary"
+              onClick={() => {
+                setEditing(null);
+                setSearch("");
+                setGames([]);
+                setError(null);
+                setSelectedCover(null);
+                setBannerPositionChoice("center");
+              }}
+            />
+            <Button
+              label="Salvar"
+              disabled={!editing || !selectedCover}
+              onClick={() => {
+                if (!editing) return;
+                const updates: {
+                  avatarUrl?: string | null;
+                  bannerUrl?: string | null;
+                  bannerPosition?: "top" | "center" | "bottom";
+                } =
+                  editing === "avatar"
+                    ? { avatarUrl: selectedCover }
+                    : {
+                        bannerUrl: selectedCover,
+                        bannerPosition: bannerPositionChoice,
+                      };
+                updateProfile(updates);
+                if (user?.username) {
+                  updateUserProfile(user.username, updates);
+                }
+                setEditing(null);
+                setSearch("");
+                setGames([]);
+                setError(null);
+                setSelectedCover(null);
+                setBannerPositionChoice("center");
+              }}
+            />
+          </div>
+        }
+      >
+        <div className="gv-profile-game-favorite-dialog">
+          <label className="gv-profile-game-list-label" htmlFor="avatar-banner-search">
+            Buscar jogo
+          </label>
+          <InputText
+            id="avatar-banner-search"
+            value={search}
+            onChange={(e) => handleSearchGames(e.target.value)}
+            placeholder="Digite o nome do jogo..."
+            className="gv-profile-edit-input w-full"
+            autoFocus
+          />
+          {editing === "banner" && (
+            <div className="gv-profile-game-favorite-options" style={{ marginTop: "0.5rem" }}>
+              <p className="gv-profile-game-list-label">Centralização da capa</p>
+              <div className="gv-profile-game-favorite-options-row">
+                <button
+                  type="button"
+                  className={`gv-profile-banner-pos-btn${
+                    bannerPositionChoice === "top" ? " is-active" : ""
+                  }`}
+                  onClick={() => setBannerPositionChoice("top")}
+                >
+                  Topo
+                </button>
+                <button
+                  type="button"
+                  className={`gv-profile-banner-pos-btn${
+                    bannerPositionChoice === "center" ? " is-active" : ""
+                  }`}
+                  onClick={() => setBannerPositionChoice("center")}
+                >
+                  Centro
+                </button>
+                <button
+                  type="button"
+                  className={`gv-profile-banner-pos-btn${
+                    bannerPositionChoice === "bottom" ? " is-active" : ""
+                  }`}
+                  onClick={() => setBannerPositionChoice("bottom")}
+                >
+                  Baixo
+                </button>
+              </div>
+            </div>
+          )}
+          {loading && (
+            <div className="gv-profile-dialog-games-loading">
+              <i className="pi pi-spin pi-spinner" />
+              Buscando jogos...
+            </div>
+          )}
+          {error && (
+            <p className="gv-profile-dialog-games-error">{error}</p>
+          )}
+          {!loading && !error && games.length > 0 && (
+            <>
+              <p className="gv-profile-game-list-label">
+                Clique em um jogo para usar a capa como {isEditingAvatar ? "avatar" : "capa"}.
+              </p>
+              <div className="gv-profile-dialog-games-list">
+                {games.map((game) => (
+                  <button
+                    key={game.id}
+                    type="button"
+                    className="gv-profile-dialog-game-item"
+                    onClick={() => handleSelectGame(game)}
+                  >
+                    {game.background_image ? (
+                      <img
+                        src={game.background_image}
+                        alt=""
+                        className="gv-profile-game-suggestion-img"
+                      />
+                    ) : (
+                      <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
+                    )}
+                    <span className="gv-profile-game-suggestion-info">
+                      <span className="gv-profile-game-suggestion-name">
+                        {game.name}
+                      </span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+          {!loading && !error && search.trim() && games.length === 0 && (
+            <p className="gv-profile-dialog-games-error">
+              Nenhum jogo encontrado.
+            </p>
+          )}
+        </div>
+      </Dialog>
     </section>
   );
 }

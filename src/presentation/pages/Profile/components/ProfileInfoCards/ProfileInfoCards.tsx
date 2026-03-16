@@ -279,40 +279,38 @@ export function ProfileInfoCards() {
             {genresError && (
               <p className="gv-profile-dialog-games-error">{genresError}</p>
             )}
-            {!genresLoading &&
-              !genresError &&
-              genresList.length > 0 && (
-                <>
-                  <p className="gv-profile-game-list-label">
-                    Clique em um gênero para selecionar
-                  </p>
-                  <div className="gv-profile-dialog-games-list">
-                    {genresList.map((genre) => (
-                      <button
-                        key={genre.id}
-                        type="button"
-                        className="gv-profile-dialog-game-item"
-                        onClick={() => onSelectGenre(genre)}
-                      >
-                        {genre.image_background ? (
-                          <img
-                            src={genre.image_background}
-                            alt=""
-                            className="gv-profile-game-suggestion-img"
-                          />
-                        ) : (
-                          <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
-                        )}
-                        <span className="gv-profile-game-suggestion-info">
-                          <span className="gv-profile-game-suggestion-name">
-                            {genre.name}
-                          </span>
+            {!genresLoading && !genresError && genresList.length > 0 && (
+              <>
+                <p className="gv-profile-game-list-label">
+                  Clique em um gênero para selecionar
+                </p>
+                <div className="gv-profile-dialog-games-list">
+                  {genresList.map((genre) => (
+                    <button
+                      key={genre.id}
+                      type="button"
+                      className="gv-profile-dialog-game-item"
+                      onClick={() => onSelectGenre(genre)}
+                    >
+                      {genre.image_background ? (
+                        <img
+                          src={genre.image_background}
+                          alt=""
+                          className="gv-profile-game-suggestion-img"
+                        />
+                      ) : (
+                        <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
+                      )}
+                      <span className="gv-profile-game-suggestion-info">
+                        <span className="gv-profile-game-suggestion-name">
+                          {genre.name}
                         </span>
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
             {!genresLoading &&
               !genresError &&
               editValue.trim() &&
