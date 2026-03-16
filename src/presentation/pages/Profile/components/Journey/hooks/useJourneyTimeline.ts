@@ -16,6 +16,14 @@ export function useJourneyTimeline(months: JourneyMonth[]) {
         else if (game.status === "DROPPED") dropados.push(game);
       });
     });
+
+    zerados.sort((a, b) => {
+      if (!a.completedAt && !b.completedAt) return 0;
+      if (!a.completedAt) return 1;
+      if (!b.completedAt) return -1;
+      return b.completedAt.localeCompare(a.completedAt);
+    });
+
     return { jogosZerados: zerados, jogandoAgora: jogando, jogosDropados: dropados };
   }, [months]);
 

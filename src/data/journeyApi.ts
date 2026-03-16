@@ -109,7 +109,7 @@ export function addJourneyGame(
   const games = [...data.games, newGame];
   saveJourneyGames(username, data.year, games);
   const months = buildMonthsFromGames(games, data.year);
-  const missionStats = computeMissionStats(games);
+  const missionStats = computeMissionStats(games, data.year);
   const genreHeatMap = buildGenreHeatMap(games);
   const jogosZeradosNaVida = buildJogosZeradosNaVidaFromGames(games);
   return {
@@ -140,7 +140,7 @@ export function updateJourneyGame(
   });
   saveJourneyGames(username, data.year, games);
   const months = buildMonthsFromGames(games, data.year);
-  const missionStats = computeMissionStats(games);
+  const missionStats = computeMissionStats(games, data.year);
   const genreHeatMap = buildGenreHeatMap(games);
   const jogosZeradosNaVida = buildJogosZeradosNaVidaFromGames(games);
   return {
@@ -153,15 +153,25 @@ export function updateJourneyGame(
   };
 }
 
-function computeMissionStats(games: JourneyGame[]): MissionStats {
-  const year = new Date().getFullYear();
+function computeMissionStats(games: JourneyGame[], year: number): MissionStats {
   const yearStr = String(year);
   const jogosZeradosNoAno = games.filter(
     (g) =>
       (g.status === "COMPLETED" || g.status === "PLATINUM") &&
       (g.completedAt?.startsWith(yearStr) ?? g.monthKey.startsWith(yearStr))
   ).length;
-  const totalHoursInvested = games.reduce((acc, g) => acc + (g.hoursPlayed ?? 0), 0);
+
+  const gamesDoAno = games.filter(
+    (g) =>
+      g.completedAt?.startsWith(yearStr) ||
+      g.startedAt?.startsWith(yearStr) ||
+      g.monthKey.startsWith(yearStr)
+  );
+
+  const totalHoursInvested = gamesDoAno.reduce(
+    (acc, g) => acc + (g.hoursPlayed ?? 0),
+    0
+  );
   return { jogosZeradosNoAno, totalHoursInvested };
 }
 
@@ -180,7 +190,7 @@ function buildJogosZeradosNaVidaFromGames(games: JourneyGame[]): JogosZeradosNaV
 /** Monta JourneyYearData a partir da lista de jogos (dados em @data). */
 function buildYearDataFromGames(games: JourneyGame[], year: number): JourneyYearData {
   const months = buildMonthsFromGames(games, year);
-  const missionStats = computeMissionStats(games);
+  const missionStats = computeMissionStats(games, year);
   const genreHeatMap = buildGenreHeatMap(games);
   const jogosZeradosNaVida = buildJogosZeradosNaVidaFromGames(games);
   return {

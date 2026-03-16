@@ -7,6 +7,7 @@ import {
   JourneyMessage,
 } from "./components";
 import { useJourneyData } from "./hooks";
+import { isZeradoStatus } from "./utils";
 import "../../styles/Journey.css";
 
 interface JourneyContentProps {
@@ -15,7 +16,10 @@ interface JourneyContentProps {
 
 export function JourneyContent({ year }: JourneyContentProps) {
   const username = useAuthStore((s) => s.user?.username ?? "");
-  const { data, loading, error, addGame, updateGame, clearAll } = useJourneyData(year, username);
+  const { data, loading, error, addGame, updateGame, clearAll } = useJourneyData(
+    year,
+    username,
+  );
 
   if (!username) {
     return (
@@ -40,6 +44,15 @@ export function JourneyContent({ year }: JourneyContentProps) {
   }
   if (!data) return null;
 
+  const sortedGames = [...data.games].sort((a, b) => {
+    if (!a.completedAt && !b.completedAt) return 0;
+    if (!a.completedAt) return 1;
+    if (!b.completedAt) return -1;
+    return b.completedAt.localeCompare(a.completedAt);
+  });
+
+  const jogosZerados = sortedGames.filter((game) => isZeradoStatus(game.status));
+
   return (
     <div className="gv-journey" data-journey-year={year}>
       <MissionStatus
@@ -52,9 +65,10 @@ export function JourneyContent({ year }: JourneyContentProps) {
         addGame={addGame}
         updateGame={updateGame}
         clearAll={clearAll}
+        jogosZeradosAno={jogosZerados}
       />
       <GenreHeatMap data={data.genreHeatMap} />
-      <JourneyGamesSection games={data.games} />
+      {jogosZerados.length > 0 && <JourneyGamesSection games={jogosZerados} />}
     </div>
   );
 }

@@ -44,20 +44,16 @@ export function JourneyGameCard({ game, compact }: JourneyGameCardProps) {
 
   const header = (
     <div className="gv-journey-card-cover-wrap">
-      <img
-        src={game.coverImageUrl}
-        alt=""
-        className="gv-journey-card-cover"
-      />
+      <img src={game.coverImageUrl} alt="" className="gv-journey-card-cover" />
       <div className="gv-journey-card-overlay">
         <div className="gv-journey-card-analysis">
           <p className="gv-journey-card-analysis-label">Análise de 1 minuto</p>
           {game.verdict && (
-            <p className="gv-journey-card-verdict">&ldquo;{game.verdict}&rdquo;</p>
+            <p className="gv-journey-card-verdict">
+              &ldquo;{game.verdict}&rdquo;
+            </p>
           )}
-          {game.notes && (
-            <p className="gv-journey-card-notes">{game.notes}</p>
-          )}
+          {game.notes && <p className="gv-journey-card-notes">{game.notes}</p>}
         </div>
       </div>
       {game.is100Percent && (

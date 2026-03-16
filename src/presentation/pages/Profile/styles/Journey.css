@@ -493,7 +493,10 @@
   color: var(--journey-text-muted);
   font-size: 0.95rem;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
 }
 
 .gv-journey-add-game-btn:hover {
@@ -504,7 +507,9 @@
 
 /* ----- Modal formulário jornada (dark mode) ----- */
 .gv-journey-form-dialog.p-dialog,
-.gv-journey-form-dialog .p-dialog {
+.gv-journey-form-dialog .p-dialog,
+.gv-journey-completed-dialog.p-dialog,
+.gv-journey-completed-dialog .p-dialog {
   background: #0a0f16;
   border: 1px solid rgba(0, 245, 255, 0.35);
   border-radius: 0.75rem;
@@ -516,13 +521,17 @@
 
 .gv-journey-form-dialog .p-dialog-header,
 .gv-journey-form-dialog .p-dialog-content,
-.gv-journey-form-dialog .p-dialog-footer {
+.gv-journey-form-dialog .p-dialog-footer,
+.gv-journey-completed-dialog .p-dialog-header,
+.gv-journey-completed-dialog .p-dialog-content,
+.gv-journey-completed-dialog .p-dialog-footer {
   background: #0a0f16;
   border-color: rgba(0, 245, 255, 0.2);
   color: rgba(255, 255, 255, 0.95);
 }
 
-.gv-journey-form-dialog .p-dialog-title {
+.gv-journey-form-dialog .p-dialog-title,
+.gv-journey-completed-dialog .p-dialog-title {
   color: #00f5ff;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -530,16 +539,19 @@
   text-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
 }
 
-.gv-journey-form-dialog .p-dialog-header-icon {
+.gv-journey-form-dialog .p-dialog-header-icon,
+.gv-journey-completed-dialog .p-dialog-header-icon {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.gv-journey-form-dialog .p-dialog-header-icon:hover {
+.gv-journey-form-dialog .p-dialog-header-icon:hover,
+.gv-journey-completed-dialog .p-dialog-header-icon:hover {
   color: #00f5ff;
   box-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
 }
 
-.gv-journey-form-dialog .p-dialog-content {
+.gv-journey-form-dialog .p-dialog-content,
+.gv-journey-completed-dialog .p-dialog-content {
   padding: 1rem;
 }
 
@@ -593,7 +605,8 @@
   color: #0a0f16;
 }
 
-.gv-journey-form-dialog .p-button:not(.p-button-secondary):hover:not(:disabled) {
+.gv-journey-form-dialog
+  .p-button:not(.p-button-secondary):hover:not(:disabled) {
   background: #00f5ff;
   border-color: #00f5ff;
   color: #0a0f16;
@@ -665,7 +678,9 @@
   border: 1px solid var(--journey-border);
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .gv-journey-form-game-item:hover {
@@ -869,13 +884,54 @@
 
 .gv-journey-games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Cards mais largos, próximos de 320px como no layout sugerido */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
+}
+
+.gv-journey-games-grid--dialog {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.gv-journey-games-dialog-item {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.gv-journey-games-dialog-item:focus-visible {
+  outline: 2px solid var(--journey-accent);
+  outline-offset: 2px;
+}
+
+.gv-journey-completed-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.gv-journey-completed-filter-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--journey-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.gv-journey-completed-dropdown.p-dropdown {
+  width: 100%;
 }
 
 .gv-journey-card {
   background: var(--journey-surface);
   border: 1px solid var(--journey-border);
+  /* ~12px para combinar com o design sugerido */
   border-radius: 0.75rem;
   overflow: hidden;
   box-shadow:
@@ -926,7 +982,8 @@
 
 .gv-journey-card-cover-wrap {
   position: relative;
-  aspect-ratio: 3/4;
+  /* Banner mais horizontal, semelhante a 320x180 (~16:9) */
+  aspect-ratio: 16/9;
   overflow: hidden;
   background: var(--journey-border);
 }

@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import { Dropdown } from "primereact/dropdown";
 import { TabView, TabPanel } from "primereact/tabview";
-import type { JourneyMonth } from "../../types";
+import type { JourneyGame, JourneyMonth } from "../../types";
+import { JourneyGameCard } from "../JourneyGameCard";
 import { useJourneyTimeline } from "../../hooks/useJourneyTimeline";
 import { useJourneyFormModal } from "../../hooks/useJourneyFormModal";
 import { TimelineTabContent } from "../TimelineTabContent";
@@ -16,7 +20,36 @@ interface JourneyTimelineProps {
   ) => void;
   updateGame: (gameId: string, updates: Partial<import("../../types").JourneyGame>) => void;
   clearAll: () => void;
+  jogosZeradosAno?: JourneyGame[];
 }
+
+const RAWG_PLATFORM_OPTIONS = [
+  "PC",
+  "PlayStation 5",
+  "PlayStation 4",
+  "Xbox Series X|S",
+  "Xbox One",
+  "Nintendo Switch",
+  "Steam Deck",
+  "iOS",
+  "Android",
+];
+
+const RAWG_GENRE_OPTIONS = [
+  "Action",
+  "Adventure",
+  "RPG",
+  "Shooter",
+  "Indie",
+  "Platformer",
+  "Puzzle",
+  "Racing",
+  "Sports",
+  "Strategy",
+  "Simulation",
+  "Fighting",
+  "Horror",
+];
 
 const TAB_CONFIG = [
   {
@@ -66,6 +99,7 @@ export function JourneyTimeline({
   addGame,
   updateGame,
   clearAll: _clearAll,
+  jogosZeradosAno,
 }: JourneyTimelineProps) {
   const { activeTabIndex, setActiveTabIndex, jogosZerados, jogandoAgora, jogosDropados } =
     useJourneyTimeline(months);
@@ -84,9 +118,67 @@ export function JourneyTimeline({
   });
 
   const gameLists = [jogosZerados, jogandoAgora, jogosDropados];
+  const [allCompletedVisible, setAllCompletedVisible] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+
+  const completedGames = jogosZeradosAno ?? jogosZerados;
+
+  const platformOptions = RAWG_PLATFORM_OPTIONS.map((p) => ({ label: p, value: p }));
+  const genreOptions = RAWG_GENRE_OPTIONS.map((g) => ({ label: g, value: g }));
+
+  const filteredCompleted = completedGames.filter((game) => {
+    if (selectedPlatform && game.platform !== selectedPlatform) return false;
+    if (selectedGenre && !(game.genres ?? []).includes(selectedGenre)) return false;
+    return true;
+  });
 
   return (
     <section className="gv-journey-timeline-wrap" aria-label="Jogos zerados">
+      <Dialog
+        header="Todos os jogos zerados"
+        visible={allCompletedVisible}
+        onHide={() => setAllCompletedVisible(false)}
+        className="gv-journey-completed-dialog"
+        style={{ width: "min(95vw, 1120px)" }}
+      >
+        <div className="gv-journey-completed-filters">
+          <div className="gv-journey-completed-filter">
+            <label className="gv-journey-completed-filter-label">Plataforma</label>
+            <Dropdown
+              value={selectedPlatform}
+              options={platformOptions}
+              onChange={(e) => setSelectedPlatform(e.value ?? null)}
+              placeholder="Todas"
+              showClear
+              className="gv-journey-completed-dropdown"
+            />
+          </div>
+          <div className="gv-journey-completed-filter">
+            <label className="gv-journey-completed-filter-label">Gênero</label>
+            <Dropdown
+              value={selectedGenre}
+              options={genreOptions}
+              onChange={(e) => setSelectedGenre(e.value ?? null)}
+              placeholder="Todos"
+              showClear
+              className="gv-journey-completed-dropdown"
+            />
+          </div>
+        </div>
+        <div className="gv-journey-games-grid gv-journey-games-grid--dialog">
+          {filteredCompleted.map((game) => (
+            <button
+              key={game.id}
+              type="button"
+              className="gv-journey-games-dialog-item"
+              onClick={() => openModal(game, true)}
+            >
+              <JourneyGameCard game={game} />
+            </button>
+          ))}
+        </div>
+      </Dialog>
       <JourneyGameFormModal
         key={selectedGame?.id ?? "new"}
         visible={modalVisible}
@@ -112,6 +204,15 @@ export function JourneyTimeline({
             onClick={() => openModal(null)}
             size="small"
           />
+          {activeTabIndex === 0 && completedGames.length > 0 && (
+            <Button
+              type="button"
+              label="Mostrar mais jogos zerados"
+              size="small"
+              outlined
+              onClick={() => setAllCompletedVisible(true)}
+            />
+          )}
         </div>
         <TabView
           className="gv-journey-timeline-tabs"
