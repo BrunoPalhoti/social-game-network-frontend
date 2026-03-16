@@ -230,6 +230,13 @@
     0 0 12px var(--sgn-avatar-glow);
 }
 
+.gv-header-avatar.p-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 /* Header responsivo: tablet */
 @media (max-width: 1024px) {
   .gv-header-search {
@@ -456,6 +463,13 @@
     rgba(15, 5, 30, 0.98)
   );
   color: var(--neon-cyan);
+}
+
+.gv-profile-avatar.p-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .gv-profile-badge.p-tag {
