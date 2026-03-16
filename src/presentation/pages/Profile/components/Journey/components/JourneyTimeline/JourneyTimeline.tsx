@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -10,6 +9,7 @@ import { useJourneyTimeline } from "../../hooks/useJourneyTimeline";
 import { useJourneyFormModal } from "../../hooks/useJourneyFormModal";
 import { TimelineTabContent } from "../TimelineTabContent";
 import { JourneyGameFormModal } from "../JourneyGameFormModal";
+import { useJourneyCompletedFilters } from "./hooks/useJourneyCompletedFilters";
 import "../../../../styles/Journey.css";
 
 interface JourneyTimelineProps {
@@ -22,34 +22,6 @@ interface JourneyTimelineProps {
   clearAll: () => void;
   jogosZeradosAno?: JourneyGame[];
 }
-
-const RAWG_PLATFORM_OPTIONS = [
-  "PC",
-  "PlayStation 5",
-  "PlayStation 4",
-  "Xbox Series X|S",
-  "Xbox One",
-  "Nintendo Switch",
-  "Steam Deck",
-  "iOS",
-  "Android",
-];
-
-const RAWG_GENRE_OPTIONS = [
-  "Action",
-  "Adventure",
-  "RPG",
-  "Shooter",
-  "Indie",
-  "Platformer",
-  "Puzzle",
-  "Racing",
-  "Sports",
-  "Strategy",
-  "Simulation",
-  "Fighting",
-  "Horror",
-];
 
 const TAB_CONFIG = [
   {
@@ -117,21 +89,20 @@ export function JourneyTimeline({
     setActiveTabIndex,
   });
 
-  const gameLists = [jogosZerados, jogandoAgora, jogosDropados];
-  const [allCompletedVisible, setAllCompletedVisible] = useState(false);
-  const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-
   const completedGames = jogosZeradosAno ?? jogosZerados;
+  const {
+    allCompletedVisible,
+    setAllCompletedVisible,
+    selectedPlatform,
+    setSelectedPlatform,
+    selectedGenre,
+    setSelectedGenre,
+    platformOptions,
+    genreOptions,
+    filteredCompleted,
+  } = useJourneyCompletedFilters(completedGames);
 
-  const platformOptions = RAWG_PLATFORM_OPTIONS.map((p) => ({ label: p, value: p }));
-  const genreOptions = RAWG_GENRE_OPTIONS.map((g) => ({ label: g, value: g }));
-
-  const filteredCompleted = completedGames.filter((game) => {
-    if (selectedPlatform && game.platform !== selectedPlatform) return false;
-    if (selectedGenre && !(game.genres ?? []).includes(selectedGenre)) return false;
-    return true;
-  });
+  const gameLists = [jogosZerados, jogandoAgora, jogosDropados];
 
   return (
     <section className="gv-journey-timeline-wrap" aria-label="Jogos zerados">

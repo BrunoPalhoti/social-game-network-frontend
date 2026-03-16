@@ -1,31 +1,15 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { useAuthStore } from "@/shared/store/useAuthStore";
 import {
   FormMessage,
   FormField,
   FormSubmitButton,
 } from "@/presentation/components/Form";
+import { useLoginForm } from "./hooks/useLoginForm";
 
 export function LoginForm() {
-  const navigate = useNavigate();
-  const login = useAuthStore((s) => s.login);
-  const [username, setUsername] = useState("bruno.palhoti");
-  const [password, setPassword] = useState("123456");
-  const [error, setError] = useState("");
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError("");
-    const success = login(username, password);
-    if (success) {
-      navigate("/profile");
-    } else {
-      setError("Usuário ou senha inválidos. Tente novamente.");
-    }
-  };
+  const { username, setUsername, password, setPassword, error, handleSubmit } =
+    useLoginForm();
 
   return (
     <form onSubmit={handleSubmit} className="login-form">

@@ -1,12 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
-import { fetchGames } from "@/shared/api/rawgApi";
-import type { RawgGame } from "@/shared/api/rawgApi";
 import type { JourneyGame, JourneyStatus } from "@/data/types/journey";
 import { isZeradoStatus } from "../../utils";
+import { useJourneyGameForm } from "./hooks/useJourneyGameForm";
 
 const STATUS_OPTIONS: { label: string; value: JourneyStatus }[] = [
   { label: "Em missão (jogando)", value: "PLAYING" },
@@ -41,18 +39,6 @@ export interface JourneyGameFormValues {
   genres?: string[];
 }
 
-const emptyForm: JourneyGameFormValues = {
-  rawgGame: null,
-  name: "",
-  startedAt: "",
-  completedAt: "",
-  hoursPlayed: null,
-  rating: null,
-  notes: "",
-  status: "PLAYING",
-  platform: "",
-};
-
 export interface JourneyGameFormModalProps {
   visible: boolean;
   onHide: () => void;
@@ -73,124 +59,27 @@ export function JourneyGameFormModal({
   onSave,
   readOnly = false,
 }: JourneyGameFormModalProps) {
-  const [form, setForm] = useState<JourneyGameFormValues>(emptyForm);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [games, setGames] = useState<RawgGame[]>([]);
-  const [gamesLoading, setGamesLoading] = useState(false);
-  const [gamesError, setGamesError] = useState<string | null>(null);
-  const [touched, setTouched] = useState(false);
-  const [saveValidationError, setSaveValidationError] = useState(false);
-
-  const completedAtRequired = isZeradoStatus(form.status);
-  const hoursRequired = completedAtRequired;
-
-  const normalizeHours = (v: number | null | undefined): number | null => {
-    if (v == null) return null;
-    const n = Number(v);
-    return Number.isFinite(n) && n >= 0 ? n : null;
-  };
-
-  useEffect(() => {
-    if (!visible) return;
-    if (initialGame) {
-      setForm({
-        rawgGame: null,
-        name: initialGame.name,
-        startedAt: initialGame.startedAt ?? "",
-        completedAt: initialGame.completedAt ?? "",
-        hoursPlayed: normalizeHours(initialGame.hoursPlayed),
-        rating: initialGame.rating ?? null,
-        notes: initialGame.notes ?? "",
-        status: initialGame.status,
-        platform: initialGame.platform ?? "",
-      });
-      setSearchQuery(initialGame.name);
-    } else {
-      setForm({ ...emptyForm, startedAt: new Date().toISOString().slice(0, 10) });
-      setSearchQuery("");
-    }
-    setGames([]);
-    setGamesError(null);
-    setTouched(false);
-    setSaveValidationError(false);
-  }, [visible, initialGame]);
-
-  useEffect(() => {
-    if (!visible || readOnly || !searchQuery.trim()) {
-      setGames([]);
-      return;
-    }
-    const t = setTimeout(() => {
-      setGamesLoading(true);
-      setGamesError(null);
-      fetchGames({ search: searchQuery.trim(), page_size: 10 })
-        .then((r) => setGames(r.results ?? []))
-        .catch((e) => {
-          setGamesError(e instanceof Error ? e.message : "Erro ao buscar jogos");
-        })
-        .finally(() => setGamesLoading(false));
-    }, DEBOUNCE_MS);
-    return () => clearTimeout(t);
-  }, [visible, readOnly, searchQuery]);
-
-  const onSelectGame = useCallback((rawg: RawgGame) => {
-    setSaveValidationError(false);
-    setForm((prev) => ({
-      ...prev,
-      rawgGame: rawg,
-      name: rawg.name,
-      genres: rawg.genres?.map((g) => g.name) ?? [],
-    }));
-    setSearchQuery(rawg.name);
-    setGames([]);
-  }, []);
-
-  const handleSave = useCallback(() => {
-    setTouched(true);
-    setSaveValidationError(false);
-    const zerado = isZeradoStatus(form.status);
-    const payload: JourneyGameFormValues = {
-      ...form,
-      completedAt: zerado && !form.completedAt && form.startedAt ? form.startedAt : form.completedAt,
-      hoursPlayed: zerado && (form.hoursPlayed == null || form.hoursPlayed < 0) ? 0 : form.hoursPlayed,
-    };
-    if (!payload.name.trim()) {
-      setSaveValidationError(true);
-      return;
-    }
-    if (!payload.startedAt) {
-      setSaveValidationError(true);
-      return;
-    }
-    if (zerado && !payload.completedAt) {
-      setSaveValidationError(true);
-      return;
-    }
-    if (zerado && (payload.hoursPlayed == null || payload.hoursPlayed < 0)) {
-      setSaveValidationError(true);
-      return;
-    }
-    onSave(payload);
-    onHide();
-  }, [form, onSave, onHide]);
-
-  const handleStatusChange = (status: JourneyStatus) => {
-    setSaveValidationError(false);
-    setForm((prev) => {
-      const next = { ...prev, status };
-      if (isZeradoStatus(status)) {
-        if (!next.completedAt && next.startedAt) next.completedAt = next.startedAt;
-        if (next.hoursPlayed == null) next.hoursPlayed = 0;
-      }
-      return next;
-    });
-  };
-
-  const formIsZerado = isZeradoStatus(form.status);
-  const canSave =
-    form.name.trim() !== "" &&
-    form.startedAt !== "" &&
-    (!formIsZerado || !!((form.completedAt || form.startedAt) && (form.hoursPlayed == null || form.hoursPlayed >= 0)));
+  const {
+    form,
+    setForm,
+    searchQuery,
+    setSearchQuery,
+    games,
+    gamesLoading,
+    gamesError,
+    touched,
+    saveValidationError,
+    completedAtRequired,
+    hoursRequired,
+    onSelectGame,
+    handleStatusChange,
+    handleSave,
+    formIsZerado,
+    canSave,
+    PLATFORM_OPTIONS,
+    readOnly: readOnlyState,
+    setSaveValidationError,
+  } = useJourneyGameForm({ visible, initialGame, readOnly, onSave, onHide });
 
   return (
     <Dialog
@@ -231,26 +120,26 @@ export function JourneyGameFormModal({
 
         <div className="gv-journey-form-field gv-journey-form-field--full">
           <label className="gv-journey-form-label" htmlFor="journey-game-search">
-            {readOnly ? "Nome do jogo" : "Nome do jogo (busque na RAWG)"}
+            {readOnlyState ? "Nome do jogo" : "Nome do jogo (busque na RAWG)"}
           </label>
           <InputText
             id="journey-game-search"
             value={searchQuery}
             onChange={(e) => {
-              if (readOnly) return;
+              if (readOnlyState) return;
               const value = e.target.value;
               setSearchQuery(value);
               setForm((prev) => ({ ...prev, name: value }));
               setSaveValidationError(false);
             }}
-            placeholder={readOnly ? "" : "Procure seu jogo aqui..."}
+            placeholder={readOnlyState ? "" : "Procure seu jogo aqui..."}
             className="gv-journey-form-input w-full"
-            readOnly={readOnly}
-            disabled={readOnly}
+            readOnly={readOnlyState}
+            disabled={readOnlyState}
           />
         </div>
 
-        {!readOnly && (
+        {!readOnlyState && (
           <div className="gv-journey-form-field gv-journey-form-field--full">
             {gamesLoading && (
               <p className="gv-journey-form-hint">
@@ -293,13 +182,13 @@ export function JourneyGameFormModal({
             type="date"
             value={form.startedAt}
             onChange={(e) => {
-              if (readOnly) return;
+              if (readOnlyState) return;
               setSaveValidationError(false);
               setForm((prev) => ({ ...prev, startedAt: e.target.value }));
             }}
             className="gv-journey-form-input p-inputtext p-component w-full"
-            readOnly={readOnly}
-            disabled={readOnly}
+            readOnly={readOnlyState}
+            disabled={readOnlyState}
           />
         </div>
 
@@ -312,13 +201,13 @@ export function JourneyGameFormModal({
             type="date"
             value={form.completedAt}
             onChange={(e) => {
-              if (readOnly) return;
+              if (readOnlyState) return;
               setSaveValidationError(false);
               setForm((prev) => ({ ...prev, completedAt: e.target.value }));
             }}
             className="gv-journey-form-input p-inputtext p-component w-full"
-            readOnly={readOnly}
-            disabled={readOnly}
+            readOnly={readOnlyState}
+            disabled={readOnlyState}
           />
           {completedAtRequired && touched && !form.completedAt && (
             <p className="gv-journey-form-error">Informe a data que zerou o jogo.</p>
@@ -332,9 +221,11 @@ export function JourneyGameFormModal({
           <select
             id="journey-status"
             value={form.status}
-            onChange={(e) => !readOnly && handleStatusChange(e.target.value as JourneyStatus)}
+            onChange={(e) =>
+              !readOnlyState && handleStatusChange(e.target.value as JourneyStatus)
+            }
             className="gv-journey-form-input p-inputtext p-component w-full"
-            disabled={readOnly}
+            disabled={readOnlyState}
           >
             {STATUS_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -352,12 +243,12 @@ export function JourneyGameFormModal({
             id="journey-platform"
             value={form.platform ?? ""}
             onChange={(e) => {
-              if (readOnly) return;
+              if (readOnlyState) return;
               setSaveValidationError(false);
               setForm((prev) => ({ ...prev, platform: e.target.value || undefined }));
             }}
             className="gv-journey-form-input p-inputtext p-component w-full"
-            disabled={readOnly}
+            disabled={readOnlyState}
           >
             <option value="">Selecione a plataforma</option>
             {PLATFORM_OPTIONS.map((p) => (
@@ -378,16 +269,16 @@ export function JourneyGameFormModal({
                 id="journey-hours"
                 value={form.hoursPlayed ?? undefined}
                 onValueChange={(e) => {
-                  if (readOnly) return;
+                  if (readOnlyState) return;
                   setSaveValidationError(false);
                   const v = e?.value ?? e;
                   setForm((prev) => ({ ...prev, hoursPlayed: normalizeHours(typeof v === "number" ? v : null) }));
                 }}
                 min={0}
-                placeholder={readOnly ? "" : "Ex: 25h"}
+                placeholder={readOnlyState ? "" : "Ex: 25h"}
                 className="gv-journey-form-input w-full"
-                readOnly={readOnly}
-                disabled={readOnly}
+                readOnly={readOnlyState}
+                disabled={readOnlyState}
               />
               {hoursRequired && touched && (form.hoursPlayed == null || form.hoursPlayed < 0) && (
                 <p className="gv-journey-form-error">Informe as horas jogadas.</p>
@@ -402,7 +293,7 @@ export function JourneyGameFormModal({
                 id="journey-rating"
                 value={form.rating ?? undefined}
                 onValueChange={(e) => {
-                  if (readOnly) return;
+                  if (readOnlyState) return;
                   setSaveValidationError(false);
                   const v = e?.value ?? e;
                   let normalized: number | null = null;
@@ -415,10 +306,10 @@ export function JourneyGameFormModal({
                 min={0}
                 max={10}
                 step={0.5}
-                placeholder={readOnly ? "" : "Ex: 8.5"}
+                placeholder={readOnlyState ? "" : "Ex: 8.5"}
                 className="gv-journey-form-input w-full"
-                readOnly={readOnly}
-                disabled={readOnly}
+                readOnly={readOnlyState}
+                disabled={readOnlyState}
               />
             </div>
 
@@ -430,7 +321,7 @@ export function JourneyGameFormModal({
                 id="journey-notes"
                 value={form.notes ?? ""}
                 onChange={(e) => {
-                  if (readOnly) return;
+                  if (readOnlyState) return;
                   const value = e.target.value.slice(0, 200);
                   setSaveValidationError(false);
                   setForm((prev) => ({ ...prev, notes: value }));

@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { TabView, TabPanel } from "primereact/tabview";
 import { JourneyContent } from "@/presentation/pages/Profile/components/Journey/JourneyContent";
-
-const currentYear = new Date().getFullYear();
+import { useProfileTabs } from "./hooks/useProfileTabs";
 
 export function ProfileTabs() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { currentYear, activeIndex, setActiveIndex } = useProfileTabs();
 
   return (
     <TabView
