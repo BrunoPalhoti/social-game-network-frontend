@@ -1232,4 +1232,20 @@
     /* Celular: 2 cards por linha */
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Toolbar do card Timeline (botões "Adicionar jogo" / "Mostrar mais...") */
+  .gv-journey-timeline-toolbar {
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .gv-journey-timeline-toolbar .p-button {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.7rem;
+    border-radius: 0.6rem;
+  }
+
+  .gv-journey-timeline-toolbar .p-button .p-button-icon {
+    font-size: 0.8rem;
+  }
 }
