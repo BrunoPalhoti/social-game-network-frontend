@@ -32,6 +32,8 @@ export interface JourneyGameFormValues {
   startedAt: string;
   completedAt: string;
   hoursPlayed: number | null;
+  rating?: number | null;
+  notes?: string;
   status: JourneyStatus;
   /** Plataforma em que jogou (ex.: PlayStation 5). */
   platform?: string;
@@ -45,6 +47,8 @@ const emptyForm: JourneyGameFormValues = {
   startedAt: "",
   completedAt: "",
   hoursPlayed: null,
+  rating: null,
+  notes: "",
   status: "PLAYING",
   platform: "",
 };
@@ -95,6 +99,8 @@ export function JourneyGameFormModal({
         startedAt: initialGame.startedAt ?? "",
         completedAt: initialGame.completedAt ?? "",
         hoursPlayed: normalizeHours(initialGame.hoursPlayed),
+        rating: initialGame.rating ?? null,
+        notes: initialGame.notes ?? "",
         status: initialGame.status,
         platform: initialGame.platform ?? "",
       });
@@ -364,6 +370,59 @@ export function JourneyGameFormModal({
         />
         {hoursRequired && touched && (form.hoursPlayed == null || form.hoursPlayed < 0) && (
           <p className="gv-journey-form-error">Informe as horas jogadas.</p>
+        )}
+
+        {formIsZerado && (
+          <>
+            <label className="gv-journey-form-label" htmlFor="journey-rating">
+              Nota (0 a 10)
+            </label>
+            <InputNumber
+              id="journey-rating"
+              value={form.rating ?? undefined}
+              onValueChange={(e) => {
+                if (readOnly) return;
+                setSaveValidationError(false);
+                const v = e?.value ?? e;
+                let normalized: number | null = null;
+                if (typeof v === "number" && Number.isFinite(v)) {
+                  const clamped = Math.max(0, Math.min(10, v));
+                  normalized = clamped;
+                }
+                setForm((prev) => ({ ...prev, rating: normalized }));
+              }}
+              min={0}
+              max={10}
+              step={0.5}
+              placeholder={readOnly ? "" : "Ex: 8.5"}
+              className="gv-journey-form-input w-full"
+              readOnly={readOnly}
+              disabled={readOnly}
+            />
+
+            <label className="gv-journey-form-label" htmlFor="journey-notes">
+              Comentário (até 200 caracteres)
+            </label>
+            <textarea
+              id="journey-notes"
+              value={form.notes ?? ""}
+              onChange={(e) => {
+                if (readOnly) return;
+                const value = e.target.value.slice(0, 200);
+                setSaveValidationError(false);
+                setForm((prev) => ({ ...prev, notes: value }));
+              }}
+              maxLength={200}
+              className="gv-journey-form-input p-inputtext p-component w-full gv-journey-form-textarea"
+              readOnly={readOnly}
+              disabled={readOnly}
+            />
+            {!readOnly && (
+              <p className="gv-journey-form-hint">
+                {`${(form.notes ?? "").length}/200 caracteres`}
+              </p>
+            )}
+          </>
         )}
       </div>
     </Dialog>
