@@ -31,7 +31,9 @@
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Shooter", "Action"],
-            "monthKey": "2026-03"
+            "monthKey": "2026-03",
+            "rating": 9,
+            "notes": "Começo perfeito pra saga, vibe sessão da tarde."
           },
           {
             "id": "22513",
@@ -43,7 +45,9 @@
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Shooter", "Action"],
-            "monthKey": "2026-03"
+            "monthKey": "2026-03",
+            "rating": 9.5,
+            "notes": "Topo do ranking de Uncharted, set pieces insanas."
           },
           {
             "id": "5703",
@@ -54,7 +58,9 @@
             "status": "PLAYING",
             "platform": "PlayStation 5",
             "genres": ["Action"],
-            "monthKey": "2026-03"
+            "monthKey": "2026-03",
+            "rating": 0,
+            "notes": "Em progresso: hype pra sequência do Drake."
           },
           {
             "id": "244738",
@@ -66,7 +72,9 @@
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Adventure", "Action"],
-            "monthKey": "2026-03"
+            "monthKey": "2026-03",
+            "rating": 8.5,
+            "notes": "Combate muito gostoso, história meio exagerada mas divertida."
           },
           {
             "id": "982603",
@@ -78,7 +86,9 @@
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Adventure", "Action"],
-            "monthKey": "2026-03"
+            "monthKey": "2026-03",
+            "rating": 8,
+            "notes": "Tensão constante, terror curtinho e eficiente."
           },
           {
             "id": "989329",
@@ -90,7 +100,9 @@
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Action", "RPG"],
-            "monthKey": "2026-02"
+            "monthKey": "2026-02",
+            "rating": 9,
+            "notes": "Exploração deliciosa, clima de lenda japonesa muito forte."
           },
           {
             "id": "29338",
@@ -102,7 +114,9 @@
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Action"],
-            "monthKey": "2025-12"
+            "monthKey": "2025-12",
+            "rating": 8.5,
+            "notes": "Horda de zumbi é o ponto alto, história demorou mas engatou."
           }
         ]
       },
