@@ -55,11 +55,19 @@ export function Header() {
           aria-label="Perfil do usuário"
           className="gv-header-avatar-btn p-button-plain"
         >
-          <Avatar
-            label={avatarLabel}
-            className="gv-header-avatar"
-            shape="circle"
-          />
+          {user?.avatarUrl ? (
+            <Avatar
+              image={user.avatarUrl}
+              className="gv-header-avatar"
+              shape="circle"
+            />
+          ) : (
+            <Avatar
+              label={avatarLabel}
+              className="gv-header-avatar"
+              shape="circle"
+            />
+          )}
         </Button>
       </div>
     </header>

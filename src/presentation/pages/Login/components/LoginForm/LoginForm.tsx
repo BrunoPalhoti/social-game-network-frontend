@@ -1,32 +1,15 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { Divider } from "primereact/divider";
-import { useAuthStore } from "@/shared/store/useAuthStore";
 import {
   FormMessage,
   FormField,
   FormSubmitButton,
 } from "@/presentation/components/Form";
+import { useLoginForm } from "./hooks/useLoginForm";
 
 export function LoginForm() {
-  const navigate = useNavigate();
-  const login = useAuthStore((s) => s.login);
-  const [username, setUsername] = useState("bruno.palhoti");
-  const [password, setPassword] = useState("123456");
-  const [error, setError] = useState("");
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError("");
-    const success = login(username, password);
-    if (success) {
-      navigate("/home");
-    } else {
-      setError("Usuário ou senha inválidos. Tente novamente.");
-    }
-  };
+  const { username, setUsername, password, setPassword, error, handleSubmit } =
+    useLoginForm();
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
@@ -68,20 +51,9 @@ export function LoginForm() {
           autoComplete="current-password"
         />
       </FormField>
-      <div className="login-links-row">
-        <Link to="/esqueci-senha" className="login-link">
-          Esqueceu a senha?
-        </Link>
-      </div>
+      {/* Links de recuperação de senha removidos enquanto não há rota correspondente */}
       <FormSubmitButton label="ENTRAR" className="login-btn-entrar" />
-      <Divider align="center" type="dashed" className="login-divider-gamer">
-        <span className="login-divider-text">ou</span>
-      </Divider>
-      <div className="login-criar-conta">
-        <Link to="/criar-conta" className="login-link">
-          Criar Conta
-        </Link>
-      </div>
+      {/* Seção de criação de conta removida enquanto não há rota correspondente */}
     </form>
   );
 }

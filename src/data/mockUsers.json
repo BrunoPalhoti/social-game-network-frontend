@@ -8,9 +8,11 @@
       "name": "Bruno Palhoti",
       "nickname": "brunogameplay",
       "platform": "Playstation",
-      "favoriteGame": "The Last of Us Part II",
+      "favoriteGame": "Life is Strange",
       "createdAt": "2025-01-01T00:00:00.000Z",
-      "favoriteGameCover": "https://media.rawg.io/media/games/909/909974d1c7863c2027241e265fe7011f.jpg",
+      "favoriteGameCover": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+      "avatarUrl": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+      "bannerUrl": "https://media.rawg.io/media/games/909/909974d1c7863c2027241e265fe7011f.jpg",
       "platforms": [
         {
           "name": "PlayStation 5",
@@ -96,7 +98,7 @@
             "coverImageUrl": "https://media.rawg.io/media/games/a79/a79d2fc90c4dbf07a8580b19600fd61d.jpg",
             "startedAt": "2025-12-21",
             "completedAt": "2025-12-18",
-            "hoursPlayed": 30,
+            "hoursPlayed": 25,
             "status": "COMPLETED",
             "platform": "PlayStation 5",
             "genres": ["Action"],
@@ -105,7 +107,8 @@
         ]
       },
       "favoriteGenre": "Shooter",
-      "favoriteGenreCover": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg"
+      "favoriteGenreCover": "https://media.rawg.io/media/games/2ba/2bac0e87cf45e5b508f227d281c9252a.jpg",
+      "bannerPosition": 87
     },
     {
       "id": "a1b2c3d4-0002-4000-8000-000000000002",

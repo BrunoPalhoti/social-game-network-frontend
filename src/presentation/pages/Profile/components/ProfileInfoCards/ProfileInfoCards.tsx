@@ -1,6 +1,8 @@
 import { InfoCard } from "@/presentation/components/InfoCard";
 import { type User } from "@/shared/store/useAuthStore";
 import { useProfileInfoCards } from "./hooks";
+import { RawgGameSuggestionList } from "../shared/RawgGameSuggestionList";
+import { LoadingRow, ErrorText, EmptyMessage } from "./DialogHelpers";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
@@ -114,55 +116,16 @@ export function ProfileInfoCards() {
               className="gv-profile-edit-input w-full"
               autoFocus
             />
-            {gamesLoading && (
-              <div className="gv-profile-dialog-games-loading">
-                <i className="pi pi-spin pi-spinner" />
-                Buscando jogos...
-              </div>
+            {gamesLoading && <LoadingRow>Buscando jogos...</LoadingRow>}
+            {gamesError && <ErrorText message={gamesError} />}
+            {!gamesLoading && !gamesError && (
+              <RawgGameSuggestionList
+                games={games}
+                emptyQuery={editValue}
+                heading="Clique em um jogo para selecionar"
+                onSelect={onSelectGame}
+              />
             )}
-            {gamesError && (
-              <p className="gv-profile-dialog-games-error">{gamesError}</p>
-            )}
-            {!gamesLoading && !gamesError && games.length > 0 && (
-              <>
-                <p className="gv-profile-game-list-label">
-                  Clique em um jogo para selecionar
-                </p>
-                <div className="gv-profile-dialog-games-list">
-                  {games.map((game) => (
-                    <button
-                      key={game.id}
-                      type="button"
-                      className="gv-profile-dialog-game-item"
-                      onClick={() => onSelectGame(game)}
-                    >
-                      {game.background_image ? (
-                        <img
-                          src={game.background_image}
-                          alt=""
-                          className="gv-profile-game-suggestion-img"
-                        />
-                      ) : (
-                        <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
-                      )}
-                      <span className="gv-profile-game-suggestion-info">
-                        <span className="gv-profile-game-suggestion-name">
-                          {game.name}
-                        </span>
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-            {!gamesLoading &&
-              !gamesError &&
-              editValue.trim() &&
-              games.length === 0 && (
-                <p className="gv-profile-dialog-games-error">
-                  Nenhum jogo encontrado.
-                </p>
-              )}
           </div>
         ) : isPlatformsEdit ? (
           <div className="gv-profile-game-favorite-dialog">
@@ -213,13 +176,10 @@ export function ProfileInfoCards() {
               </>
             )}
             {platformsLoading && (
-              <div className="gv-profile-dialog-games-loading">
-                <i className="pi pi-spin pi-spinner" />
-                Carregando plataformas...
-              </div>
+              <LoadingRow>Carregando plataformas...</LoadingRow>
             )}
             {platformsError && (
-              <p className="gv-profile-dialog-games-error">{platformsError}</p>
+              <ErrorText message={platformsError} />
             )}
             {!platformsLoading &&
               !platformsError &&
@@ -271,55 +231,48 @@ export function ProfileInfoCards() {
               autoFocus
             />
             {genresLoading && (
-              <div className="gv-profile-dialog-games-loading">
-                <i className="pi pi-spin pi-spinner" />
-                Carregando gêneros...
-              </div>
+              <LoadingRow>Carregando gêneros...</LoadingRow>
             )}
             {genresError && (
-              <p className="gv-profile-dialog-games-error">{genresError}</p>
+              <ErrorText message={genresError} />
             )}
-            {!genresLoading &&
-              !genresError &&
-              genresList.length > 0 && (
-                <>
-                  <p className="gv-profile-game-list-label">
-                    Clique em um gênero para selecionar
-                  </p>
-                  <div className="gv-profile-dialog-games-list">
-                    {genresList.map((genre) => (
-                      <button
-                        key={genre.id}
-                        type="button"
-                        className="gv-profile-dialog-game-item"
-                        onClick={() => onSelectGenre(genre)}
-                      >
-                        {genre.image_background ? (
-                          <img
-                            src={genre.image_background}
-                            alt=""
-                            className="gv-profile-game-suggestion-img"
-                          />
-                        ) : (
-                          <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
-                        )}
-                        <span className="gv-profile-game-suggestion-info">
-                          <span className="gv-profile-game-suggestion-name">
-                            {genre.name}
-                          </span>
+            {!genresLoading && !genresError && genresList.length > 0 && (
+              <>
+                <p className="gv-profile-game-list-label">
+                  Clique em um gênero para selecionar
+                </p>
+                <div className="gv-profile-dialog-games-list">
+                  {genresList.map((genre) => (
+                    <button
+                      key={genre.id}
+                      type="button"
+                      className="gv-profile-dialog-game-item"
+                      onClick={() => onSelectGenre(genre)}
+                    >
+                      {genre.image_background ? (
+                        <img
+                          src={genre.image_background}
+                          alt=""
+                          className="gv-profile-game-suggestion-img"
+                        />
+                      ) : (
+                        <div className="gv-profile-game-suggestion-img gv-profile-game-suggestion-placeholder" />
+                      )}
+                      <span className="gv-profile-game-suggestion-info">
+                        <span className="gv-profile-game-suggestion-name">
+                          {genre.name}
                         </span>
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
             {!genresLoading &&
               !genresError &&
               editValue.trim() &&
               genresList.length === 0 && (
-                <p className="gv-profile-dialog-games-error">
-                  Nenhum gênero encontrado.
-                </p>
+                <EmptyMessage>Nenhum gênero encontrado.</EmptyMessage>
               )}
           </div>
         ) : null}
