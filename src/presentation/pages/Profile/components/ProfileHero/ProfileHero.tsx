@@ -175,7 +175,13 @@ export function ProfileHero({ children }: ProfileHeroProps) {
             />
             <Button
               label="Salvar"
-              disabled={!editing || !selectedCover}
+              disabled={
+                !editing ||
+                (editing === "avatar" && !selectedCover) ||
+                (editing === "banner" &&
+                  !selectedCover &&
+                  typeof user?.bannerUrl !== "string")
+              }
               onClick={() => {
                 if (!editing) return;
                 const updates: {
@@ -186,7 +192,7 @@ export function ProfileHero({ children }: ProfileHeroProps) {
                   editing === "avatar"
                     ? { avatarUrl: selectedCover }
                     : {
-                        bannerUrl: selectedCover,
+                        bannerUrl: selectedCover ?? user?.bannerUrl ?? null,
                         bannerPosition: bannerPositionPercent,
                       };
                 updateProfile(updates);
