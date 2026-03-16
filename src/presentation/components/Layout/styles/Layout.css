@@ -53,7 +53,6 @@
     0 0 40px rgba(255, 0, 255, 0.15);
 }
 
-
 .gv-page-header {
   display: flex;
   flex-direction: column;
@@ -318,7 +317,7 @@
 
 .gv-profile-banner {
   position: relative;
-  height: 180px;
+  height: 500px;
   background: linear-gradient(
     135deg,
     rgba(15, 5, 30, 0.98) 0%,
@@ -569,6 +568,24 @@
   padding-right: 0.25rem;
   padding-bottom: 0.5rem;
 }
+
+.gv-profile-banner-position-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gv-profile-banner-pos-slider {
+  width: 100%;
+  cursor: pointer;
+}
+
+.gv-profile-banner-pos-hints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
 .gv-profile-dialog-game-item {
   display: flex;
   align-items: center;
@@ -582,7 +599,9 @@
   color: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
 }
 .gv-profile-dialog-game-item:hover {
   background: rgba(0, 245, 255, 0.12);
@@ -660,7 +679,9 @@
   background: transparent;
   color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .gv-profile-dialog-platform-chip-remove:hover {
@@ -908,11 +929,15 @@
   border: 1px solid rgba(0, 255, 255, 0.3);
   color: rgba(255, 255, 255, 0.95);
   border-radius: 0.5rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 [data-theme="dark"] .gv-profile-edit-dialog .p-inputtext:focus,
-[data-theme="dark"] .gv-profile-edit-dialog .gv-profile-edit-input.p-inputtext:focus {
+[data-theme="dark"]
+  .gv-profile-edit-dialog
+  .gv-profile-edit-input.p-inputtext:focus {
   border-color: #00ffff;
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
   outline: none;
@@ -948,7 +973,9 @@
   box-shadow: 0 0 16px rgba(0, 255, 255, 0.3);
 }
 
-[data-theme="dark"] .gv-profile-edit-dialog .p-button:not(.p-button-secondary):hover {
+[data-theme="dark"]
+  .gv-profile-edit-dialog
+  .p-button:not(.p-button-secondary):hover {
   background: rgba(0, 255, 255, 0.4);
   border-color: #00ffff;
   box-shadow: 0 0 24px rgba(0, 255, 255, 0.4);
@@ -1256,7 +1283,7 @@
 /* Profile hero: celular (640px e 480px) */
 @media (max-width: 640px) {
   .gv-profile-banner {
-    height: 140px;
+    height: 170px;
   }
 
   .gv-profile-avatar-wrap {
@@ -1303,7 +1330,7 @@
 
 @media (max-width: 480px) {
   .gv-profile-banner {
-    height: 120px;
+    height: 150px;
   }
   .gv-profile-avatar-wrap {
     margin-top: -40px;

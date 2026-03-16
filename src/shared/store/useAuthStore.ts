@@ -13,7 +13,7 @@ export function getMockUserProfile(
   favoriteGenreCover?: string;
   avatarUrl?: string | null;
   bannerUrl?: string | null;
-  bannerPosition?: "top" | "center" | "bottom";
+  bannerPosition?: "top" | "center" | "bottom" | number;
 } {
   if (!username) return {};
   const key = username.trim().toLowerCase();
@@ -52,8 +52,8 @@ export interface User {
   avatarUrl?: string | null;
   /** URL da capa/banner do perfil (ex.: capa do game favorito na RAWG). */
   bannerUrl?: string | null;
-  /** Posição vertical da capa (para centralizar melhor o foco). */
-  bannerPosition?: "top" | "center" | "bottom";
+  /** Posição vertical da capa (para centralizar melhor o foco). Aceita presets antigos ("top" | "center" | "bottom") ou valor contínuo (0–100). */
+  bannerPosition?: "top" | "center" | "bottom" | number;
 }
 
 export function getInitialsFromUsername(username: string): string {

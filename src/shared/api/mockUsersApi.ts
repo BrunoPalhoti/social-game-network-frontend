@@ -22,8 +22,8 @@ export type ProfileOverrides = {
   avatarUrl?: string | null;
   /** URL da capa/banner do perfil (ex.: capa do game favorito na RAWG). */
   bannerUrl?: string | null;
-  /** Posição vertical da capa (top/center/bottom). */
-  bannerPosition?: "top" | "center" | "bottom";
+  /** Posição vertical da capa (top/center/bottom ou percentual 0–100). */
+  bannerPosition?: "top" | "center" | "bottom" | number;
   /** Jogos da jornada por ano (chave = ano em string, ex: "2026"). */
   journeyByYear?: Record<string, JourneyGame[]>;
 };
@@ -232,7 +232,7 @@ export type AuthUserSnapshot = {
   favoriteGenreCover?: string;
   avatarUrl?: string | null;
   bannerUrl?: string | null;
-  bannerPosition?: "top" | "center" | "bottom";
+  bannerPosition?: "top" | "center" | "bottom" | number;
 };
 
 /**

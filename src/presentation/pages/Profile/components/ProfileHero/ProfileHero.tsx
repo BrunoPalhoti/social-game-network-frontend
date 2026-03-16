@@ -21,22 +21,34 @@ export function ProfileHero({ children }: ProfileHeroProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedCover, setSelectedCover] = useState<string | null>(null);
-  const [bannerPositionChoice, setBannerPositionChoice] = useState<
-    "top" | "center" | "bottom"
-  >("center");
+  const [bannerPositionPercent, setBannerPositionPercent] =
+    useState<number>(50);
 
-  const bannerStyle =
-    user?.bannerUrl ?? user?.favoriteGameCover
-      ? {
-          backgroundImage: `url(${user.bannerUrl ?? user.favoriteGameCover})`,
-          backgroundPosition:
-            user?.bannerPosition === "top"
-              ? "center 0%"
-              : user?.bannerPosition === "bottom"
-                ? "center 100%"
-                : "center 50%",
-        }
-      : undefined;
+  const storedBannerPositionPercent =
+    typeof user?.bannerPosition === "number"
+      ? user.bannerPosition
+      : user?.bannerPosition === "top"
+        ? 0
+        : user?.bannerPosition === "bottom"
+          ? 100
+          : 50;
+
+  const activeBannerPositionPercent =
+    editing === "banner" ? bannerPositionPercent : storedBannerPositionPercent;
+
+  const activeBannerImage =
+    (editing === "banner" && selectedCover) ||
+    user?.bannerUrl ||
+    user?.favoriteGameCover ||
+    null;
+
+  const bannerStyle = activeBannerImage
+    ? {
+        backgroundImage: `url(${activeBannerImage})`,
+        backgroundPosition: `center ${activeBannerPositionPercent}%`,
+        backgroundSize: "cover",
+      }
+    : undefined;
 
   async function handleSearchGames(q: string) {
     const query = q.trim();
@@ -77,7 +89,7 @@ export function ProfileHero({ children }: ProfileHeroProps) {
           onClick={() => {
             setEditing("banner");
             setSelectedCover(null);
-            setBannerPositionChoice(user?.bannerPosition ?? "center");
+            setBannerPositionPercent(storedBannerPositionPercent);
           }}
           aria-label="Alterar capa do perfil"
         >
@@ -138,7 +150,7 @@ export function ProfileHero({ children }: ProfileHeroProps) {
           setGames([]);
           setError(null);
           setSelectedCover(null);
-          setBannerPositionChoice("center");
+          setBannerPositionPercent(storedBannerPositionPercent);
         }}
         className="gv-profile-edit-dialog"
         contentStyle={{ padding: "0.25rem 1rem" }}
@@ -158,7 +170,7 @@ export function ProfileHero({ children }: ProfileHeroProps) {
                 setGames([]);
                 setError(null);
                 setSelectedCover(null);
-                setBannerPositionChoice("center");
+                setBannerPositionPercent(storedBannerPositionPercent);
               }}
             />
             <Button
@@ -169,24 +181,24 @@ export function ProfileHero({ children }: ProfileHeroProps) {
                 const updates: {
                   avatarUrl?: string | null;
                   bannerUrl?: string | null;
-                  bannerPosition?: "top" | "center" | "bottom";
+                  bannerPosition?: number;
                 } =
                   editing === "avatar"
                     ? { avatarUrl: selectedCover }
                     : {
                         bannerUrl: selectedCover,
-                        bannerPosition: bannerPositionChoice,
+                        bannerPosition: bannerPositionPercent,
                       };
                 updateProfile(updates);
                 if (user?.username) {
-                  updateUserProfile(user.username, updates);
+                  updateUserProfile(user.username, updates as any);
                 }
                 setEditing(null);
                 setSearch("");
                 setGames([]);
                 setError(null);
                 setSelectedCover(null);
-                setBannerPositionChoice("center");
+                setBannerPositionPercent(storedBannerPositionPercent);
               }}
             />
           </div>
@@ -205,36 +217,25 @@ export function ProfileHero({ children }: ProfileHeroProps) {
             autoFocus
           />
           {editing === "banner" && (
-            <div className="gv-profile-game-favorite-options" style={{ marginTop: "0.5rem" }}>
-              <p className="gv-profile-game-list-label">Centralização da capa</p>
-              <div className="gv-profile-game-favorite-options-row">
-                <button
-                  type="button"
-                  className={`gv-profile-banner-pos-btn${
-                    bannerPositionChoice === "top" ? " is-active" : ""
-                  }`}
-                  onClick={() => setBannerPositionChoice("top")}
-                >
-                  Topo
-                </button>
-                <button
-                  type="button"
-                  className={`gv-profile-banner-pos-btn${
-                    bannerPositionChoice === "center" ? " is-active" : ""
-                  }`}
-                  onClick={() => setBannerPositionChoice("center")}
-                >
-                  Centro
-                </button>
-                <button
-                  type="button"
-                  className={`gv-profile-banner-pos-btn${
-                    bannerPositionChoice === "bottom" ? " is-active" : ""
-                  }`}
-                  onClick={() => setBannerPositionChoice("bottom")}
-                >
-                  Baixo
-                </button>
+            <div
+              className="gv-profile-banner-position-controls"
+              style={{ marginTop: "0.5rem" }}
+            >
+              <p className="gv-profile-game-list-label">
+                Recorte vertical da capa
+              </p>
+              <input
+                type="range"
+                min={0}
+                max={100}
+                value={bannerPositionPercent}
+                onChange={(e) => setBannerPositionPercent(Number(e.target.value))}
+                className="gv-profile-banner-pos-slider"
+              />
+              <div className="gv-profile-banner-pos-hints">
+                <span>Mostrar mais o topo</span>
+                <span>{bannerPositionPercent}%</span>
+                <span>Mostrar mais a parte de baixo</span>
               </div>
             </div>
           )}
