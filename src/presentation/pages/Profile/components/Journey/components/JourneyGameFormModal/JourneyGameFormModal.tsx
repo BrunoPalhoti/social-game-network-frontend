@@ -9,9 +9,9 @@ import type { JourneyGame, JourneyStatus } from "@/data/types/journey";
 import { isZeradoStatus } from "../../utils";
 
 const STATUS_OPTIONS: { label: string; value: JourneyStatus }[] = [
-  { label: "JOGANDO AGORA", value: "PLAYING" },
-  { label: "JOGO ZERADO", value: "COMPLETED" },
-  { label: "JOGO DROPADO", value: "DROPPED" },
+  { label: "Em missão (jogando)", value: "PLAYING" },
+  { label: "Missão concluída (zerado)", value: "COMPLETED" },
+  { label: "Missão abortada (dropado)", value: "DROPPED" },
 ];
 
 const PLATFORM_OPTIONS = [
@@ -195,12 +195,16 @@ export function JourneyGameFormModal({
   return (
     <Dialog
       header={
-        readOnly ? "Ver jogo" : initialGame ? "Editar jogo" : "Adicionar jogo à jornada"
+        readOnly
+          ? "Ver jogo da jornada"
+          : initialGame
+          ? "Editar jogo da jornada"
+          : "Adicionar jogo à jornada"
       }
       visible={visible}
       onHide={onHide}
       className="gv-journey-form-dialog"
-      style={{ width: "min(90vw, 420px)" }}
+      style={{ width: "min(95vw, 600px)" }}
       footer={
         <div
           className="gv-journey-form-dialog-footer"
@@ -212,7 +216,7 @@ export function JourneyGameFormModal({
           ) : (
             <>
               <Button type="button" label="Cancelar" severity="secondary" onClick={onHide} />
-              <Button type="button" label="Salvar" onClick={handleSave} disabled={!canSave} />
+              <Button type="button" label="Salvar missão" onClick={handleSave} disabled={!canSave} />
             </>
           )}
         </div>
@@ -220,208 +224,228 @@ export function JourneyGameFormModal({
     >
       <div className="gv-journey-form-fields">
         {!readOnly && saveValidationError && (
-          <p className="gv-journey-form-error gv-journey-form-error-block">
+          <p className="gv-journey-form-error gv-journey-form-error-block gv-journey-form-field gv-journey-form-field--full">
             Preencha todos os campos obrigatórios antes de salvar.
           </p>
         )}
-        <label className="gv-journey-form-label" htmlFor="journey-game-search">
-          Nome do jogo {!readOnly && "(buscar na RAWG)"}
-        </label>
-        <InputText
-          id="journey-game-search"
-          value={searchQuery}
-          onChange={(e) => {
-            if (readOnly) return;
-            const value = e.target.value;
-            setSearchQuery(value);
-            setForm((prev) => ({ ...prev, name: value }));
-            setSaveValidationError(false);
-          }}
-          placeholder={readOnly ? "" : "Digite o nome do jogo..."}
-          className="gv-journey-form-input w-full"
-          readOnly={readOnly}
-          disabled={readOnly}
-        />
-        {!readOnly && gamesLoading && (
-          <p className="gv-journey-form-hint">
-            <i className="pi pi-spin pi-spinner" /> Buscando...
-          </p>
-        )}
-        {!readOnly && gamesError && (
-          <p className="gv-journey-form-error">{gamesError}</p>
-        )}
-        {!readOnly && !gamesLoading && !gamesError && games.length > 0 && (
-          <div className="gv-journey-form-games-list">
-            {games.map((game) => (
-              <button
-                key={game.id}
-                type="button"
-                className="gv-journey-form-game-item"
-                onClick={() => onSelectGame(game)}
-              >
-                {game.background_image ? (
-                  <img
-                    src={game.background_image}
-                    alt=""
-                    className="gv-journey-form-game-img"
-                  />
-                ) : (
-                  <div className="gv-journey-form-game-img gv-journey-form-game-placeholder" />
-                )}
-                <span className="gv-journey-form-game-name">{game.name}</span>
-              </button>
-            ))}
+
+        <div className="gv-journey-form-field gv-journey-form-field--full">
+          <label className="gv-journey-form-label" htmlFor="journey-game-search">
+            {readOnly ? "Nome do jogo" : "Nome do jogo (busque na RAWG)"}
+          </label>
+          <InputText
+            id="journey-game-search"
+            value={searchQuery}
+            onChange={(e) => {
+              if (readOnly) return;
+              const value = e.target.value;
+              setSearchQuery(value);
+              setForm((prev) => ({ ...prev, name: value }));
+              setSaveValidationError(false);
+            }}
+            placeholder={readOnly ? "" : "Procure seu jogo aqui..."}
+            className="gv-journey-form-input w-full"
+            readOnly={readOnly}
+            disabled={readOnly}
+          />
+        </div>
+
+        {!readOnly && (
+          <div className="gv-journey-form-field gv-journey-form-field--full">
+            {gamesLoading && (
+              <p className="gv-journey-form-hint">
+                <i className="pi pi-spin pi-spinner" /> Buscando...
+              </p>
+            )}
+            {gamesError && <p className="gv-journey-form-error">{gamesError}</p>}
+            {!gamesLoading && !gamesError && games.length > 0 && (
+              <div className="gv-journey-form-games-list">
+                {games.map((game) => (
+                  <button
+                    key={game.id}
+                    type="button"
+                    className="gv-journey-form-game-item"
+                    onClick={() => onSelectGame(game)}
+                  >
+                    {game.background_image ? (
+                      <img
+                        src={game.background_image}
+                        alt=""
+                        className="gv-journey-form-game-img"
+                      />
+                    ) : (
+                      <div className="gv-journey-form-game-img gv-journey-form-game-placeholder" />
+                    )}
+                    <span className="gv-journey-form-game-name">{game.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
-        <label className="gv-journey-form-label" htmlFor="journey-started-at">
-          Data que começou a jogar *
-        </label>
-        <input
-          id="journey-started-at"
-          type="date"
-          value={form.startedAt}
-          onChange={(e) => {
-            if (readOnly) return;
-            setSaveValidationError(false);
-            setForm((prev) => ({ ...prev, startedAt: e.target.value }));
-          }}
-          className="gv-journey-form-input p-inputtext p-component w-full"
-          readOnly={readOnly}
-          disabled={readOnly}
-        />
+        <div className="gv-journey-form-field">
+          <label className="gv-journey-form-label" htmlFor="journey-started-at">
+            Quando começou a jogar? *
+          </label>
+          <input
+            id="journey-started-at"
+            type="date"
+            value={form.startedAt}
+            onChange={(e) => {
+              if (readOnly) return;
+              setSaveValidationError(false);
+              setForm((prev) => ({ ...prev, startedAt: e.target.value }));
+            }}
+            className="gv-journey-form-input p-inputtext p-component w-full"
+            readOnly={readOnly}
+            disabled={readOnly}
+          />
+        </div>
 
-        <label className="gv-journey-form-label" htmlFor="journey-status">
-          Status
-        </label>
-        <select
-          id="journey-status"
-          value={form.status}
-          onChange={(e) => !readOnly && handleStatusChange(e.target.value as JourneyStatus)}
-          className="gv-journey-form-input p-inputtext p-component w-full"
-          disabled={readOnly}
-        >
-          {STATUS_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+        <div className="gv-journey-form-field">
+          <label className="gv-journey-form-label" htmlFor="journey-completed-at">
+            Quando zerou o jogo? {!readOnly && completedAtRequired && "*"}
+          </label>
+          <input
+            id="journey-completed-at"
+            type="date"
+            value={form.completedAt}
+            onChange={(e) => {
+              if (readOnly) return;
+              setSaveValidationError(false);
+              setForm((prev) => ({ ...prev, completedAt: e.target.value }));
+            }}
+            className="gv-journey-form-input p-inputtext p-component w-full"
+            readOnly={readOnly}
+            disabled={readOnly}
+          />
+          {completedAtRequired && touched && !form.completedAt && (
+            <p className="gv-journey-form-error">Informe a data que zerou o jogo.</p>
+          )}
+        </div>
 
-        <label className="gv-journey-form-label" htmlFor="journey-platform">
-          Plataforma em que jogou
-        </label>
-        <select
-          id="journey-platform"
-          value={form.platform ?? ""}
-          onChange={(e) => {
-            if (readOnly) return;
-            setSaveValidationError(false);
-            setForm((prev) => ({ ...prev, platform: e.target.value || undefined }));
-          }}
-          className="gv-journey-form-input p-inputtext p-component w-full"
-          disabled={readOnly}
-        >
-          <option value="">Selecione a plataforma</option>
-          {PLATFORM_OPTIONS.map((p) => (
-            <option key={p} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
+        <div className="gv-journey-form-field">
+          <label className="gv-journey-form-label" htmlFor="journey-status">
+            Status da missão
+          </label>
+          <select
+            id="journey-status"
+            value={form.status}
+            onChange={(e) => !readOnly && handleStatusChange(e.target.value as JourneyStatus)}
+            className="gv-journey-form-input p-inputtext p-component w-full"
+            disabled={readOnly}
+          >
+            {STATUS_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <label className="gv-journey-form-label" htmlFor="journey-completed-at">
-          Data que terminou {!readOnly && completedAtRequired && "*"}
-        </label>
-        <input
-          id="journey-completed-at"
-          type="date"
-          value={form.completedAt}
-          onChange={(e) => {
-            if (readOnly) return;
-            setSaveValidationError(false);
-            setForm((prev) => ({ ...prev, completedAt: e.target.value }));
-          }}
-          className="gv-journey-form-input p-inputtext p-component w-full"
-          readOnly={readOnly}
-          disabled={readOnly}
-        />
-        {completedAtRequired && touched && !form.completedAt && (
-          <p className="gv-journey-form-error">Informe a data que zerou o jogo.</p>
-        )}
-
-        <label className="gv-journey-form-label" htmlFor="journey-hours">
-          Quantas horas levou para terminar {!readOnly && hoursRequired && "*"}
-        </label>
-        <InputNumber
-          id="journey-hours"
-          value={form.hoursPlayed ?? undefined}
-          onValueChange={(e) => {
-            if (readOnly) return;
-            setSaveValidationError(false);
-            const v = e?.value ?? e;
-            setForm((prev) => ({ ...prev, hoursPlayed: normalizeHours(typeof v === "number" ? v : null) }));
-          }}
-          min={0}
-          placeholder={readOnly ? "" : "Ex: 25"}
-          className="gv-journey-form-input w-full"
-          readOnly={readOnly}
-          disabled={readOnly}
-        />
-        {hoursRequired && touched && (form.hoursPlayed == null || form.hoursPlayed < 0) && (
-          <p className="gv-journey-form-error">Informe as horas jogadas.</p>
-        )}
+        <div className="gv-journey-form-field">
+          <label className="gv-journey-form-label" htmlFor="journey-platform">
+            Onde você jogou?
+          </label>
+          <select
+            id="journey-platform"
+            value={form.platform ?? ""}
+            onChange={(e) => {
+              if (readOnly) return;
+              setSaveValidationError(false);
+              setForm((prev) => ({ ...prev, platform: e.target.value || undefined }));
+            }}
+            className="gv-journey-form-input p-inputtext p-component w-full"
+            disabled={readOnly}
+          >
+            <option value="">Selecione a plataforma</option>
+            {PLATFORM_OPTIONS.map((p) => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {formIsZerado && (
           <>
-            <label className="gv-journey-form-label" htmlFor="journey-rating">
-              Nota (0 a 10)
-            </label>
-            <InputNumber
-              id="journey-rating"
-              value={form.rating ?? undefined}
-              onValueChange={(e) => {
-                if (readOnly) return;
-                setSaveValidationError(false);
-                const v = e?.value ?? e;
-                let normalized: number | null = null;
-                if (typeof v === "number" && Number.isFinite(v)) {
-                  const clamped = Math.max(0, Math.min(10, v));
-                  normalized = clamped;
-                }
-                setForm((prev) => ({ ...prev, rating: normalized }));
-              }}
-              min={0}
-              max={10}
-              step={0.5}
-              placeholder={readOnly ? "" : "Ex: 8.5"}
-              className="gv-journey-form-input w-full"
-              readOnly={readOnly}
-              disabled={readOnly}
-            />
+            <div className="gv-journey-form-field">
+              <label className="gv-journey-form-label" htmlFor="journey-hours">
+                Quanto tempo de gameplay até zerar? {!readOnly && hoursRequired && "*"}
+              </label>
+              <InputNumber
+                id="journey-hours"
+                value={form.hoursPlayed ?? undefined}
+                onValueChange={(e) => {
+                  if (readOnly) return;
+                  setSaveValidationError(false);
+                  const v = e?.value ?? e;
+                  setForm((prev) => ({ ...prev, hoursPlayed: normalizeHours(typeof v === "number" ? v : null) }));
+                }}
+                min={0}
+                placeholder={readOnly ? "" : "Ex: 25h"}
+                className="gv-journey-form-input w-full"
+                readOnly={readOnly}
+                disabled={readOnly}
+              />
+              {hoursRequired && touched && (form.hoursPlayed == null || form.hoursPlayed < 0) && (
+                <p className="gv-journey-form-error">Informe as horas jogadas.</p>
+              )}
+            </div>
 
-            <label className="gv-journey-form-label" htmlFor="journey-notes">
-              Comentário (até 200 caracteres)
-            </label>
-            <textarea
-              id="journey-notes"
-              value={form.notes ?? ""}
-              onChange={(e) => {
-                if (readOnly) return;
-                const value = e.target.value.slice(0, 200);
-                setSaveValidationError(false);
-                setForm((prev) => ({ ...prev, notes: value }));
-              }}
-              maxLength={200}
-              className="gv-journey-form-input p-inputtext p-component w-full gv-journey-form-textarea"
-              readOnly={readOnly}
-              disabled={readOnly}
-            />
-            {!readOnly && (
-              <p className="gv-journey-form-hint">
-                {`${(form.notes ?? "").length}/200 caracteres`}
-              </p>
-            )}
+            <div className="gv-journey-form-field">
+              <label className="gv-journey-form-label" htmlFor="journey-rating">
+                Sua nota (0 a 10)
+              </label>
+              <InputNumber
+                id="journey-rating"
+                value={form.rating ?? undefined}
+                onValueChange={(e) => {
+                  if (readOnly) return;
+                  setSaveValidationError(false);
+                  const v = e?.value ?? e;
+                  let normalized: number | null = null;
+                  if (typeof v === "number" && Number.isFinite(v)) {
+                    const clamped = Math.max(0, Math.min(10, v));
+                    normalized = clamped;
+                  }
+                  setForm((prev) => ({ ...prev, rating: normalized }));
+                }}
+                min={0}
+                max={10}
+                step={0.5}
+                placeholder={readOnly ? "" : "Ex: 8.5"}
+                className="gv-journey-form-input w-full"
+                readOnly={readOnly}
+                disabled={readOnly}
+              />
+            </div>
+
+            <div className="gv-journey-form-field gv-journey-form-field--full">
+              <label className="gv-journey-form-label" htmlFor="journey-notes">
+                Comentário / review rápida (até 200 caracteres)
+              </label>
+              <textarea
+                id="journey-notes"
+                value={form.notes ?? ""}
+                onChange={(e) => {
+                  if (readOnly) return;
+                  const value = e.target.value.slice(0, 200);
+                  setSaveValidationError(false);
+                  setForm((prev) => ({ ...prev, notes: value }));
+                }}
+                maxLength={200}
+                className="gv-journey-form-input p-inputtext p-component w-full gv-journey-form-textarea"
+                readOnly={readOnly}
+                disabled={readOnly}
+              />
+              {!readOnly && (
+                <p className="gv-journey-form-hint">
+                  {`${(form.notes ?? "").length}/200 caracteres`}
+                </p>
+              )}
+            </div>
           </>
         )}
       </div>
