@@ -1229,6 +1229,7 @@
 
 @media (max-width: 480px) {
   .gv-journey-mission-cards {
-    grid-template-columns: 1fr;
+    /* Celular: 2 cards por linha */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

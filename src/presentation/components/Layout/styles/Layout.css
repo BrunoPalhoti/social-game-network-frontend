@@ -1309,11 +1309,9 @@
     height: 96px;
     font-size: 1.6rem;
   }
-
   .gv-profile-username {
     font-size: 1.25rem;
   }
-
   .gv-profile-info-cards {
     flex-wrap: wrap;
     flex-direction: column;
@@ -1383,5 +1381,18 @@
   }
   .gv-profile-tab-content {
     font-size: 0.875rem;
+  }
+
+  /* Celular: simplifica visual das abas (Jornada, Dashboard, Amigos) */
+  .gv-profile-tabview .p-tabview-nav-container {
+    border-bottom-width: 2px;
+  }
+
+  .gv-profile-tabview
+    .p-tabview-nav
+    .p-tabview-selected.p-highlight
+    .p-tabview-nav-link,
+  .gv-profile-tabview .p-tabview-nav-link.p-highlight {
+    border-bottom-width: 2px;
   }
 }
