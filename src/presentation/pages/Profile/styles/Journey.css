@@ -1248,4 +1248,37 @@
   .gv-journey-timeline-toolbar .p-button .p-button-icon {
     font-size: 0.8rem;
   }
+
+  /* Tabs internas da Jornada (Jogos Zerados / Jogando agora / Dropados) */
+  .gv-journey-timeline-tabs .p-tabview-nav-container {
+    padding: 0.4rem 0.5rem 0;
+  }
+
+  .gv-journey-timeline-tabs .p-tabview-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.25rem;
+  }
+
+  .gv-journey-timeline-tabs .p-tabview-nav-link {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.7rem;
+    line-height: 1;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* Celular: só texto (sem ícones) para caber melhor */
+  .gv-journey-timeline-tabs .p-tabview-nav-link .gv-journey-tab-icon {
+    display: none;
+  }
+
+  .gv-journey-timeline-tabs .p-tabview-nav-link span {
+    letter-spacing: 0.06em;
+  }
+
+  .gv-journey-timeline-tabs .p-tabview-panels {
+    padding: 1rem 0.75rem;
+  }
 }
