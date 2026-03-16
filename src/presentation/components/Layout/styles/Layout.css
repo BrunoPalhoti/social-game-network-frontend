@@ -53,24 +53,6 @@
     0 0 40px rgba(255, 0, 255, 0.15);
 }
 
-/* Modo claro: botão menu com roxo/primary */
-[data-theme="light"] .gv-layout-menu-toggle {
-  color: var(--sgn-primary) !important;
-  background: var(--sgn-primary-muted) !important;
-  border: 1px solid rgba(109, 40, 217, 0.35) !important;
-  box-shadow:
-    0 0 12px rgba(109, 40, 217, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-[data-theme="light"] .gv-layout-menu-toggle:hover {
-  background: var(--sgn-nav-hover-bg) !important;
-  border-color: var(--sgn-nav-hover-border) !important;
-  color: var(--sgn-primary-hover) !important;
-  box-shadow:
-    0 0 18px rgba(109, 40, 217, 0.25),
-    0 4px 16px rgba(0, 0, 0, 0.08);
-}
 
 .gv-page-header {
   display: flex;

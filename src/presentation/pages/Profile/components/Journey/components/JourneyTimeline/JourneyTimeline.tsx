@@ -1,4 +1,5 @@
 import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 import { TabView, TabPanel } from "primereact/tabview";
 import type { JourneyMonth } from "../../types";
 import { useJourneyTimeline } from "../../hooks/useJourneyTimeline";
@@ -103,6 +104,15 @@ export function JourneyTimeline({
           content: { style: { padding: 0 } },
         }}
       >
+        <div className="gv-journey-timeline-toolbar">
+          <Button
+            type="button"
+            label="Adicionar jogo"
+            icon="pi pi-plus"
+            onClick={() => openModal(null)}
+            size="small"
+          />
+        </div>
         <TabView
           className="gv-journey-timeline-tabs"
           activeIndex={activeTabIndex}
@@ -119,9 +129,7 @@ export function JourneyTimeline({
                 badge={config.badge}
                 emptyMessage={config.emptyMessage}
                 emptyIcon={config.emptyIcon}
-                showAddButton={config.showAddButton}
                 onGameClick={openModal}
-                onAddClick={config.showAddButton ? () => openModal(null) : undefined}
               />
             </TabPanel>
           ))}

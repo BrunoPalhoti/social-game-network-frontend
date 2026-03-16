@@ -9,9 +9,7 @@ interface TimelineTabContentProps {
   badge: TimelineGameSlotBadge;
   emptyMessage: string;
   emptyIcon?: string;
-  showAddButton?: boolean;
   onGameClick: (game: JourneyGame, readOnly?: boolean) => void;
-  onAddClick?: () => void;
 }
 
 export function TimelineTabContent({
@@ -19,9 +17,7 @@ export function TimelineTabContent({
   badge,
   emptyMessage,
   emptyIcon = "pi-inbox",
-  showAddButton = false,
   onGameClick,
-  onAddClick,
 }: TimelineTabContentProps) {
   const readOnly = badge === "zerado";
   const showEmptyMessage = games.length === 0;
@@ -38,19 +34,6 @@ export function TimelineTabContent({
               onClick={() => onGameClick(game, readOnly)}
             />
           ))}
-          {showAddButton && onAddClick && (
-            <div className="gv-journey-timeline-add-slot">
-              <button
-                type="button"
-                className="gv-journey-add-game-btn"
-                onClick={onAddClick}
-                aria-label="Adicionar jogo"
-              >
-                <i className="pi pi-plus" />
-                <span>Adicionar jogo</span>
-              </button>
-            </div>
-          )}
           {showEmptyMessage && (
             <Message
               severity="info"

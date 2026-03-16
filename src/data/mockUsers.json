@@ -16,7 +16,54 @@
           "name": "PlayStation 5",
           "imageUrl": null
         }
-      ]
+      ],
+      "journeyByYear": {
+        "2026": [
+          {
+            "id": "4340",
+            "name": "Uncharted: Drake's Fortune",
+            "coverImageUrl": "https://media.rawg.io/media/games/f2e/f2e6dcf9c27d99ba2551f1094ad41756.jpg",
+            "startedAt": "2026-03-13",
+            "completedAt": "2026-03-14",
+            "hoursPlayed": 7,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": [
+              "Shooter",
+              "Action"
+            ],
+            "monthKey": "2026-03"
+          },
+          {
+            "id": "22513",
+            "name": "Uncharted 2: Among Thieves",
+            "coverImageUrl": "https://media.rawg.io/media/games/74b/74b239f6ef0216a2f66e652d54abb2e6.jpg",
+            "startedAt": "2026-03-14",
+            "completedAt": "2026-03-14",
+            "hoursPlayed": 8,
+            "status": "COMPLETED",
+            "platform": "PlayStation 5",
+            "genres": [
+              "Shooter",
+              "Action"
+            ],
+            "monthKey": "2026-03"
+          },
+          {
+            "id": "5703",
+            "name": "Uncharted 3: Drake's Deception",
+            "coverImageUrl": "https://media.rawg.io/media/games/589/589fc47c5ae34160d65c4682e21fed66.jpg",
+            "startedAt": "2026-03-16",
+            "hoursPlayed": 0,
+            "status": "PLAYING",
+            "platform": "PlayStation 5",
+            "genres": [
+              "Action"
+            ],
+            "monthKey": "2026-03"
+          }
+        ]
+      }
     },
     {
       "id": "a1b2c3d4-0002-4000-8000-000000000002",
@@ -116,10 +163,12 @@
             "startedAt": "2026-03-14",
             "completedAt": "2026-03-14",
             "status": "COMPLETED",
-            "genres": ["Shooter", "Action"],
+            "genres": [
+              "Shooter",
+              "Action"
+            ],
             "monthKey": "2026-03",
-            "hoursPlayed": 7.5,
-            "platform": "PlayStation 5"
+            "hoursPlayed": 7.5
           },
           {
             "id": "22513",
@@ -127,7 +176,10 @@
             "coverImageUrl": "https://media.rawg.io/media/games/74b/74b239f6ef0216a2f66e652d54abb2e6.jpg",
             "startedAt": "2026-03-15",
             "status": "PLAYING",
-            "genres": ["Shooter", "Action"],
+            "genres": [
+              "Shooter",
+              "Action"
+            ],
             "monthKey": "2026-03",
             "platform": "PlayStation 5"
           }

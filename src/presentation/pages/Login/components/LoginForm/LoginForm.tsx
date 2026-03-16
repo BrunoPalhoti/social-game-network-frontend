@@ -74,7 +74,7 @@ export function LoginForm() {
         </Link>
       </div>
       <FormSubmitButton label="ENTRAR" className="login-btn-entrar" />
-      <Divider align="center" type="dashed">
+      <Divider align="center" type="dashed" className="login-divider-gamer">
         <span className="login-divider-text">ou</span>
       </Divider>
       <div className="login-criar-conta">
