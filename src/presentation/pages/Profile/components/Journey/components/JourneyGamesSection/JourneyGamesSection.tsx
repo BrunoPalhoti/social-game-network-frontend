@@ -11,7 +11,7 @@ export function JourneyGamesSection({ games }: JourneyGamesSectionProps) {
   return (
     <>
       <Card
-        title="Sua odisseia em jogos"
+        title="Seus jogos da jornada"
         className="gv-journey-games-section"
         aria-label="Todos os jogos da jornada"
         pt={{
