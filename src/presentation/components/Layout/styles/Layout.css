@@ -1332,6 +1332,7 @@
   }
   .gv-profile-tabview .p-tabview-nav {
     justify-content: flex-start;
+    flex-wrap: nowrap; /* abas em uma única linha no celular */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
