@@ -17,6 +17,8 @@ export interface JourneyGame {
   startedAt?: string;
   /** Data em que zerou o jogo (ISO YYYY-MM-DD). Opcional quando status = PLAYING. */
   completedAt?: string;
+  /** Data em que dropou o jogo (ISO YYYY-MM-DD). Opcional quando status ≠ DROPPED. */
+  droppedAt?: string;
   hoursPlayed?: number;
   rating?: number;
   status: JourneyStatus;

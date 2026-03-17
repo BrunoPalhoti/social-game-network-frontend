@@ -30,9 +30,11 @@ export interface JourneyGameFormValues {
   name: string;
   startedAt: string;
   completedAt: string;
+  droppedAt: string;
   hoursPlayed: number | null;
   rating?: number | null;
   notes?: string;
+  droppedReason?: string;
   status: JourneyStatus;
   /** Plataforma em que jogou (ex.: PlayStation 5). */
   platform?: string;
@@ -82,6 +84,7 @@ export function JourneyGameFormModal({
     handleStatusChange,
     handleSave,
     formIsZerado,
+    formIsDropped,
     canSave,
     PLATFORM_OPTIONS,
     readOnly: readOnlyState,
@@ -201,27 +204,53 @@ export function JourneyGameFormModal({
           />
         </div>
 
-        <div className="gv-journey-form-field">
-          <label className="gv-journey-form-label" htmlFor="journey-completed-at">
-            Quando zerou o jogo? {!readOnly && completedAtRequired && "*"}
-          </label>
-          <input
-            id="journey-completed-at"
-            type="date"
-            value={form.completedAt}
-            onChange={(e) => {
-              if (readOnlyState) return;
-              setSaveValidationError(false);
-              setForm((prev) => ({ ...prev, completedAt: e.target.value }));
-            }}
-            className="gv-journey-form-input p-inputtext p-component w-full"
-            readOnly={readOnlyState}
-            disabled={readOnlyState}
-          />
-          {completedAtRequired && touched && !form.completedAt && (
-            <p className="gv-journey-form-error">Informe a data que zerou o jogo.</p>
-          )}
-        </div>
+        {!formIsDropped && (
+          <div className="gv-journey-form-field">
+            <label className="gv-journey-form-label" htmlFor="journey-completed-at">
+              Quando zerou o jogo? {!readOnly && completedAtRequired && "*"}
+            </label>
+            <input
+              id="journey-completed-at"
+              type="date"
+              value={form.completedAt}
+              onChange={(e) => {
+                if (readOnlyState) return;
+                setSaveValidationError(false);
+                setForm((prev) => ({ ...prev, completedAt: e.target.value }));
+              }}
+              className="gv-journey-form-input p-inputtext p-component w-full"
+              readOnly={readOnlyState}
+              disabled={readOnlyState}
+            />
+            {completedAtRequired && touched && !form.completedAt && (
+              <p className="gv-journey-form-error">Informe a data que zerou o jogo.</p>
+            )}
+          </div>
+        )}
+
+        {formIsDropped && (
+          <div className="gv-journey-form-field">
+            <label className="gv-journey-form-label" htmlFor="journey-dropped-at">
+              Quando dropou o jogo? *
+            </label>
+            <input
+              id="journey-dropped-at"
+              type="date"
+              value={form.droppedAt}
+              onChange={(e) => {
+                if (readOnlyState) return;
+                setSaveValidationError(false);
+                setForm((prev) => ({ ...prev, droppedAt: e.target.value }));
+              }}
+              className="gv-journey-form-input p-inputtext p-component w-full"
+              readOnly={readOnlyState}
+              disabled={readOnlyState}
+            />
+            {touched && !form.droppedAt && (
+              <p className="gv-journey-form-error">Informe a data em que dropou o jogo.</p>
+            )}
+          </div>
+        )}
 
         <div className="gv-journey-form-field">
           <label className="gv-journey-form-label" htmlFor="journey-status">
@@ -347,6 +376,33 @@ export function JourneyGameFormModal({
               )}
             </div>
           </>
+        )}
+
+        {formIsDropped && (
+          <div className="gv-journey-form-field gv-journey-form-field--full">
+            <label className="gv-journey-form-label" htmlFor="journey-dropped-reason">
+              Motivo de ter dropado (até 200 caracteres) *
+            </label>
+            <textarea
+              id="journey-dropped-reason"
+              value={form.droppedReason ?? ""}
+              onChange={(e) => {
+                if (readOnlyState) return;
+                const value = e.target.value.slice(0, 200);
+                setSaveValidationError(false);
+                setForm((prev) => ({ ...prev, droppedReason: value }));
+              }}
+              maxLength={200}
+              className="gv-journey-form-input p-inputtext p-component w-full gv-journey-form-textarea"
+              readOnly={readOnly}
+              disabled={readOnly}
+            />
+            {!readOnly && (
+              <p className="gv-journey-form-hint">
+                {`${(form.droppedReason ?? "").length}/200 caracteres`}
+              </p>
+            )}
+          </div>
         )}
       </div>
     </Dialog>

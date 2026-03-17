@@ -38,9 +38,11 @@ export function useJourneyFormModal({
           name: values.name,
           startedAt: values.startedAt || undefined,
           completedAt: values.completedAt || undefined,
+          droppedAt: values.droppedAt || undefined,
           status: values.status,
           genres: values.genres ?? selectedGame.genres,
           platform: values.platform || undefined,
+          droppedReason: values.droppedReason || undefined,
         };
         if (hoursPlayed !== undefined) updates.hoursPlayed = hoursPlayed;
         updateGame(selectedGame.id, updates);
@@ -54,10 +56,12 @@ export function useJourneyFormModal({
           coverImageUrl,
           startedAt: values.startedAt,
           completedAt: values.completedAt || undefined,
+          droppedAt: values.droppedAt || undefined,
           hoursPlayed: hoursPlayed ?? 0,
           status: values.status,
           platform: values.platform || undefined,
           genres: values.genres ?? rawg?.genres?.map((g) => g.name),
+          droppedReason: values.droppedReason || undefined,
         });
       }
       if (isZeradoStatus(values.status)) setActiveTabIndex(0);

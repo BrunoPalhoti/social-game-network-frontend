@@ -23,9 +23,11 @@ const emptyForm: JourneyGameFormValues = {
   name: "",
   startedAt: "",
   completedAt: "",
+  droppedAt: "",
   hoursPlayed: null,
   rating: null,
   notes: "",
+  droppedReason: "",
   status: "PLAYING",
   platform: "",
 };
@@ -65,9 +67,11 @@ export function useJourneyGameForm(params: {
         name: initialGame.name,
         startedAt: initialGame.startedAt ?? "",
         completedAt: initialGame.completedAt ?? "",
+        droppedAt: initialGame.droppedAt ?? "",
         hoursPlayed: normalizeHours(initialGame.hoursPlayed),
         rating: initialGame.rating ?? null,
         notes: initialGame.notes ?? "",
+        droppedReason: initialGame.droppedReason ?? "",
         status: initialGame.status,
         platform: initialGame.platform ?? "",
       });
@@ -123,6 +127,7 @@ export function useJourneyGameForm(params: {
     setTouched(true);
     setSaveValidationError(false);
     const zerado = isZeradoStatus(form.status);
+    const isDropped = form.status === "DROPPED";
     const payload: JourneyGameFormValues = {
       ...form,
       completedAt:
@@ -150,6 +155,16 @@ export function useJourneyGameForm(params: {
       setSaveValidationError(true);
       return;
     }
+    if (isDropped) {
+      if (!payload.droppedAt) {
+        setSaveValidationError(true);
+        return;
+      }
+      if (!payload.droppedReason || !payload.droppedReason.trim()) {
+        setSaveValidationError(true);
+        return;
+      }
+    }
     onSave(payload);
     onHide();
   }, [form, onSave, onHide]);
@@ -161,12 +176,17 @@ export function useJourneyGameForm(params: {
       if (isZeradoStatus(status)) {
         if (!next.completedAt && next.startedAt) next.completedAt = next.startedAt;
         if (next.hoursPlayed == null) next.hoursPlayed = 0;
+      } else if (status === "DROPPED") {
+        if (!next.droppedAt) {
+          next.droppedAt = new Date().toISOString().slice(0, 10);
+        }
       }
       return next;
     });
   };
 
   const formIsZerado = isZeradoStatus(form.status);
+  const formIsDropped = form.status === "DROPPED";
   const canSave =
     form.name.trim() !== "" &&
     form.startedAt !== "" &&
@@ -174,7 +194,9 @@ export function useJourneyGameForm(params: {
       !!(
         (form.completedAt || form.startedAt) &&
         (form.hoursPlayed == null || form.hoursPlayed >= 0)
-      ));
+      )) &&
+    (!formIsDropped ||
+      !!(form.droppedAt && form.droppedReason && form.droppedReason.trim() !== ""));
 
   return {
     form,
@@ -192,6 +214,7 @@ export function useJourneyGameForm(params: {
     handleStatusChange,
     handleSave,
     formIsZerado,
+    formIsDropped,
     canSave,
     PLATFORM_OPTIONS,
     readOnly,
