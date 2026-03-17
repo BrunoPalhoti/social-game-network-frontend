@@ -43,6 +43,8 @@ export function useJourneyFormModal({
           genres: values.genres ?? selectedGame.genres,
           platform: values.platform || undefined,
           droppedReason: values.droppedReason || undefined,
+          releaseDate: values.releaseDate || undefined,
+          hasDemo: values.hasDemo ?? false,
         };
         if (hoursPlayed !== undefined) updates.hoursPlayed = hoursPlayed;
         updateGame(selectedGame.id, updates);
@@ -62,6 +64,8 @@ export function useJourneyFormModal({
           platform: values.platform || undefined,
           genres: values.genres ?? rawg?.genres?.map((g) => g.name),
           droppedReason: values.droppedReason || undefined,
+          releaseDate: values.releaseDate || undefined,
+          hasDemo: values.hasDemo ?? false,
         });
       }
       if (isZeradoStatus(values.status)) setActiveTabIndex(0);

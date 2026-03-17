@@ -30,6 +30,8 @@ const emptyForm: JourneyGameFormValues = {
   droppedReason: "",
   status: "PLAYING",
   platform: "",
+  releaseDate: "",
+  hasDemo: false,
 };
 
 function normalizeHours(v: number | null | undefined): number | null {
@@ -58,6 +60,7 @@ export function useJourneyGameForm(params: {
 
   const completedAtRequired = isZeradoStatus(form.status);
   const hoursRequired = completedAtRequired;
+  const isWishlist = form.status === "WISHLIST";
 
   useEffect(() => {
     if (!visible) return;
@@ -74,6 +77,8 @@ export function useJourneyGameForm(params: {
         droppedReason: initialGame.droppedReason ?? "",
         status: initialGame.status,
         platform: initialGame.platform ?? "",
+        releaseDate: initialGame.releaseDate ?? "",
+        hasDemo: initialGame.hasDemo ?? false,
       });
       setSearchQuery(initialGame.name);
     } else {
@@ -128,6 +133,7 @@ export function useJourneyGameForm(params: {
     setSaveValidationError(false);
     const zerado = isZeradoStatus(form.status);
     const isDropped = form.status === "DROPPED";
+    const isWishlistLocal = form.status === "WISHLIST";
     const payload: JourneyGameFormValues = {
       ...form,
       completedAt:
@@ -143,7 +149,7 @@ export function useJourneyGameForm(params: {
       setSaveValidationError(true);
       return;
     }
-    if (!payload.startedAt) {
+    if (!isWishlistLocal && !payload.startedAt) {
       setSaveValidationError(true);
       return;
     }
@@ -180,6 +186,12 @@ export function useJourneyGameForm(params: {
         if (!next.droppedAt) {
           next.droppedAt = new Date().toISOString().slice(0, 10);
         }
+      } else if (status === "WISHLIST") {
+        next.startedAt = "";
+        next.completedAt = "";
+        next.droppedAt = "";
+        next.hoursPlayed = null;
+        next.droppedReason = "";
       }
       return next;
     });
@@ -189,7 +201,7 @@ export function useJourneyGameForm(params: {
   const formIsDropped = form.status === "DROPPED";
   const canSave =
     form.name.trim() !== "" &&
-    form.startedAt !== "" &&
+    (isWishlist || form.startedAt !== "") &&
     (!formIsZerado ||
       !!(
         (form.completedAt || form.startedAt) &&

@@ -2,7 +2,7 @@ import type { JourneyGame } from "../../types";
 import { JourneyGameCard } from "../JourneyGameCard";
 import "../../../../styles/Journey.css";
 
-export type TimelineGameSlotBadge = "zerado" | "playing" | "dropped";
+export type TimelineGameSlotBadge = "zerado" | "playing" | "dropped" | "wishlist";
 
 interface TimelineGameSlotProps {
   game: JourneyGame;
@@ -13,6 +13,7 @@ interface TimelineGameSlotProps {
 export function TimelineGameSlot({ game, badge, onClick }: TimelineGameSlotProps) {
   const isPlaying = badge === "playing";
   const isDropped = badge === "dropped";
+  const isWishlist = badge === "wishlist";
   return (
     <div
       key={game.id}
@@ -20,7 +21,7 @@ export function TimelineGameSlot({ game, badge, onClick }: TimelineGameSlotProps
       tabIndex={onClick ? 0 : undefined}
       onClick={onClick}
       onKeyDown={onClick ? (e) => e.key === "Enter" && onClick() : undefined}
-      className={`gv-journey-timeline-game-slot ${isPlaying ? "gv-journey-timeline-game-slot--playing" : ""} ${isDropped ? "gv-journey-timeline-game-slot--dropped" : ""} ${onClick ? "gv-journey-timeline-game-slot--clickable" : ""}`}
+      className={`gv-journey-timeline-game-slot ${isPlaying ? "gv-journey-timeline-game-slot--playing" : ""} ${isDropped ? "gv-journey-timeline-game-slot--dropped" : ""} ${isWishlist ? "gv-journey-timeline-game-slot--wishlist" : ""} ${onClick ? "gv-journey-timeline-game-slot--clickable" : ""}`}
     >
       <div className="gv-journey-timeline-cover-wrap">
         <img
@@ -32,6 +33,8 @@ export function TimelineGameSlot({ game, badge, onClick }: TimelineGameSlotProps
           <span className="gv-journey-badge-playing">Jogando agora</span>
         ) : isDropped ? (
           <span className="gv-journey-badge-dropped">Dropado</span>
+        ) : isWishlist ? (
+          <span className="gv-journey-badge-wishlist">Desejado</span>
         ) : (
           <>
             {game.is100Percent && (

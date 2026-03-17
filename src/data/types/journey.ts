@@ -31,6 +31,10 @@ export interface JourneyGame {
   monthKey: string;
   is100Percent?: boolean;
   droppedReason?: string;
+  /** Para jogos desejados: data de lançamento (ISO YYYY-MM-DD). */
+  releaseDate?: string;
+  /** Para jogos desejados: indica se já há demo jogável. */
+  hasDemo?: boolean;
 }
 
 export interface JourneyMonth {

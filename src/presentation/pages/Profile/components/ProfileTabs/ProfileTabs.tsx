@@ -1,5 +1,6 @@
 import { TabView, TabPanel } from "primereact/tabview";
 import { JourneyContent } from "@/presentation/pages/Profile/components/Journey/JourneyContent";
+import { DashboardContent } from "@/presentation/pages/Profile/components/Dashboard/DashboardContent";
 import { useProfileTabs } from "./hooks/useProfileTabs";
 
 export function ProfileTabs() {
@@ -18,11 +19,7 @@ export function ProfileTabs() {
       </TabPanel>
       <TabPanel header="DASHBOARD" className="gv-profile-tab-panel">
         <div className="gv-profile-tab-content">
-          <div className="gv-under-construction" aria-label="Página em construção">
-            <span className="gv-under-construction-icon" aria-hidden>🔧</span>
-            <h3 className="gv-under-construction-title">Página em construção</h3>
-            <p className="gv-under-construction-text">Em breve você terá acesso ao dashboard.</p>
-          </div>
+          <DashboardContent />
         </div>
       </TabPanel>
       <TabPanel header="AMIGOS" className="gv-profile-tab-panel">

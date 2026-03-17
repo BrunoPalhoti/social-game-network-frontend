@@ -11,6 +11,7 @@ const STATUS_OPTIONS: { label: string; value: JourneyStatus }[] = [
   { label: "Em missão (jogando)", value: "PLAYING" },
   { label: "Missão concluída (zerado)", value: "COMPLETED" },
   { label: "Missão abortada (dropado)", value: "DROPPED" },
+  { label: "Quero jogar (desejado)", value: "WISHLIST" },
 ];
 
 const PLATFORM_OPTIONS = [
@@ -40,6 +41,10 @@ export interface JourneyGameFormValues {
   platform?: string;
   /** Preenchido ao selecionar jogo da RAWG. */
   genres?: string[];
+  /** Para jogos desejados: data de lançamento (ISO YYYY-MM-DD). */
+  releaseDate?: string;
+  /** Para jogos desejados: indica se já há demo jogável. */
+  hasDemo?: boolean;
 }
 
 export interface JourneyGameFormModalProps {
@@ -91,6 +96,7 @@ export function JourneyGameFormModal({
     setSaveValidationError,
     setUserHasTypedSearch,
   } = useJourneyGameForm({ visible, initialGame, readOnly, onSave, onHide });
+  const formIsWishlist = form.status === "WISHLIST";
 
   return (
     <Dialog
@@ -185,26 +191,28 @@ export function JourneyGameFormModal({
           </div>
         )}
 
-        <div className="gv-journey-form-field">
-          <label className="gv-journey-form-label" htmlFor="journey-started-at">
-            Quando começou a jogar? *
-          </label>
-          <input
-            id="journey-started-at"
-            type="date"
-            value={form.startedAt}
-            onChange={(e) => {
-              if (readOnlyState) return;
-              setSaveValidationError(false);
-              setForm((prev) => ({ ...prev, startedAt: e.target.value }));
-            }}
-            className="gv-journey-form-input p-inputtext p-component w-full"
-            readOnly={readOnlyState}
-            disabled={readOnlyState}
-          />
-        </div>
+        {!formIsWishlist && (
+          <div className="gv-journey-form-field">
+            <label className="gv-journey-form-label" htmlFor="journey-started-at">
+              Quando começou a jogar? *
+            </label>
+            <input
+              id="journey-started-at"
+              type="date"
+              value={form.startedAt}
+              onChange={(e) => {
+                if (readOnlyState) return;
+                setSaveValidationError(false);
+                setForm((prev) => ({ ...prev, startedAt: e.target.value }));
+              }}
+              className="gv-journey-form-input p-inputtext p-component w-full"
+              readOnly={readOnlyState}
+              disabled={readOnlyState}
+            />
+          </div>
+        )}
 
-        {!formIsDropped && (
+        {!formIsDropped && !formIsWishlist && (
           <div className="gv-journey-form-field">
             <label className="gv-journey-form-label" htmlFor="journey-completed-at">
               Quando zerou o jogo? {!readOnly && completedAtRequired && "*"}
@@ -296,6 +304,48 @@ export function JourneyGameFormModal({
             ))}
           </select>
         </div>
+
+        {formIsWishlist && (
+          <>
+            <div className="gv-journey-form-field">
+              <label className="gv-journey-form-label" htmlFor="journey-release-date">
+                Data de lançamento do jogo
+              </label>
+              <input
+                id="journey-release-date"
+                type="date"
+                value={form.releaseDate ?? ""}
+                onChange={(e) => {
+                  if (readOnlyState) return;
+                  setSaveValidationError(false);
+                  setForm((prev) => ({ ...prev, releaseDate: e.target.value || undefined }));
+                }}
+                className="gv-journey-form-input p-inputtext p-component w-full"
+                readOnly={readOnlyState}
+                disabled={readOnlyState}
+              />
+            </div>
+            <div className="gv-journey-form-field">
+              <label className="gv-journey-form-label" htmlFor="journey-has-demo">
+                Já tem demo jogável?
+              </label>
+              <select
+                id="journey-has-demo"
+                value={form.hasDemo ? "yes" : "no"}
+                onChange={(e) => {
+                  if (readOnlyState) return;
+                  setSaveValidationError(false);
+                  setForm((prev) => ({ ...prev, hasDemo: e.target.value === "yes" }));
+                }}
+                className="gv-journey-form-input p-inputtext p-component w-full"
+                disabled={readOnlyState}
+              >
+                <option value="no">Ainda não</option>
+                <option value="yes">Sim, já tem demo</option>
+              </select>
+            </div>
+          </>
+        )}
 
         {formIsZerado && (
           <>

@@ -942,6 +942,214 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
+.gv-journey-completed-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: radial-gradient(
+      circle at top left,
+      rgba(0, 245, 255, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.15), transparent 55%),
+    rgba(0, 0, 0, 0.65);
+  box-shadow:
+    0 0 24px rgba(0, 245, 255, 0.2),
+    0 0 36px rgba(122, 0, 255, 0.25);
+}
+
+.gv-journey-completed-level {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  flex: 2 1 240px;
+}
+
+.gv-journey-completed-level-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.gv-journey-completed-level-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0, 245, 255, 0.95);
+}
+
+.gv-journey-completed-level-sub {
+  font-size: 0.8rem;
+  color: var(--journey-text);
+}
+
+.gv-journey-completed-level-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gv-journey-completed-level-progress-bar {
+  position: relative;
+  height: 0.75rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(0, 245, 255, 0.5);
+}
+
+.gv-journey-completed-level-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--journey-accent), var(--journey-accent-alt));
+  box-shadow: 0 0 16px var(--journey-glow);
+  transition: width 0.4s ease-out;
+}
+
+.gv-journey-completed-level-progress-label {
+  font-size: 0.75rem;
+  color: var(--journey-text-muted);
+}
+
+.gv-journey-completed-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex: 1 1 180px;
+}
+
+.gv-journey-completed-stat-chip {
+  min-width: 90px;
+  padding: 0.45rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 245, 255, 0.45);
+  background: radial-gradient(circle at top, rgba(0, 245, 255, 0.25), transparent 65%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.gv-journey-completed-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.gv-journey-completed-stat-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(248, 250, 252, 0.98);
+}
+
+.gv-journey-completed-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1.35fr);
+  gap: 1.5rem;
+}
+
+.gv-journey-completed-main {
+  min-width: 0;
+}
+
+.gv-journey-completed-sidebar {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: radial-gradient(
+      circle at top,
+      rgba(148, 163, 184, 0.15),
+      transparent 60%
+    ),
+    rgba(15, 23, 42, 0.95);
+  border: 1px dashed rgba(148, 163, 184, 0.45);
+  box-shadow: 0 0 20px rgba(15, 23, 42, 0.9);
+}
+
+.gv-journey-completed-sidebar-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.95);
+  margin: 0 0 0.3rem;
+}
+
+.gv-journey-completed-sidebar-subtitle {
+  font-size: 0.8rem;
+  color: rgba(148, 163, 184, 0.95);
+  margin: 0 0 0.75rem;
+}
+
+.gv-journey-completed-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gv-journey-completed-challenge {
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.gv-journey-completed-challenge--locked {
+  opacity: 0.9;
+}
+
+.gv-journey-completed-challenge-header {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gv-journey-completed-challenge-lock {
+  font-size: 0.8rem;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.gv-journey-completed-challenge-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.98);
+}
+
+.gv-journey-completed-challenge-meta {
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.95);
+  margin: 0;
+}
+.gv-journey-completed-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.gv-journey-completed-title-main {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--journey-text);
+}
+
+.gv-journey-completed-title-meta {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--journey-text-muted);
+}
+
 .gv-journey-games-dialog-item {
   padding: 0;
   margin: 0;
@@ -1205,8 +1413,248 @@
   font-weight: 700;
 }
 
+/* ----- Dashboard: Wishlist (DASHBOARD tab) ----- */
+.gv-dashboard-wishlist {
+  padding: 1.5rem 1.75rem 2rem;
+  color: var(--journey-text);
+}
+
+.gv-dashboard-wishlist-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.gv-dashboard-wishlist-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.gv-dashboard-wishlist-counter {
+  font-size: 0.8rem;
+  color: var(--journey-text-muted);
+}
+
+.gv-dashboard-wishlist-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--journey-text-muted);
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--journey-accent);
+  text-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+  margin: 0;
+}
+
+.gv-dashboard-wishlist-subtitle {
+  font-size: 0.9rem;
+  color: var(--journey-text-muted);
+  margin: 0;
+}
+
+.gv-dashboard-wishlist-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.gv-dashboard-wishlist-empty {
+  grid-column: 1 / -1;
+  font-size: 0.9rem;
+  color: var(--journey-text-muted);
+  font-style: italic;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px dashed var(--journey-border);
+  background: rgba(0, 245, 255, 0.04);
+  text-align: center;
+}
+
+.gv-dashboard-wishlist-meta {
+  font-size: 0.8rem;
+  color: var(--journey-text-muted);
+  margin: 0;
+}
+
+.gv-dashboard-wishlist-remove {
+  align-self: flex-start;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 113, 113, 0.7);
+  background: rgba(127, 29, 29, 0.6);
+  color: #fecaca;
+  cursor: pointer;
+}
+
+.gv-dashboard-wishlist-remove:hover {
+  background: rgba(239, 68, 68, 0.9);
+  border-color: #fecaca;
+  color: #111827;
+}
+
+.gv-dashboard-wishlist-footer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gv-dashboard-wishlist-card {
+  /* leve ajuste para diferenciar visualmente da jornada principal */
+  box-shadow:
+    0 0 18px rgba(56, 189, 248, 0.2),
+    0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.gv-dashboard-wishlist-queue {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--journey-text-muted);
+}
+
+.gv-dashboard-wishlist-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gv-dashboard-wishlist-modal-text {
+  font-size: 0.85rem;
+  color: var(--journey-text-muted);
+  margin: 0;
+}
+
+.gv-dashboard-wishlist-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.gv-dashboard-wishlist-modal-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gv-dashboard-wishlist-modal-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--journey-text-muted);
+}
+
+.gv-dashboard-wishlist-modal-error {
+  margin: 0;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #f87171;
+}
+
+.gv-dashboard-wishlist-modal-dropdown.p-dropdown {
+  width: 100%;
+}
+
+.gv-dashboard-wishlist-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.gv-dashboard-wishlist-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--journey-border);
+  background: rgba(0, 245, 255, 0.06);
+  cursor: pointer;
+  text-align: left;
+}
+
+.gv-dashboard-wishlist-modal-item:hover {
+  background: rgba(0, 245, 255, 0.12);
+  border-color: var(--journey-accent);
+}
+
+.gv-dashboard-wishlist-modal-cover-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 0.55rem;
+  overflow: hidden;
+  background: var(--journey-border);
+}
+
+.gv-dashboard-wishlist-modal-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gv-dashboard-wishlist-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.gv-dashboard-wishlist-modal-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--journey-text);
+}
+
+.gv-dashboard-wishlist-modal-meta {
+  font-size: 0.8rem;
+  color: var(--journey-text-muted);
+}
+
+.gv-dashboard-wishlist-all-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gv-dashboard-wishlist-all-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.gv-dashboard-wishlist-all-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gv-dashboard-wishlist-grid--dialog {
+  margin-top: 0.5rem;
+}
+
 /* ----- Responsivo ----- */
 @media (max-width: 768px) {
+  .gv-journey-completed-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gv-journey-completed-sidebar {
+    order: -1;
+  }
+
+  .gv-journey-completed-header {
+    margin-bottom: 1rem;
+  }
+
   .gv-journey-genre-row {
     grid-template-columns: 1fr 1fr auto;
     gap: 0.75rem;

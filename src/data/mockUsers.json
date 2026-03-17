@@ -137,6 +137,19 @@
             "monthKey": "2025-12",
             "rating": 8.5,
             "notes": "Horda de zumbi é o ponto alto, história demorou mas engatou."
+          },
+          {
+            "id": "452650",
+            "name": "Pragmata",
+            "coverImageUrl": "https://media.rawg.io/media/games/019/0192f08452e0d8ead71940e90a3cdf70.jpg",
+            "startedAt": "2026-03-17",
+            "hoursPlayed": 0,
+            "status": "WISHLIST",
+            "platform": "PlayStation 5",
+            "genres": [
+              "Action"
+            ],
+            "monthKey": "2026-03"
           }
         ]
       },

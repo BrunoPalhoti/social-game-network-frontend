@@ -63,6 +63,19 @@ const TAB_CONFIG = [
     emptyIcon: "pi-trash",
     showAddButton: false,
   },
+  {
+    key: "wishlist" as const,
+    header: (
+      <>
+        <i className="pi pi-heart gv-journey-tab-icon" />
+        <span>Jogos desejados</span>
+      </>
+    ),
+    badge: "wishlist" as const,
+    emptyMessage: "Nenhum jogo desejado ainda.",
+    emptyIcon: "pi-heart",
+    showAddButton: true,
+  },
 ] as const;
 
 export function JourneyTimeline({
@@ -73,8 +86,14 @@ export function JourneyTimeline({
   clearAll: _clearAll,
   jogosZeradosAno,
 }: JourneyTimelineProps) {
-  const { activeTabIndex, setActiveTabIndex, jogosZerados, jogandoAgora, jogosDropados } =
-    useJourneyTimeline(months);
+  const {
+    activeTabIndex,
+    setActiveTabIndex,
+    jogosZerados,
+    jogandoAgora,
+    jogosDropados,
+    wishlist,
+  } = useJourneyTimeline(months);
 
   const {
     modalVisible,
@@ -102,7 +121,7 @@ export function JourneyTimeline({
     filteredCompleted,
   } = useJourneyCompletedFilters(completedGames);
 
-  const gameLists = [jogosZerados, jogandoAgora, jogosDropados];
+  const gameLists = [jogosZerados, jogandoAgora, jogosDropados, wishlist];
 
   return (
     <section className="gv-journey-timeline-wrap" aria-label="Jogos zerados">
@@ -111,43 +130,69 @@ export function JourneyTimeline({
         visible={allCompletedVisible}
         onHide={() => setAllCompletedVisible(false)}
         className="gv-journey-completed-dialog"
-        style={{ width: "min(95vw, 1120px)" }}
+        style={{ width: "min(96vw, 1200px)" }}
       >
-        <div className="gv-journey-completed-filters">
-          <div className="gv-journey-completed-filter">
-            <label className="gv-journey-completed-filter-label">Plataforma</label>
-            <Dropdown
-              value={selectedPlatform}
-              options={platformOptions}
-              onChange={(e) => setSelectedPlatform(e.value ?? null)}
-              placeholder="Todas"
-              showClear
-              className="gv-journey-completed-dropdown"
-            />
+        <div className="gv-journey-completed-layout">
+          <div className="gv-journey-completed-main">
+            <div className="gv-journey-completed-filters">
+              <div className="gv-journey-completed-filter">
+                <label className="gv-journey-completed-filter-label">Plataforma</label>
+                <Dropdown
+                  value={selectedPlatform}
+                  options={platformOptions}
+                  onChange={(e) => setSelectedPlatform(e.value ?? null)}
+                  placeholder="Todas"
+                  showClear
+                  className="gv-journey-completed-dropdown"
+                />
+              </div>
+              <div className="gv-journey-completed-filter">
+                <label className="gv-journey-completed-filter-label">Gênero</label>
+                <Dropdown
+                  value={selectedGenre}
+                  options={genreOptions}
+                  onChange={(e) => setSelectedGenre(e.value ?? null)}
+                  placeholder="Todos"
+                  showClear
+                  className="gv-journey-completed-dropdown"
+                />
+              </div>
+            </div>
+            <div className="gv-journey-games-grid gv-journey-games-grid--dialog">
+              {filteredCompleted.map((game) => (
+                <button
+                  key={game.id}
+                  type="button"
+                  className="gv-journey-games-dialog-item"
+                  onClick={() => openModal(game, true)}
+                >
+                  <JourneyGameCard game={game} />
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="gv-journey-completed-filter">
-            <label className="gv-journey-completed-filter-label">Gênero</label>
-            <Dropdown
-              value={selectedGenre}
-              options={genreOptions}
-              onChange={(e) => setSelectedGenre(e.value ?? null)}
-              placeholder="Todos"
-              showClear
-              className="gv-journey-completed-dropdown"
-            />
-          </div>
-        </div>
-        <div className="gv-journey-games-grid gv-journey-games-grid--dialog">
-          {filteredCompleted.map((game) => (
-            <button
-              key={game.id}
-              type="button"
-              className="gv-journey-games-dialog-item"
-              onClick={() => openModal(game, true)}
-            >
-              <JourneyGameCard game={game} />
-            </button>
-          ))}
+          <aside className="gv-journey-completed-sidebar">
+            <h3 className="gv-journey-completed-sidebar-title">Próximos desafios</h3>
+            <p className="gv-journey-completed-sidebar-subtitle">
+              Trave jogos lendários para ganhar bônus de XP.
+            </p>
+            <div className="gv-journey-completed-sidebar-list">
+              <div className="gv-journey-completed-challenge gv-journey-completed-challenge--locked">
+                <div className="gv-journey-completed-challenge-header">
+                  <span className="gv-journey-completed-challenge-lock pi pi-lock" />
+                  <span className="gv-journey-completed-challenge-title">Elden Ring</span>
+                </div>
+                <p className="gv-journey-completed-challenge-meta">Zerar para bônus de 6k XP</p>
+              </div>
+              <div className="gv-journey-completed-challenge gv-journey-completed-challenge--locked">
+                <div className="gv-journey-completed-challenge-header">
+                  <span className="gv-journey-completed-challenge-lock pi pi-lock" />
+                  <span className="gv-journey-completed-challenge-title">Hades 2</span>
+                </div>
+                <p className="gv-journey-completed-challenge-meta">Domine para bônus de 3k XP</p>
+              </div>
+            </div>
+          </aside>
         </div>
       </Dialog>
       <JourneyGameFormModal

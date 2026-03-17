@@ -5,15 +5,17 @@ import { isZeradoStatus } from "../utils";
 export function useJourneyTimeline(months: JourneyMonth[]) {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-  const { jogosZerados, jogandoAgora, jogosDropados } = useMemo(() => {
+  const { jogosZerados, jogandoAgora, jogosDropados, wishlist } = useMemo(() => {
     const zerados: JourneyGame[] = [];
     const jogando: JourneyGame[] = [];
     const dropados: JourneyGame[] = [];
+    const desejados: JourneyGame[] = [];
     months.forEach((month) => {
       month.games.forEach((game) => {
         if (isZeradoStatus(game.status)) zerados.push(game);
         else if (game.status === "PLAYING") jogando.push(game);
         else if (game.status === "DROPPED") dropados.push(game);
+        else if (game.status === "WISHLIST") desejados.push(game);
       });
     });
 
@@ -24,8 +26,13 @@ export function useJourneyTimeline(months: JourneyMonth[]) {
       return b.completedAt.localeCompare(a.completedAt);
     });
 
-    return { jogosZerados: zerados, jogandoAgora: jogando, jogosDropados: dropados };
+    return {
+      jogosZerados: zerados,
+      jogandoAgora: jogando,
+      jogosDropados: dropados,
+      wishlist: desejados,
+    };
   }, [months]);
 
-  return { activeTabIndex, setActiveTabIndex, jogosZerados, jogandoAgora, jogosDropados };
+  return { activeTabIndex, setActiveTabIndex, jogosZerados, jogandoAgora, jogosDropados, wishlist };
 }
