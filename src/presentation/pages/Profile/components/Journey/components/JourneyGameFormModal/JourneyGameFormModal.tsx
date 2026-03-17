@@ -3,6 +3,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import type { JourneyGame, JourneyStatus } from "@/data/types/journey";
+import type { RawgGame } from "@/shared/api/rawgApi";
 import { isZeradoStatus } from "../../utils";
 import { useJourneyGameForm } from "./hooks/useJourneyGameForm";
 
@@ -51,6 +52,12 @@ export interface JourneyGameFormModalProps {
 
 const DEBOUNCE_MS = 350;
 
+function normalizeHours(v: number | null | undefined): number | null {
+  if (v == null) return null;
+  const n = Number(v);
+  return Number.isFinite(n) && n >= 0 ? n : null;
+}
+
 export function JourneyGameFormModal({
   visible,
   onHide,
@@ -79,6 +86,7 @@ export function JourneyGameFormModal({
     PLATFORM_OPTIONS,
     readOnly: readOnlyState,
     setSaveValidationError,
+    setUserHasTypedSearch,
   } = useJourneyGameForm({ visible, initialGame, readOnly, onSave, onHide });
 
   return (
@@ -128,6 +136,7 @@ export function JourneyGameFormModal({
             onChange={(e) => {
               if (readOnlyState) return;
               const value = e.target.value;
+              setUserHasTypedSearch(true);
               setSearchQuery(value);
               setForm((prev) => ({ ...prev, name: value }));
               setSaveValidationError(false);

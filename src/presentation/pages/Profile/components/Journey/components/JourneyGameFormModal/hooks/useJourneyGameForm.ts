@@ -52,6 +52,7 @@ export function useJourneyGameForm(params: {
   const [gamesError, setGamesError] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
   const [saveValidationError, setSaveValidationError] = useState(false);
+  const [userHasTypedSearch, setUserHasTypedSearch] = useState(false);
 
   const completedAtRequired = isZeradoStatus(form.status);
   const hoursRequired = completedAtRequired;
@@ -78,6 +79,7 @@ export function useJourneyGameForm(params: {
       });
       setSearchQuery("");
     }
+    setUserHasTypedSearch(false);
     setGames([]);
     setGamesError(null);
     setTouched(false);
@@ -85,7 +87,7 @@ export function useJourneyGameForm(params: {
   }, [visible, initialGame]);
 
   useEffect(() => {
-    if (!visible || readOnly || !searchQuery.trim()) {
+    if (!visible || readOnly || !searchQuery.trim() || !userHasTypedSearch) {
       setGames([]);
       return;
     }
@@ -102,7 +104,7 @@ export function useJourneyGameForm(params: {
         .finally(() => setGamesLoading(false));
     }, DEBOUNCE_MS);
     return () => clearTimeout(t);
-  }, [visible, readOnly, searchQuery]);
+  }, [visible, readOnly, searchQuery, userHasTypedSearch]);
 
   const onSelectGame = useCallback((rawg: RawgGame) => {
     setSaveValidationError(false);
@@ -113,6 +115,7 @@ export function useJourneyGameForm(params: {
       genres: rawg.genres?.map((g) => g.name) ?? [],
     }));
     setSearchQuery(rawg.name);
+    setUserHasTypedSearch(false);
     setGames([]);
   }, []);
 
@@ -193,6 +196,7 @@ export function useJourneyGameForm(params: {
     PLATFORM_OPTIONS,
     readOnly,
     setSaveValidationError,
+    setUserHasTypedSearch,
   };
 }
 
